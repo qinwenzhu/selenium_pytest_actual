@@ -6,10 +6,11 @@
 
 
 import pytest
-from guard.pages.login_backup import LoginPage
+from guard.pages.login import LoginPage
 
 
 def test_login_success(web_login_and_quit):
+    # 此处需要连接数据库动态判断当前登陆用户的别名
     assert "祝文琴" == LoginPage(web_login_and_quit).login_success_info()
 
 
