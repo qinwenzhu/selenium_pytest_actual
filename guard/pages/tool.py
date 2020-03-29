@@ -12,8 +12,56 @@ from guard.pages.basepage import BasePage
 
 class ToolPage(BasePage):
 
+    def close_tool_current_win(self, current_btn):
+        """ common 关闭当前窗口 """
+        if current_btn == "tools-face-verification":
+            CLOSE_BTN = (By.XPATH,
+                         f'//div[contains(@class, "{current_btn}")]//i[contains(@class, "app-tools-header-close")]')
+        elif current_btn == "tools-score-detection":
+            CLOSE_BTN = (By.XPATH,
+                         f'//div[contains(@class, "{current_btn}")]//i[contains(@class, "app-tools-header-close")]')
+        elif current_btn == "tools-test-detection":
+            CLOSE_BTN = (By.XPATH,
+                         f'//div[contains(@class, "{current_btn}")]//i[contains(@class, "app-tools-header-close")]')
+        BasePage(self.driver).click_ele(CLOSE_BTN)
+
+    """ 1:1人脸验证 """
+    def one_to_one_face_compare(self, path1, path2):
+
+        # 上传左侧图片
+        IMAGE_UPLOAD_INPUT_L = (By.CSS_SELECTOR, '.app-tools-content-pics .imageselsect-container:first-child > input[type="file"]')
+        BasePage(self.driver).upload_file(IMAGE_UPLOAD_INPUT_L, path1)
+
+        # 上传右侧图片
+        IMAGE_UPLOAD_INPUT_R = (By.CSS_SELECTOR, '.app-tools-content-pics .imageselsect-container:last-child > input[type="file"]')
+        BasePage(self.driver).upload_file(IMAGE_UPLOAD_INPUT_R, path2)
+
+        # 点击比对按钮
+        CHECK_CONTENT_FACE_BUTTON = (By.CLASS_NAME, "app-tools-content-pics-vsbtn")
+        BasePage(self.driver).click_ele(CHECK_CONTENT_FACE_BUTTON)
+
+    def get_face_compare_result(self):
+        # 获取人脸比对结果后的页面元素
+        CHECK_RESULT_CONTENT = (By.CSS_SELECTOR, '.app-tools-content-pics-vsbtn-popover > strong')
+        return BasePage(self.driver).get_text(CHECK_RESULT_CONTENT)
+
+    """ 质量分数检测 """
+    def check_one_img_quality(self, path):
+
+        # 上传人脸图片
+        IMAGE_UPLOAD_INPUT = (By.CSS_SELECTOR, 'input[type="file"]')
+        BasePage(self.driver).upload_file(IMAGE_UPLOAD_INPUT, path)
+
+        CHECK_CONTENT_DETECTION_BUTTON = (By.CSS_SELECTOR, '.app-tools-content-detection-detectbtn')
+        BasePage(self.driver).click_ele(CHECK_CONTENT_DETECTION_BUTTON)
+
+    def get_face_score_detection_result(self):
+        # 获取人脸质量分数
+        CHECK_CONTENT_DETECTION_BUTTON_RESULT = (By.XPATH, '//div[@class="app-tools-content-center"]//span')
+        return BasePage(self.driver).get_text(CHECK_CONTENT_DETECTION_BUTTON_RESULT)
+
+    """ 人脸属性检测 """
     def check_face_property(self, path):
-        """ 人脸属性检测 """
 
         # 图片上传按钮
         IMAGE_UPLOAD_INPUT = (By.CSS_SELECTOR, 'input[type="file"]')
@@ -23,111 +71,47 @@ class ToolPage(BasePage):
         CHECK_CONTENT_FACE_BUTTON = (By.CSS_SELECTOR, '.app-tools-content-face-detectbtn')
         BasePage(self.driver).click_ele(CHECK_CONTENT_FACE_BUTTON)
 
-    def get_check_result_sex(self):
-        CHECK_CONTENT_FACE_RESULT = '//div[@class="app-tools-content-detection-right"]//li[1]//span'
-        CHECK_CONTENT_SEX = '//div[@class="app-tools-content-detection-right"]//li[1]'
-        BasePage(self.driver).get_ele_locator(CHECK_CONTENT_FACE_RESULT)
-        self.find_element(CHECK_CONTENT_FACE_RESULT, By.XPATH)
-        self.find_element(CHECK_CONTENT_SEX, By.XPATH)
-        data_text = [self.get_text(CHECK_CONTENT_FACE_RESULT), self.get_text(CHECK_CONTENT_SEX)]
-        return data_text
-    #
-    # def get_check_result_age(self):
-    #     CHECK_CONTENT_FACE_RESULT = '//div[@class="app-tools-content-detection-right"]//li[2]//span'
-    #     CHECK_CONTENT_AGE = '//div[@class="app-tools-content-detection-right"]//li[2]'
-    #     self.find_element(CHECK_CONTENT_FACE_RESULT, By.XPATH)
-    #     self.find_element(CHECK_CONTENT_AGE, By.XPATH)
-    #     data_text = [self.get_text(CHECK_CONTENT_FACE_RESULT), self.get_text(CHECK_CONTENT_AGE)]
-    #     return data_text
-    #
-    # def get_check_result_phiz(self):
-    #     CHECK_CONTENT_FACE_RESULT = '//div[@class="app-tools-content-detection-right"]//li[3]//span'
-    #     CHECK_CONTENT_PHIZ = '//div[@class="app-tools-content-detection-right"]//li[3]'
-    #     self.find_element(CHECK_CONTENT_FACE_RESULT, By.XPATH)
-    #     self.find_element(CHECK_CONTENT_PHIZ, By.XPATH)
-    #     data_text = [self.get_text(CHECK_CONTENT_FACE_RESULT), self.get_text(CHECK_CONTENT_PHIZ)]
-    #     return data_text
-    #
-    # def get_check_result_mustache(self):
-    #     CHECK_CONTENT_FACE_RESULT = '//div[@class="app-tools-content-detection-right"]//li[4]//span'
-    #     CHECK_CONTENT_MUSTACHE = '//div[@class="app-tools-content-detection-right"]//li[4]'
-    #     self.find_element(CHECK_CONTENT_FACE_RESULT, By.XPATH)
-    #     self.find_element(CHECK_CONTENT_MUSTACHE, By.XPATH)
-    #     data_text = [self.get_text(CHECK_CONTENT_FACE_RESULT), self.get_text(CHECK_CONTENT_MUSTACHE)]
-    #     return data_text
-    #
-    # def get_check_result_glasse(self):
-    #     CHECK_CONTENT_FACE_RESULT = '//div[@class="app-tools-content-detection-right"]//li[5]//span'
-    #     CHECK_CONTENT_GLASSE = '//div[@class="app-tools-content-detection-right"]//li[5]'
-    #     self.find_element(CHECK_CONTENT_FACE_RESULT, By.XPATH)
-    #     self.find_element(CHECK_CONTENT_GLASSE, By.XPATH)
-    #     data_text = [self.get_text(CHECK_CONTENT_FACE_RESULT), self.get_text(CHECK_CONTENT_GLASSE)]
-    #     return data_text
-    #
-    # def get_check_result_mask(self):
-    #     CHECK_CONTENT_FACE_RESULT = '//div[@class="app-tools-content-detection-right"]//li[6]//span'
-    #     CHECK_CONTENT_MASK = '//div[@class="app-tools-content-detection-right"]//li[6]'
-    #     self.find_element(CHECK_CONTENT_FACE_RESULT, By.XPATH)
-    #     self.find_element(CHECK_CONTENT_MASK, By.XPATH)
-    #     data_text = [self.get_text(CHECK_CONTENT_FACE_RESULT), self.get_text(CHECK_CONTENT_MASK)]
-    #     return data_text
-    #
-    # def get_check_result_helmet(self):
-    #     CHECK_CONTENT_FACE_RESULT = '//div[@class="app-tools-content-detection-right"]//li[7]//span'
-    #     CHECK_CONTENT_HELMET = '//div[@class="app-tools-content-detection-right"]//li[7]'
-    #     self.find_element(CHECK_CONTENT_FACE_RESULT, By.XPATH)
-    #     self.find_element(CHECK_CONTENT_HELMET, By.XPATH)
-    #     data_text = [self.get_text(CHECK_CONTENT_FACE_RESULT), self.get_text(CHECK_CONTENT_HELMET)]
-    #     return data_text
-    #
-    # def get_check_result_hat(self):
-    #     CHECK_CONTENT_FACE_RESULT = '//div[@class="app-tools-content-detection-right"]//li[8]//span'
-    #     CHECK_CONTENT_HAT = '//div[@class="app-tools-content-detection-right"]//li[8]'
-    #     self.find_element(CHECK_CONTENT_FACE_RESULT, By.XPATH)
-    #     self.find_element(CHECK_CONTENT_HAT, By.XPATH)
-    #     data_text = [self.get_text(CHECK_CONTENT_FACE_RESULT), self.get_text(CHECK_CONTENT_HAT)]
-    #     return data_text
+    # def close_tool_face_detection(self):
+    #     """ 关闭人脸属性窗口 """
+    #     CLOSE_BTN = (By.XPATH, '//div[contains(@class, "tools-test-detection")]//i[contains(@class, "app-tools-header-close")]')
+    #     BasePage(self.driver).click_ele(CLOSE_BTN)
 
-    # # 1:1人脸验证
-    # def check_face_validation(self, path1, path2):
-    #     IMAGE_UPLOAD_INPUT_L = '.app-tools-content-pics .imageselsect-container:first-child > input[type="file"]'
-    #     IMAGE_UPLOAD_INPUT_R = '.app-tools-content-pics .imageselsect-container:last-child > input[type="file"]'
-    #
-    #     BasePage.upload_file_by_image_path(self, IMAGE_UPLOAD_INPUT_L, path1)
-    #     self.sleep(1)
-    #     BasePage.upload_file_by_image_path(self, IMAGE_UPLOAD_INPUT_R, path2)
-    #     self.sleep(3)
-    #     CHECK_CONTENT_FACE_BUTTON = '.app-tools-content-pics-vsbtn'
-    #     self.slow_click(CHECK_CONTENT_FACE_BUTTON)
-    #
-    # def get_check_face_result(self):
-    #     CHECK_CONTENT = '.app-tools-content-pics-vsbtn-popover > strong'
-    #     self.find_element(CHECK_CONTENT)
-    #     return self.get_text(CHECK_CONTENT)
+    def get_face_result_sex(self):
+        # 获取人脸属性 - 性别
+        CHECK_CONTENT_FACE_SEX = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[1]')
+        return BasePage(self.driver).get_text(CHECK_CONTENT_FACE_SEX)
 
-    # # 质量分数检测
-    # def check_image_quality(self, path):
-    #     IMAGE_UPLOAD_INPUT = 'input[type="file"]'
-    #     BasePage.upload_file_by_image_path(self, IMAGE_UPLOAD_INPUT, path)
-    #
-    #     CHECK_CONTENT_DETECTION_BUTTON = '.app-tools-content-detection-detectbtn'
-    #     self.slow_click(CHECK_CONTENT_DETECTION_BUTTON)
-    #
-    # def get_check_content_detection_result(self):
-    #     CHECK_CONTENT_DETECTION_BUTTON_RESULT = '.app-tools-content-detection-detectbtn > span'
-    #     CHECK_CONTENT_DETECTION_RESULT = '.app-tools-content-detection-detectresult'
-    #     self.find_element(CHECK_CONTENT_DETECTION_RESULT)
-    #     return self.get_text(CHECK_CONTENT_DETECTION_BUTTON_RESULT)
+    def get_face_result_age(self):
+        # 获取人脸属性 - 年龄
+        CHECK_CONTENT_AGE = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[2]')
+        return BasePage(self.driver).get_text(CHECK_CONTENT_AGE)
 
+    def get_face_result_phiz(self):
+        # 获取人脸属性 - 表情
+        CHECK_CONTENT_PHIZ = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[3]')
+        return BasePage(self.driver).get_text(CHECK_CONTENT_PHIZ)
 
-if __name__ == '__main__':
-    # 读取配置文件
-    # SSH_CONFIG_FILE = HandleConfig('../config/ssh_config.yml').config
-    # print(SSH_CONFIG_FILE)
+    def get_face_result_mustache(self):
+        # 获取人脸属性 - 胡子
+        CHECK_CONTENT_MUSTACHE = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[4]')
+        return BasePage(self.driver).get_text(CHECK_CONTENT_MUSTACHE)
 
-    from selenium import webdriver
+    def get_face_result_glasse(self):
+        # 获取人脸属性 - 眼镜
+        CHECK_CONTENT_GLASSE = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[5]')
+        return BasePage(self.driver).get_text(CHECK_CONTENT_GLASSE)
 
-    driver = webdriver.Chrome()
-    # driver.get("http://10.151.3.96/login")
-    # LoginPage(driver).login("zhuwenqin", "888888")
-    # LoginPage(driver).get_captcha_from_k8s_log()
+    def get_face_result_mask(self):
+        # 获取人脸属性 - 口罩
+        CHECK_CONTENT_MASK = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[6]')
+        return BasePage(self.driver).get_text(CHECK_CONTENT_MASK)
+
+    def get_face_result_helmet(self):
+        # 获取人脸属性 - 安全帽
+        CHECK_CONTENT_HELMET = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[7]')
+        return BasePage(self.driver).get_text(CHECK_CONTENT_HELMET)
+
+    def get_face_result_hat(self):
+        # 获取人脸属性 - 帽子
+        CHECK_CONTENT_HAT = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[8]')
+        return BasePage(self.driver).get_text(CHECK_CONTENT_HAT)

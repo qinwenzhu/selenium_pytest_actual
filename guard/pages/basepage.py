@@ -14,7 +14,7 @@ class BasePage:
 
     def __init__(self, driver: WebDriver):
         self.driver = driver
-        self.driver.maximize_window()
+        # self.driver.maximize_window()
 
     def wait_for_ele_to_be_visible(self, loc, timeout=10, poll_frequency=0.5):
         """ 等待元素在页面中可见 """
