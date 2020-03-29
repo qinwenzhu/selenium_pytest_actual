@@ -6,6 +6,11 @@
 
 
 class LoginData:
-    # 成功登录数据
-    # 测试登录失败用例
-    pass
+
+    # 正向用例数据
+    success_login_data = ("zhuwenqin", "888888")
+
+    # 反向异常测试数据
+    login_data = [
+        {"username": "", "password": ""}
+    ]

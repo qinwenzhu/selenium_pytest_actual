@@ -1,7 +1,7 @@
 
 class FacePropertyData:
-    """ 人脸属性测试数据 """
 
+    """ 数据驱动 - 人脸属性测试数据 """
     face_data_negative = [
         { "img_path": "woman_no_mustache_no_glasse_no_mask.jpg", "sex": "女", "age": "成人", "phiz": "悲伤",
             "mustache": "无", "glasse": "无", "mask": "无", "helmet": "无", "hat": "无"},

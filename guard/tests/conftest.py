@@ -12,11 +12,19 @@ from guard.pages.login_backup import LoginPage
 from guard.pages.tool import ToolPage
 
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(scope="class")
 def web_login_and_quit():
     driver = webdriver.Chrome()
     driver.get("http://10.151.5.92/login")
     LoginPage(driver).login("zhuwenqin", "888888")
+    yield driver
+    driver.quit()
+
+
+@pytest.fixture(scope="class")
+def login_and_quit():
+    driver = webdriver.Chrome()
+    driver.get("http://10.151.5.92/login")
     yield driver
     driver.quit()
 

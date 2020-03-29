@@ -72,6 +72,23 @@ class LoginPage(BasePage):
         LOGIN_BUTTON = (By.XPATH, '//button//span[contains(text(), "登录")]')
         BasePage(self.driver).click_ele(LOGIN_BUTTON)
 
+    def login_success_info(self):
+        # 定位到首页
+        LOGIN_SUCCESS_USERNAME = (By.CSS_SELECTOR, 'span[class="avatar-name"]')
+        text = BasePage(self.driver).get_text(LOGIN_SUCCESS_USERNAME)
+        print(f"当前登录用户的别名为：{text}")             # "/monitor"
+        return text
+
+    # def get_error_username(self):
+    #     # 用户名错误信息
+    #     LOGIN_ERROR_USERNAME = (By.XPATH, '//input[@name="username"]/parent::div/following-sibling::div')
+    #     return BasePage(self.driver).get_text(LOGIN_ERROR_USERNAME)
+    #
+    # def get_error_password(self):
+    #     # 用户名错误信息
+    #     LOGIN_ERROR_USERNAME = (By.XPATH, '//input[@name="username"]/parent::div/following-sibling::div')
+    #     return BasePage(self.driver).get_text(LOGIN_ERROR_USERNAME)
+
     def get_code_cjy(self):
         """ 通过调用第三方接口获取验证码"""
         CODE_IMG = (By.CSS_SELECTOR, '.code-pic > img')
@@ -97,13 +114,6 @@ class LoginPage(BasePage):
         captcha = ssh.execute_command(
             f"kubectl logs {oauth2_pod_name.rstrip()} --tail 2 | grep 生成验证码存入redis | awk -F ' ' '{{print $5}}'")
         return captcha.rstrip()
-
-    def login_success_info(self):
-        # 定位到首页
-        LOGIN_SUCCESS_USERNAME = (By.CSS_SELECTOR, 'span[class="avatar-name"]')
-        text = BasePage(self.driver).get_text(LOGIN_SUCCESS_USERNAME)
-        print(f"当前登录用户的别名为：{text}")             # "/monitor"
-        return text
 
 
 if __name__ == '__main__':
