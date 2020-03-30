@@ -29,14 +29,14 @@ class TestTool:
         result = ToolPage(web_login_and_quit).get_face_compare_result()
         assert '评分参考' == result
 
-    # @pytest.mark.positive
-    # def test_score_detection(self, web_login_and_quit, tool_close_one_img_quality):
-    #     """ 测试人脸质量分数检测功能 """
-    #     MenubarPage(web_login_and_quit).click_nav_item("工具", "质量分数检测")
-    #     ToolPage(web_login_and_quit).check_one_img_quality(f"{CommonPath.DATA_FOLDER}/face_property/have_glasse.jpg")
-    #
-    #     result = ToolPage(web_login_and_quit).get_face_score_detection_result()
-        # assert re.match(r'\d+.\d+%', result)
+    @pytest.mark.positive
+    def test_score_detection(self, web_login_and_quit, tool_close_one_img_quality):
+        """ 测试人脸质量分数检测功能 """
+        MenubarPage(web_login_and_quit).click_nav_item("工具", "质量分数检测")
+        ToolPage(web_login_and_quit).check_one_img_quality(f"{CommonPath.DATA_FOLDER}/face_property/have_glasse.jpg")
+
+        result = ToolPage(web_login_and_quit).get_face_score_detection_result()
+        assert re.match(r'\d+ .\d+%', result)
 
     @pytest.mark.positive
     def test_face_property(self, web_login_and_quit, tool_close_face_score_detection):

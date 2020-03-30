@@ -1,6 +1,6 @@
 # ssh configurations
 ssh:
-  hostname: "10.151.5.92"
+  hostname: "10.151.3.96"
   port: 22
   username: "root"
   password: "Nebula123$%^"

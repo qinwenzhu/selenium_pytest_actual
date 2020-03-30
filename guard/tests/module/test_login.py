@@ -9,13 +9,22 @@ import pytest
 from guard.pages.login import LoginPage
 from guard.data.login_data import LoginData
 
+from guard.tests.path import CommonPath
 
-# @pytest.mark.positive
-# def test_login_success(login_and_quit):
-#     LoginPage(login_and_quit).login(*LoginData.success_login_data)
-#
-#     # 此处需要连接数据库动态判断当前登陆用户的别名
-#     assert "祝文琴" == LoginPage(login_and_quit).login_success_info()
+from utils.database import Database
+from utils.handle_config import HandleConfig
+
+
+
+@pytest.mark.positive
+def test_login_success(login_and_quit):
+    LoginPage(login_and_quit).login(*LoginData.success_login_data)
+
+    # 此处需要连接数据库动态判断当前登陆用户的别名
+    assert "祝文琴" == LoginPage(login_and_quit).login_success_info()
+
+    # config = HandleConfig(f"{CommonPath.CONFIG_FOLDER}/db_config.yml").config
+    # Database(**config)
 
 
 # @pytest.mark.parametrize("data", LoginData.login_data)
