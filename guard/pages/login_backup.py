@@ -115,7 +115,7 @@ class LoginPage(object):
         return result['pic_str']
 
     def get_captcha_from_k8s_log(self):
-        SSH_CONFIG = HandleConfig('D:\wenqin\web_automation\Selenium_pytest_actual\guard\config\ssh_config.yml').config
+        SSH_CONFIG = HandleConfig(f'{CommonPath.CONFIG_FOLDER}\ssh_config.yml').config
         ssh_config = SSH_CONFIG.get("ssh")
         ssh_config['hostname'] = "10.151.3.96"
         ssh = SSH(**ssh_config)

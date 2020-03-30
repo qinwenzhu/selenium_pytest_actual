@@ -17,9 +17,11 @@ import urllib.request
 # 导入封装类
 from utils.ssh import SSH
 from utils.handle_config import HandleConfig
+
 # 导入共用路径
 from guard.tests.path import CommonPath
-# 导入二次封装BasePage基类
+
+# 导入二次封装selenium框架的 BasePage类
 from guard.pages.basepage import BasePage
 
 
@@ -70,23 +72,40 @@ class LoginPage(BasePage):
         LOGIN_BUTTON = (By.XPATH, '//button//span[contains(text(), "登录")]')
         BasePage(self.driver).click_ele(LOGIN_BUTTON)
 
+    def login_success_info(self):
+        # 定位到首页
+        LOGIN_SUCCESS_USERNAME = (By.CSS_SELECTOR, 'span[class="avatar-name"]')
+        text = BasePage(self.driver).get_text(LOGIN_SUCCESS_USERNAME)
+        print(f"当前登录用户的别名为：{text}")             # "/monitor"
+        return text
+
+    # def get_error_username(self):
+    #     # 用户名错误信息
+    #     LOGIN_ERROR_USERNAME = (By.XPATH, '//input[@name="username"]/parent::div/following-sibling::div')
+    #     return BasePage(self.driver).get_text(LOGIN_ERROR_USERNAME)
+    #
+    # def get_error_password(self):
+    #     # 用户名错误信息
+    #     LOGIN_ERROR_USERNAME = (By.XPATH, '//input[@name="username"]/parent::div/following-sibling::div')
+    #     return BasePage(self.driver).get_text(LOGIN_ERROR_USERNAME)
+
     def get_code_cjy(self):
         """ 通过调用第三方接口获取验证码"""
         CODE_IMG = (By.CSS_SELECTOR, '.code-pic > img')
         BasePage(self.driver).wait_for_ele_to_be_visible(CODE_IMG)
         code_img_src = BasePage(self.driver).get_ele_locator(CODE_IMG).get_attribute("src")
         # 将获取到的图片地址保存到本地目录
-        urllib.request.urlretrieve(code_img_src, f'{CommonPath.DATA_FOLDER}\cjy_get_code\get_current_code.jpg')
+        urllib.request.urlretrieve(code_img_src, f'{CommonPath.DATA_FOLDER}\cjy_read_code\save_cur_code.jpg')
 
         # 调第三方接口_识别验证码
         cjy = Chaojiying_Client('18500379756', '123456', '9bf661c27903e244883b5af71ed0c5da')  # 用户中心>>软件ID 生成一个
-        img = open(f'{CommonPath.DATA_FOLDER}\cjy_get_code\get_current_code.jpg', 'rb').read()  # 本地图片文件路径,有时WIN系统须要//
+        img = open(f'{CommonPath.DATA_FOLDER}\cjy_read_code\save_cur_code.jpg', 'rb').read()  # 本地图片文件路径,有时WIN系统须要//
         result = cjy.PostPic(img, 1902)  # 1902 验证码类型
         print(f"-------第三方接口识别当前的验证码为：{result['pic_str']}-----------")
         return result['pic_str']
 
     def get_captcha_from_k8s_log(self):
-        SSH_CONFIG = HandleConfig('D:\wenqin\web_automation\Selenium_pytest_actual\guard\config\ssh_config.yml').config
+        SSH_CONFIG = HandleConfig(f'{CommonPath.CONFIG_FOLDER}\ssh_config.yml').config
         ssh_config = SSH_CONFIG.get("ssh")
         ssh_config['hostname'] = "10.151.3.96"
         ssh = SSH(**ssh_config)
@@ -96,24 +115,13 @@ class LoginPage(BasePage):
             f"kubectl logs {oauth2_pod_name.rstrip()} --tail 2 | grep 生成验证码存入redis | awk -F ' ' '{{print $5}}'")
         return captcha.rstrip()
 
-    def login_success_info(self):
-        # 定位到首页
-        LOGIN_SUCCESS_USERNAME = (By.CSS_SELECTOR, 'span[class="avatar-name"]')
-        text = BasePage(self.driver).get_text(LOGIN_SUCCESS_USERNAME)
-        print(f"当前登录用户的别名为：{text}")             # "/monitor"
-        return text
-
 
 if __name__ == '__main__':
 
     from selenium import webdriver
 
     driver = webdriver.Chrome()
-    # driver.maximize_window()
     driver.get("http://10.151.3.96/login")
-
-    # print(os.getcwd())
-    # print(os.path.split(os.getcwd())[0])
 
     # 测试通过手动输入验证码进行登录
     # LoginPage(driver).login("zhuwenqin", "888888", flag=False)
@@ -122,4 +130,4 @@ if __name__ == '__main__':
     # LoginPage(driver).login("zhuwenqin", "888888", flag=True)
 
     # 测试ssh连接服务器进行验证码获取来进行登录
-    # LoginPage(driver).login("zhuwenqin", "888888")
+    LoginPage(driver).login("zhuwenqin", "888888")
