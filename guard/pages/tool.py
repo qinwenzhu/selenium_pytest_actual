@@ -43,6 +43,7 @@ class ToolPage(BasePage):
     def get_face_compare_result(self):
         # 获取人脸比对结果后的页面元素
         CHECK_RESULT_CONTENT = (By.CSS_SELECTOR, '.app-tools-content-pics-vsbtn-popover > strong')
+        # BasePage(self.driver).wait_for_ele_to_be_visible(CHECK_RESULT_CONTENT)
         return BasePage(self.driver).get_text(CHECK_RESULT_CONTENT)
 
     """ 质量分数检测 """
@@ -70,11 +71,6 @@ class ToolPage(BasePage):
         # 点击检测
         CHECK_CONTENT_FACE_BUTTON = (By.CSS_SELECTOR, '.app-tools-content-face-detectbtn')
         BasePage(self.driver).click_ele(CHECK_CONTENT_FACE_BUTTON)
-
-    # def close_tool_face_detection(self):
-    #     """ 关闭人脸属性窗口 """
-    #     CLOSE_BTN = (By.XPATH, '//div[contains(@class, "tools-test-detection")]//i[contains(@class, "app-tools-header-close")]')
-    #     BasePage(self.driver).click_ele(CLOSE_BTN)
 
     def get_face_result_sex(self):
         # 获取人脸属性 - 性别
