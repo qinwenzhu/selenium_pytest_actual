@@ -7,12 +7,16 @@
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
 
 from utils.win_upload import upload
 
 
 class BasePage:
-    """  针对selenium框架中常用的元素操作进行二次封装 Basepage"""
+
+    """
+    针对selenium框架中常用的元素操作进行二次封装 Basepage
+    """
 
     def __init__(self, driver: WebDriver):
         self.driver = driver
@@ -57,3 +61,17 @@ class BasePage:
         self.wait_for_ele_to_be_visible(loc)
         ele = self.get_ele_locator(loc)
         ele.click()
+
+    def mouse_move_ele(self, loc):
+        """  鼠标移动到指定元素上 """
+        self.wait_for_ele_to_be_visible(loc)
+        ele = self.get_ele_locator(loc)
+        ActionChains(self.driver).move_to_element(ele).perform()
+
+    def mouse_move_ele_and_click(self, loc1, loc2):
+        """  鼠标移动到指定元素上并进行列表的点击操作 """
+        self.wait_for_ele_to_be_visible(loc1)
+        ele = self.get_ele_locator(loc1)
+        self.wait_for_ele_to_be_visible(loc2)
+        sub_ele = self.get_ele_locator(loc2)
+        ActionChains(self.driver).move_to_element(ele).pause(0.2).click(sub_ele).perform()
