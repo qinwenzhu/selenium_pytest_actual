@@ -43,7 +43,7 @@ class ToolPage(BasePage):
     def get_face_compare_result(self):
         # 获取人脸比对结果后的页面元素
         CHECK_RESULT_CONTENT = (By.CSS_SELECTOR, '.app-tools-content-pics-vsbtn-popover > strong')
-        # BasePage(self.driver).wait_for_ele_to_be_visible(CHECK_RESULT_CONTENT)
+        BasePage(self.driver).wait_for_ele_to_be_visible(CHECK_RESULT_CONTENT)
         return BasePage(self.driver).get_text(CHECK_RESULT_CONTENT)
 
     """ 质量分数检测 """
@@ -59,6 +59,7 @@ class ToolPage(BasePage):
     def get_face_score_detection_result(self):
         # 获取人脸质量分数
         CHECK_CONTENT_DETECTION_BUTTON_RESULT = (By.XPATH, '//div[@class="app-tools-content-center"]//span')
+        BasePage(self.driver).wait_for_ele_to_be_visible(CHECK_CONTENT_DETECTION_BUTTON_RESULT)
         return BasePage(self.driver).get_text(CHECK_CONTENT_DETECTION_BUTTON_RESULT)
 
     """ 人脸属性检测 """
@@ -75,39 +76,47 @@ class ToolPage(BasePage):
     def get_face_result_sex(self):
         # 获取人脸属性 - 性别
         CHECK_CONTENT_FACE_SEX = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[1]')
+        BasePage(self.driver).wait_for_ele_to_be_visible(CHECK_CONTENT_FACE_SEX)
         return BasePage(self.driver).get_text(CHECK_CONTENT_FACE_SEX)
 
     def get_face_result_age(self):
         # 获取人脸属性 - 年龄
         CHECK_CONTENT_AGE = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[2]')
+        BasePage(self.driver).wait_for_ele_to_be_visible(CHECK_CONTENT_AGE)
         return BasePage(self.driver).get_text(CHECK_CONTENT_AGE)
 
     def get_face_result_phiz(self):
         # 获取人脸属性 - 表情
         CHECK_CONTENT_PHIZ = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[3]')
+        BasePage(self.driver).wait_for_ele_to_be_visible(CHECK_CONTENT_PHIZ)
         return BasePage(self.driver).get_text(CHECK_CONTENT_PHIZ)
 
     def get_face_result_mustache(self):
         # 获取人脸属性 - 胡子
         CHECK_CONTENT_MUSTACHE = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[4]')
+        BasePage(self.driver).wait_for_ele_to_be_visible(CHECK_CONTENT_MUSTACHE)
         return BasePage(self.driver).get_text(CHECK_CONTENT_MUSTACHE)
 
     def get_face_result_glasse(self):
         # 获取人脸属性 - 眼镜
         CHECK_CONTENT_GLASSE = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[5]')
+        BasePage(self.driver).wait_for_ele_to_be_visible(CHECK_CONTENT_GLASSE)
         return BasePage(self.driver).get_text(CHECK_CONTENT_GLASSE)
 
     def get_face_result_mask(self):
         # 获取人脸属性 - 口罩
         CHECK_CONTENT_MASK = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[6]')
+        BasePage(self.driver).wait_for_ele_to_be_visible(CHECK_CONTENT_MASK)
         return BasePage(self.driver).get_text(CHECK_CONTENT_MASK)
 
     def get_face_result_helmet(self):
         # 获取人脸属性 - 安全帽
         CHECK_CONTENT_HELMET = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[7]')
+        BasePage(self.driver).wait_for_ele_to_be_visible(CHECK_CONTENT_HELMET)
         return BasePage(self.driver).get_text(CHECK_CONTENT_HELMET)
 
     def get_face_result_hat(self):
         # 获取人脸属性 - 帽子
         CHECK_CONTENT_HAT = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[8]')
+        BasePage(self.driver).wait_for_ele_to_be_visible(CHECK_CONTENT_HAT)
         return BasePage(self.driver).get_text(CHECK_CONTENT_HAT)
