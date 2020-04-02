@@ -30,3 +30,5 @@ class TestUser:
         # 创建分组名称 flag为True<默认创建同级，如果为False，则为创建下一级>
         title_name = UserPage(web_login_and_quit).add_department_by_root_name(flag=False)
         UserPage(web_login_and_quit).create_department_group(title_name, f"SUDN-{uuid.uuid1()}")
+
+

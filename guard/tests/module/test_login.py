@@ -14,17 +14,15 @@ from guard.tests.path import CommonPath
 from utils.database import Database
 from utils.handle_config import HandleConfig
 
-
-
 @pytest.mark.positive
 def test_login_success(login_and_quit):
     LoginPage(login_and_quit).login(*LoginData.success_login_data)
 
-    # 此处需要连接数据库动态判断当前登陆用户的别名
-    assert "祝文琴" == LoginPage(login_and_quit).login_success_info()
+    # 断言 - 只要判断首页的某个指定元素存在，说明登录成功并进行页面跳转
+    assert LoginPage(login_and_quit).get_login_success()
 
-    # config = HandleConfig(f"{CommonPath.CONFIG_FOLDER}/db_config.yml").config
-    # Database(**config)
+    # TODO 此处需要连接数据库动态判断当前登陆用户的别名
+    # assert "祝文琴" == LoginPage(login_and_quit).login_success_info()
 
 
 # @pytest.mark.parametrize("data", LoginData.login_data)

@@ -52,14 +52,7 @@ class TestTool:
         face_helmet = ToolPage(web_login_and_quit).get_face_result_helmet()
         face_hat = ToolPage(web_login_and_quit).get_face_result_hat()
 
-        assert "性别" in face_sex
-        assert "年龄" in face_age
-        assert "表情" in face_phiz
-        assert "胡子" in face_mustache
-        assert "眼镜" in face_glasse
-        assert "口罩" in face_mask
-        assert "安全帽" in face_helmet
-        assert "帽子" in face_hat
+        assert ("性别" in face_sex) and ("年龄" in face_age) and ("表情" in face_phiz) and ("胡子" in face_mustache) and ("眼镜" in face_glasse) and ("口罩" in face_mask) and ("安全帽" in face_helmet) and ("帽子" in face_hat)
 
     @pytest.mark.parametrize("data", FPD.face_data_negative)
     @pytest.mark.negative

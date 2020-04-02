@@ -34,6 +34,16 @@ class UserPage(BasePage):
         CONFIRM_BTN = (By.XPATH, f'//span[contains(text(), "{til_name}")]/parent::div/following-sibling::div[@class="el-dialog__footer"]//span[contains(text(), "确定")]')
         BasePage(self.driver).click_ele(CONFIRM_BTN)
 
+    def view_details_group_name(self, til_name):
+        """ 查看分组详情中的分组名称是否为当前组名称 """
+        # //span[contains(text(), "详情")]/parent::div/following-sibling::div[@class="el-dialog__body"]//div[@class="right"]//span[1]
+        DETAIL_GTOUP_TEXT = (By.XPATH, f'//span[contains(text(), "{til_name}")]/parent::div/following-sibling::div[@class="el-dialog__body"]//div[@class="right"]//span[1]')
+        return BasePage(self.driver).get_text(DETAIL_GTOUP_TEXT)
+
+
+
+
+
 
 if __name__ == '__main__':
 
