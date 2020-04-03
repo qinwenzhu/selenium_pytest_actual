@@ -8,8 +8,6 @@
 from selenium.webdriver.common.by import By
 from guard.pages.basepage import BasePage
 
-from selenium.webdriver.common.action_chains import ActionChains
-
 
 class GroupTree(BasePage):
 

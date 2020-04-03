@@ -122,3 +122,8 @@ class BasePage:
             ele = self.get_ele_locator(loc1)
             sub_ele = self.get_ele_locator(loc2)
             ActionChains(self.driver).move_to_element(ele).pause(pause_time).click(sub_ele).perform()
+
+    def scroll_visibility_region(self, loc):
+        """  滚动到元素可见区域 """
+        ele = self.get_ele_locator(loc)
+        self.driver.execute_script("arguments[0].scrollIntoView();", ele)
