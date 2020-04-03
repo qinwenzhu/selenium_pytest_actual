@@ -80,8 +80,8 @@ class LoginPage(BasePage):
     #     print(f"当前登录用户的别名为：{text}")             # "/monitor"
     #     return text
 
-    def get_login_success(self):
-        # 定位到首页
+    def is_login_success(self):
+        # 判断登录操作是否成功并跳转到首页
         LOGIN_SUCCESS_USERNAME = (By.CSS_SELECTOR, 'span[class="avatar-name"]')
         BasePage(self.driver).wait_for_ele_to_be_presence(LOGIN_SUCCESS_USERNAME)
         if BasePage(self.driver).get_ele_locator(LOGIN_SUCCESS_USERNAME):
