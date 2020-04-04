@@ -1,4 +1,7 @@
 /.idea/
 /guard/pages/__pycache__/
+/guard/pages/components/__pycache__/
 /utils/__pycache__/
 /guard/tests/__pycache__/
+/guard/tests/module/__pycache__/
+/guard/data/__pycache__/
