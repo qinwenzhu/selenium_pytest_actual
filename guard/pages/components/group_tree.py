@@ -61,3 +61,18 @@ class GroupTree(BasePage):
             CONFIRM_BTN = (By.XPATH,
                            '//span[contains(text(),"删除")]/parent::div/following-sibling::div[@class="el-dialog__footer"]//span[contains(text(),"取消")]')
             BasePage(self.driver).click_ele(CONFIRM_BTN)
+
+    def search_dep_by_name(self, group_name):
+
+        # 定位搜索文本框
+        SEARCH_INPUT = (By.XPATH, '//aside[@class="el-aside"]//div[contains(@class,"el-input--suffix")]/input')
+        BasePage(self.driver).update_input_text(SEARCH_INPUT, group_name)
+
+        # 点击搜索
+        SEARCH_BTN = (By.XPATH, '//aside[@class="el-aside"]//div[contains(@class,"el-input--suffix")]/span')
+        BasePage(self.driver).click_ele(SEARCH_BTN)
+
+    def judge_search_success(self, group_name):
+        # 判断 tree分组下搜索到对应的分组
+        RESULT_TEXT = (By.XPATH, f'//div[@role="tree"]//div[contains(@title,"{group_name}")]')
+        return BasePage(self.driver).get_text(RESULT_TEXT)

@@ -84,6 +84,19 @@ class UserPage(BasePage):
         CLOSE_BTN = (By.XPATH, '//div[@role="alert"]//i[contains(@class, "el-icon-close")]')
         BasePage(self.driver).click_ele(CLOSE_BTN)
 
+    # def search_dep_by_name(self, group_name):
+    #
+    #     # 定位搜索文本框
+    #     SEARCH_INPUT = (By.XPATH, '//aside[@class="el-aside"]//div[contains(@class,"el-input--suffix")]/input')
+    #     BasePage(self.driver).update_input_text(SEARCH_INPUT, group_name)
+    #
+    #     # 点击搜索
+    #     SEARCH_BTN = (By.XPATH, '//aside[@class="el-aside"]//div[contains(@class,"el-input--suffix")]/span')
+    #     BasePage(self.driver).click_ele(SEARCH_BTN)
+
+    def add_user(self):
+        pass
+
 
 if __name__ == '__main__':
 
