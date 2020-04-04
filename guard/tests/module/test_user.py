@@ -9,27 +9,39 @@ import pytest
 from guard.pages.user import UserPage
 
 
-@pytest.mark.usefixtures("user_management")
+@pytest.mark.usefixtures("user_web")
 class TestUser:
 
-    pass
+    @pytest.mark.usefixtures("close_alert")
+    def test_create_peer_dep_from_Default(self, dep_name):
+        # 测试从Default根分组创建同级分组
+        UserPage(dep_name[0]).create_department_from_Default(dep_name[1])
+        result = UserPage(dep_name[0]).judge_alert_info()
+        assert "创建同级分组成功" == result
 
-    # def test_create_equal_department(self, user_management):
-    #     """ 测试从根<Default>部门创建同级部门
-    #             add_department_by_root_name(flag=True)
-    #     """
-    #     # 创建分组名称 flag为True<默认创建同级，如果为False，则为创建下一级>
-    #     title_name = UserPage(user_management[0]).add_department_by_root_name()
-    #     # 传递title名称和分组名称
-    #     UserPage(user_management[0]).create_department_group(group_name=user_management[1], til_name=title_name)
-    #
-    # def test_create_next_department(self, user_management):
-    #     """ 测试在根<Default>部门创建下一级部门
-    #             add_department_by_root_name(flag=True)
-    #     """
-    #     # 创建分组名称 flag为True<默认创建同级，如果为False，则为创建下一级>
-    #     title_name = UserPage(user_management[0]).add_department_by_root_name(flag=False)
-    #     UserPage(user_management[0]).create_department_group(group_name=user_management[1], til_name=title_name)
+    @pytest.mark.usefixtures("close_alert", "del_sub_dep_name_to_user")
+    def test_create_next_dep_from_user_defined(self, dep_name, sole_group_name):
+        # 测试从用户自定义分组创建下一级分组
+        UserPage(dep_name[0]).create_department_from_user_defined(group_name=sole_group_name, parent_name=dep_name[1], is_peer=False)
+        result = UserPage(dep_name[0]).judge_alert_info()
+        assert "创建下一级分组成功" == result
 
+    @pytest.mark.usefixtures("close_alert", "del_dep_name_to_user")
+    def test_create_peer_dep_from_user_defined(self, dep_name, sole_group_name):
+        # 测试从用户自定义分组创建同级分组
+        UserPage(dep_name[0]).create_department_from_user_defined(group_name=sole_group_name, parent_name=dep_name[1])
+        result = UserPage(dep_name[0]).judge_alert_info()
+        assert "创建同级分组成功" == result
 
+    @pytest.mark.usefixtures("close_alert", "del_sub_dep_name_to_default")
+    def test_create_next_dep_from_Default(self, dep_name, sole_group_name):
+        # 测试从Default根分组创建下一级分组
+        UserPage(dep_name[0]).create_department_from_Default(sole_group_name, is_peer=False)
+        result = UserPage(dep_name[0]).judge_alert_info()
+        assert "创建下一级分组成功" == result
 
+    @pytest.mark.usefixtures("close_alert")
+    def test_delete_peer_dep_from_Default(self, dep_name):
+        UserPage(dep_name[0]).delete_department_by_name(parent_name=dep_name[1])
+        result = UserPage(dep_name[0]).judge_alert_info()
+        assert "删除分组成功" == result

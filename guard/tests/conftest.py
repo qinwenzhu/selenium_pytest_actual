@@ -6,6 +6,7 @@
 
 
 import pytest
+import time
 from selenium import webdriver
 
 from utils.uuid_generate_unique_data import uuid_data
@@ -13,11 +14,10 @@ from utils.uuid_generate_unique_data import uuid_data
 from guard.pages.login_backup import LoginPage
 from guard.pages.tool import ToolPage
 from guard.pages.components.menubar import MenubarPage
-from guard.pages.components.group_tree import GroupTree
 from guard.pages.user import UserPage
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="module")
 def start_driver_and_quit():
     # 前置 - 启动会话窗口 后置 - 关闭
     driver = webdriver.Chrome()
@@ -26,7 +26,7 @@ def start_driver_and_quit():
     driver.quit()
 
 
-@pytest.fixture(scope="class")
+@pytest.fixture(scope="module")
 def login_web(start_driver_and_quit):
     # 登录web网站
     start_driver_and_quit.get("http://10.151.3.96/login")
@@ -35,37 +35,94 @@ def login_web(start_driver_and_quit):
 
 
 """ ---------------------------- 用户管理 user ---------------------------- """
-@pytest.fixture(scope="class")
+@pytest.fixture(scope="module")
 def user_web(login_web):
     # 进入用户管理模块
     MenubarPage(login_web).click_nav_item("配置", "用户管理")
     yield login_web
 
 
-@pytest.fixture
-def user_management(user_web):
-    # 前置 - 准备分组名称 后置 - 删除同级分组
+@pytest.fixture(scope="class")
+def dep_name(user_web):
+    # 前置 - 准备分组名称
     group_name = f"UDN-{uuid_data()}"
     yield user_web, group_name
-    UserPage(user_web).delete_dep_by_name(group_name)
+    # # 删除通过Default用户组创建的同级分组
+    # UserPage(user_web).delete_department_by_name(parent_name=group_name)
 
 
 @pytest.fixture
-def user_del_sub_dep_group(user_web):
-    # 前置 - 准备分组名称 后置 - 删除下一级分组
-    group_name = f"UDN-{uuid_data()}"
-    yield user_web, group_name
-    UserPage(user_web).delete_dep_by_name(group_name, flag=False)
+def close_alert(user_web):
+    # 删除alert弹框
+    yield
+    UserPage(user_web).close_alert()
 
 
-# @pytest.fixture(scope="class")
-# def add_user_and_delete_user(user_management):
-#     # 从Default创建同级分组
-#     group_name = uuid_data()
-#     til_name = UserPage(user_management[0]).add_department_by_root_name()
-#     UserPage(user_management[0]).create_department_group(group_name, til_name)
-#     yield group_name
-#     UserPage(user_management[0]).delete_dep_by_name(group_name)
+@pytest.fixture
+def sole_group_name(dep_name):
+    # 前置 - 分组名 - 只针对测试用例<保证数据唯一性>
+    sole_group_name = f"UDN-{uuid_data()}"
+    yield sole_group_name
+
+
+@pytest.fixture
+def del_sub_dep_name_to_default(dep_name, sole_group_name):
+    yield
+    # 删除Default分组的下一级分组
+    UserPage(dep_name[0]).delete_department_by_name(sub_name=sole_group_name, is_peer=False)
+    time.sleep(2)
+
+
+@pytest.fixture
+def del_dep_name_to_user(dep_name, sole_group_name):
+    yield
+    # 删除用户自定义分组
+    UserPage(dep_name[0]).delete_department_by_name(parent_name=sole_group_name)
+    time.sleep(2)
+
+
+@pytest.fixture
+def del_sub_dep_name_to_user(dep_name, sole_group_name):
+    yield
+    # 删除用户自定义分组的下一级分组
+    UserPage(dep_name[0]).delete_department_by_name(sub_name=sole_group_name, parent_name=dep_name[1], is_peer=False)
+    time.sleep(2)
+
+
+
+
+
+# @pytest.fixture
+# def add_dep_sole_name_and_del(dep_name):
+#     # 前置 - 准备分组名称 - 只针对测试用例<保证数据唯一性>
+#     sole_group_name = f"UDN-{uuid_data()}"
+#     yield sole_group_name
+#     # 删除通过Default用户组创建的父级分组下的同级分组
+#     UserPage(dep_name[0]).delete_department_by_name(sub_name=sole_group_name, parent_name=dep_name[1])
+#
+#
+
+#
+#
+# @pytest.fixture
+# def del_sub_dep_by_default(dep_name):
+#     # 前置 - 准备分组名称 - 只针对测试用例<保证数据唯一性>
+#     sole_group_name = f"UDN-{uuid_data()}"
+#     yield sole_group_name
+#     # 删除通过Default用户组创建的下一级分组
+#     UserPage(dep_name[0]).delete_department_by_name(sub_name=sole_group_name, parent_name="Default")
+
+
+# @pytest.fixture
+# def teardown_delete_dep(user_web):
+#     # 前置 - 准备分组名称 - 只针对测试用例<保证数据唯一性>
+#     sole_group_name = f"UDN-{uuid_data()}"
+#     yield sole_group_name
+#     UserPage(user_web).delete_department_by_name()
+
+
+
+
 
 
 """ ---------------------------- 登录 login ---------------------------- """
