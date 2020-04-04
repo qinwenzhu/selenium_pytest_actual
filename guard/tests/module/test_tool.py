@@ -27,6 +27,7 @@ class TestTool:
         MenubarPage(login_web).click_nav_item("工具", "1:1人脸验证")
         ToolPage(login_web).one_to_one_face_compare(f"{CommonPath.DATA_FOLDER}/face_property/have_glasse.jpg",
                                                            f"{CommonPath.DATA_FOLDER}/face_property/woman_no_mustache_no_glasse_no_mask.jpg")
+
         result = ToolPage(login_web).get_face_compare_result()
         assert '评分参考' == result
 
