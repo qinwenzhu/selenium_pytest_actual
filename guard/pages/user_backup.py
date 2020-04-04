@@ -43,15 +43,15 @@ class UserPage(BasePage):
     #         # GroupTree(self.driver).click_group_by_name(parent_name)
     #         pass
     #
-    #     if confirm:
-    #         # 点击确认
-    #         CONFIRM_BTN = (By.XPATH, '//span[contains(text(),"删除")]/parent::div/following-sibling::div[@class="el-dialog__footer"]//span[contains(text(),"删除")]')
-    #         BasePage(self.driver).click_ele(CONFIRM_BTN)
-    #     else:
-    #         # 点击取消
-    #         CONFIRM_BTN = (By.XPATH,
-    #                        '//span[contains(text(),"删除")]/parent::div/following-sibling::div[@class="el-dialog__footer"]//span[contains(text(),"取消")]')
-    #         BasePage(self.driver).click_ele(CONFIRM_BTN)
+        # if confirm:
+        #     # 点击确认
+        #     CONFIRM_BTN = (By.XPATH, '//span[contains(text(),"删除")]/parent::div/following-sibling::div[@class="el-dialog__footer"]//span[contains(text(),"删除")]')
+        #     BasePage(self.driver).click_ele(CONFIRM_BTN)
+        # else:
+        #     # 点击取消
+        #     CONFIRM_BTN = (By.XPATH,
+        #                    '//span[contains(text(),"删除")]/parent::div/following-sibling::div[@class="el-dialog__footer"]//span[contains(text(),"取消")]')
+        #     BasePage(self.driver).click_ele(CONFIRM_BTN)
 
 
     # def add_department_by_user_defined_name(self, dep_name, flag=True):

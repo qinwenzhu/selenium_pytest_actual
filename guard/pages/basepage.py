@@ -51,6 +51,7 @@ class BasePage:
     def get_text(self, loc):
         """ 等待元素存在，获取文本内容 """
         try:
+            self.wait_for_ele_to_be_presence(loc)
             ele = self.get_ele_locator(loc)
         except Exception:
             raise

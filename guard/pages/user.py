@@ -4,7 +4,7 @@
 # @File: user.py
 # @Software: PyCharm
 
-
+import time
 from selenium.webdriver.common.by import By
 
 from guard.pages.basepage import BasePage
@@ -13,44 +13,76 @@ from guard.pages.components.group_tree import GroupTree
 
 class UserPage(BasePage):
 
-    def create_dep_group(self, group_name, til_name, parent_name="Default", confirm=True):
+    def create_department_from_Default(self, group_name, is_peer=True):
         """
-        方法封装：创建 同级/下一级 分组
-        :param parent_name: 父级分组名称
-        :param group_name: 部分分组名称
-        :param til_name: dialog弹框中的标题 - 作为识别打开的当前弹框页面
-        :param confirm: 判断是点击确定还是点击取消按钮 True默认创建点击确定按钮
-        :return:
+        通过Default部门创建 同级/下一级分组
+        :param group_name: 组名称
+        :param is_peer: 判断是否创建同级分组  默认为创建同级
         """
+
+        if is_peer:
+            # 滑动到创建同级分组
+            GroupTree(self.driver).click_menu_by_name("Default", "创建同级")
+            # 动态定位title 为 创建同级
+            GroupTree(self.driver).create_dep_group_com(group_name, "创建同级")
+        else:
+            # 滑动到创建下一级分组
+            GroupTree(self.driver).click_menu_by_name("Default", "创建下一级")
+            # 动态定位title 为 创建下一级
+            GroupTree(self.driver).create_dep_group_com(group_name, "创建下一级")
+
+    def create_department_from_user_defined(self, group_name, parent_name="Default", is_peer=True):
+        # 先点击保证元素在页面可视区域
         GroupTree(self.driver).click_group_by_name(parent_name)
-        # 组名称input框
-        GROUP_INPUT = (By.XPATH, f'//span[contains(text(),"{til_name}")]/parent::div/following-sibling::div[@class="el-dialog__body"]//input')
-        BasePage(self.driver).update_input_text(GROUP_INPUT, group_name)
-        if confirm:
-            # 点击确认
-            CONFIRM_BTN = (By.XPATH, f'//span[contains(text(),"{til_name}")]/parent::div/following-sibling::div[@class="el-dialog__footer"]//span[contains(text(),"确定")]')
-            BasePage(self.driver).click_ele(CONFIRM_BTN)
+        if is_peer:
+            # 滑动到创建同级分组
+            GroupTree(self.driver).click_menu_by_name(parent_name, "创建同级")
+            # 动态定位title 为 创建同级
+            GroupTree(self.driver).create_dep_group_com(group_name, "创建同级")
         else:
-            # 点击取消
-            CONFIRM_BTN = (By.XPATH, f'//span[contains(text(),"{til_name}")]/parent::div/following-sibling::div[@class="el-dialog__footer"]//span[contains(text(),"取消")]')
-            BasePage(self.driver).click_ele(CONFIRM_BTN)
+            # 滑动到创建下一级分组
+            GroupTree(self.driver).click_menu_by_name(parent_name, "创建下一级")
+            # 动态定位title 为 创建下一级
+            GroupTree(self.driver).create_dep_group_com(group_name, "创建下一级")
 
-    def create_department_from_Default(self, flag=True):
-        if flag:
-            """ 从Default目录下创建同级分组 """
-            self.create_dep_group("Default", "创建同级")
+    def delete_department_by_name(self, sub_name=None, parent_name="Default", is_peer=True, delete=True):
+        """
+        通过组名称删除分组
+        :param sub_name: 子级分组
+        :param parent_name: 父级分组
+        :param is_peer: 判断删除父级/子级分组，默认删除父级
+        :param delete: 判断点击删除还是取消按钮，默认删除
+        """
+
+        if is_peer:
+            # 先点击保证元素在页面可视区域
+            GroupTree(self.driver).click_group_by_name(parent_name)
+            # 滑动到删除
+            GroupTree(self.driver).click_menu_by_name(parent_name, "删除")
         else:
-            """ 从Default目录下创建下一级分组 """
-            self.create_dep_group("Default", "创建下一级")
+            # 点击父级分组，出现子级分组列表
+            GroupTree(self.driver).click_group_by_name(parent_name)
+            time.sleep(0.5)
+            # 滑动到删除
+            GroupTree(self.driver).click_menu_by_name(sub_name, "删除")
 
+        if delete:
+            # 点击删除按钮
+            GroupTree(self.driver).delete_dep_group_com()
+        else:
+            # 点击取消按钮
+            GroupTree(self.driver).delete_dep_group_com(delete=False)
 
-    # def create_sub_department_from_Default(self):
+    def judge_alert_info(self):
+        # 定位alert弹框的文本
+        INFO_TEXT = (By.XPATH, '//div[@role="alert"]//p')
+        BasePage(self.driver).wait_for_ele_to_be_visible(INFO_TEXT)
+        return BasePage(self.driver).get_text(INFO_TEXT)
 
-
-
-
-
-    pass
+    def close_alert(self):
+        # 关闭alert弹框
+        CLOSE_BTN = (By.XPATH, '//div[@role="alert"]//i[contains(@class, "el-icon-close")]')
+        BasePage(self.driver).click_ele(CLOSE_BTN)
 
 
 if __name__ == '__main__':
@@ -64,5 +96,8 @@ if __name__ == '__main__':
     LoginPage(driver).login("zhuwenqin", "888888")
 
     MenubarPage(driver).click_nav_item("配置", "用户管理")
-    title_name = UserPage(driver).add_department_by_root_name(flag=False)
-    UserPage(driver).create_department_group(title_name, "分组名称")
+    # 创建下一级分组
+    UserPage(driver).create_department_from_Default("nae552", is_peer=False)
+    driver.refresh()
+    # 删除下一级分组
+    UserPage(driver).delete_department_by_name("nae552", is_peer=False)
