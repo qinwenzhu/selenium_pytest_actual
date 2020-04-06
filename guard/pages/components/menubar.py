@@ -29,15 +29,11 @@ class MenubarPage(BasePage):
 
         if sub_menu_text is not None:
             # 通过移动到一级目录然后点击二级目录
-            BasePage(self.driver).wait_for_ele_to_be_visible(MENU_TEXT)
-            menu_ele = BasePage(self.driver).get_ele_locator(MENU_TEXT)
-            ActionChains(self.driver).move_to_element(menu_ele).perform()
-            BasePage(self.driver).wait_for_ele_to_be_visible(SUB_MENU_TEXT)
-            sub_menu_ele = BasePage(self.driver).get_ele_locator(SUB_MENU_TEXT)
-            ActionChains(self.driver).move_to_element(menu_ele).click(sub_menu_ele).perform()
+            BasePage(self.driver).mouse_move_ele(MENU_TEXT, "顶部导航组件-nav")
+            BasePage(self.driver).mouse_move_ele_and_click(MENU_TEXT, SUB_MENU_TEXT, img_describe="顶部导航组件-nav")
         else:
             # 选择指定的一级目录
-            BasePage(self.driver).click_ele(MENU_TEXT)
+            BasePage(self.driver).click_ele(MENU_TEXT, "顶部导航组件-nav")
 
 
 if __name__ == '__main__':

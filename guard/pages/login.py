@@ -33,12 +33,12 @@ class LoginPage(BasePage):
         # 定位到用户名文本框
         USERNAME_INPUT = (By.CSS_SELECTOR, 'input[name="username"]')
         # 输入用户名 - 等待元素可见并输入文本
-        BasePage(self.driver).update_input_text(USERNAME_INPUT, username)
+        BasePage(self.driver).update_input_text(USERNAME_INPUT, username, "登录")
 
         # 定位到密码文本框
         PASSWORD_INPUT = (By.CSS_SELECTOR, 'input[name="password"]')
         # 输入密码
-        BasePage(self.driver).update_input_text(PASSWORD_INPUT, password)
+        BasePage(self.driver).update_input_text(PASSWORD_INPUT, password, "登录")
 
         # 定位到验证码文本框
         CODE_INPUT = (By.CSS_SELECTOR, 'input[name="verifyCode"]')
@@ -53,24 +53,24 @@ class LoginPage(BasePage):
             # 由于多人同时操作自动化环境，会导致获取到的日志里的验证码不是当前用户的登录页面的验证码
             # 优化方案：先对登录也的验证码进行刷新操作，然后去日志获取验证码
             CAPTCHA_REFRESH_BUTTON = (By.CSS_SELECTOR, 'div.verify-code > div.refresh > i')
-            BasePage(self.driver).click_ele(CAPTCHA_REFRESH_BUTTON)
+            BasePage(self.driver).click_ele(CAPTCHA_REFRESH_BUTTON, "登录")
             time.sleep(0.2)
             # 2、通过调用封装的方法从日志里获取当前登录页面的验证码
             code = self.get_captcha_from_k8s_log()
-            BasePage(self.driver).update_input_text(CODE_INPUT, code)
+            BasePage(self.driver).update_input_text(CODE_INPUT, code, "登录")
         elif flag == 'ceshi':
             # 手动输入验证码
             print("请手动输入登录页面的验证码：")
             code = input()
-            BasePage(self.driver).update_input_text(CODE_INPUT, code)
+            BasePage(self.driver).update_input_text(CODE_INPUT, code, "登录")
         else:
             # 2、通过调用第三方接口<cjy>识别当前验证码
             code = self.get_code_cjy()
-            BasePage(self.driver).update_input_text(CODE_INPUT, code)
+            BasePage(self.driver).update_input_text(CODE_INPUT, code, "登录")
 
         # 定位到登录按钮
         LOGIN_BUTTON = (By.XPATH, '//button//span[contains(text(), "登录")]')
-        BasePage(self.driver).click_ele(LOGIN_BUTTON)
+        BasePage(self.driver).click_ele(LOGIN_BUTTON, "登录")
 
     # def login_success_info(self):
     #     # 定位到首页
@@ -102,20 +102,20 @@ class LoginPage(BasePage):
     def get_code_cjy(self):
         """ 通过调用第三方接口获取验证码"""
         CODE_IMG = (By.CSS_SELECTOR, '.code-pic > img')
-        BasePage(self.driver).wait_for_ele_to_be_visible(CODE_IMG)
+        BasePage(self.driver).wait_for_ele_to_be_visible(CODE_IMG, "登录")
         code_img_src = BasePage(self.driver).get_ele_locator(CODE_IMG).get_attribute("src")
         # 将获取到的图片地址保存到本地目录
-        urllib.request.urlretrieve(code_img_src, f'{CommonPath.DATA_FOLDER}\cjy_read_code\save_cur_code.jpg')
+        urllib.request.urlretrieve(code_img_src, r'{}\cjy_read_code\save_cur_code.jpg'.format(CommonPath.DATA_FOLDER))
 
         # 调第三方接口_识别验证码
         cjy = Chaojiying_Client('18500379756', '123456', '9bf661c27903e244883b5af71ed0c5da')  # 用户中心>>软件ID 生成一个
-        img = open(f'{CommonPath.DATA_FOLDER}\cjy_read_code\save_cur_code.jpg', 'rb').read()  # 本地图片文件路径,有时WIN系统须要//
+        img = open(r'{}\cjy_read_code\save_cur_code.jpg'.format(CommonPath.DATA_FOLDER), 'rb').read()  # 本地图片文件路径,有时WIN系统须要//
         result = cjy.PostPic(img, 1902)  # 1902 验证码类型
         print(f"-------第三方接口识别当前的验证码为：{result['pic_str']}-----------")
         return result['pic_str']
 
     def get_captcha_from_k8s_log(self):
-        SSH_CONFIG = HandleConfig(f'{CommonPath.CONFIG_FOLDER}\ssh_config.yml').config
+        SSH_CONFIG = HandleConfig(r'{}\ssh_config.yml'.format(CommonPath.CONFIG_FOLDER)).config
         ssh_config = SSH_CONFIG.get("ssh")
         ssh_config['hostname'] = "10.151.3.96"
         ssh = SSH(**ssh_config)

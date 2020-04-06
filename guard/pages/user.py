@@ -76,13 +76,14 @@ class UserPage(BasePage):
     def judge_alert_info(self):
         # 定位alert弹框的文本
         INFO_TEXT = (By.XPATH, '//div[@role="alert"]//p')
+        # 强制等待元素可见
         BasePage(self.driver).wait_for_ele_to_be_visible(INFO_TEXT)
-        return BasePage(self.driver).get_text(INFO_TEXT)
+        return BasePage(self.driver).get_text(INFO_TEXT, "用户管理")
 
     def close_alert(self):
         # 关闭alert弹框
         CLOSE_BTN = (By.XPATH, '//div[@role="alert"]//i[contains(@class, "el-icon-close")]')
-        BasePage(self.driver).click_ele(CLOSE_BTN)
+        BasePage(self.driver).click_ele(CLOSE_BTN, "用户管理")
 
     # def search_dep_by_name(self, group_name):
     #
