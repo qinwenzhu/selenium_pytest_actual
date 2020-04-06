@@ -5,3 +5,4 @@
 /guard/tests/__pycache__/
 /guard/tests/module/__pycache__/
 /guard/data/__pycache__/
+/.pytest_cache/
