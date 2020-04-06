@@ -5,7 +5,6 @@
 # @Software: PyCharm
 
 import pytest
-import time
 
 from guard.pages.components.group_tree import GroupTree
 from guard.pages.user import UserPage
