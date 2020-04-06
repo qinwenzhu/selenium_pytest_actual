@@ -57,10 +57,10 @@ class SSH(object):
             channel = stdout.channel
             status = channel.recv_exit_status()
             if (status == 0):
-                print(f'Command "{command}" has been executed successfully.')
+                # print(f'Command "{command}" has been executed successfully.')
                 return stdout.read().decode("utf-8")
             else:
-                print(f'Command "{command}" failed to be executed!')
+                # print(f'Command "{command}" failed to be executed!')
                 return None
 
     def scp_local_file(self, file_name, source, destination):

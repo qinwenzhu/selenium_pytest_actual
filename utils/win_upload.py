@@ -33,4 +33,4 @@ def upload(file_path, browser_type="chrome"):
     win32gui.SendMessage(dialog, win32con.WM_COMMAND, 1, button)  # 点击打开按钮
 
 # 测试调用
-# upload("D:\\chromedriver.log")
+# upload("D:\\chromedriver.logs")
