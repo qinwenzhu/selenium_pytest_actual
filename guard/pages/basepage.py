@@ -59,16 +59,16 @@ class BasePage:
             self.log.error(f"等待元素存在失败!")
             raise e
 
-    def wait_for_ele_to_click(self, loc, img_describe="current", timeout=10, poll_frequency=0.5):
-        """ 等待元素可点击 """
-
-        self.log.info(f"等待元素可点击：{img_describe}页面的-{loc[-1]}元素")
-        try:
-            WebDriverWait(self.driver, timeout, poll_frequency).until(EC.element_to_be_clickable(loc))
-        except TimeoutError as e:
-            self.save_web_screenshots(img_describe)
-            self.log.error(f"元素点击失败!")
-            raise e
+    # def wait_for_ele_to_click(self, loc, img_describe="current", timeout=10, poll_frequency=0.5):
+    #     """ 等待元素可点击 """
+    #
+    #     self.log.info(f"等待元素可点击：{img_describe}页面的-{loc[-1]}元素")
+    #     try:
+    #         WebDriverWait(self.driver, timeout, poll_frequency).until(EC.element_to_be_clickable(loc))
+    #     except TimeoutError as e:
+    #         self.save_web_screenshots(img_describe)
+    #         self.log.error(f"等待元素可点击失败!")
+    #         raise e
 
     def get_ele_locator(self, loc, img_describe="current"):
         """ 获取元素 """
@@ -158,8 +158,10 @@ class BasePage:
     def click_ele(self, loc, img_describe="current"):
         """ 点击元素，等待元素可见进行点击"""
 
-        self.wait_for_ele_to_click(loc)
-        ele = self.get_ele_locator(loc, img_describe)
+        # ele = self.wait_for_ele_to_click(loc)
+        # ele = self.get_ele_locator(loc, img_describe)
+        self.wait_for_ele_to_be_visible(loc)
+        ele = self.get_ele_locator(loc)
         self.log.info(f"点击元素：{img_describe}页面的-{loc[-1]}元素")
         try:
             ele.click()
