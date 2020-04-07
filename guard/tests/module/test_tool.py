@@ -31,50 +31,50 @@ class TestTool:
         result = ToolPage(login_web).get_face_compare_result()
         assert '评分参考' == result
 
-    @pytest.mark.positive
-    @pytest.mark.usefixtures("tool_close_one_img_quality")
-    def test_score_detection(self, login_web):
-        """ 测试人脸质量分数检测功能 """
-        MenubarPage(login_web).click_nav_item("工具", "质量分数检测")
-        ToolPage(login_web).check_one_img_quality(f"{CommonPath.DATA_FOLDER}/face_property/have_glasse.jpg")
-
-        result = ToolPage(login_web).get_face_score_detection_result()
-        assert re.match(r'\d+ .\d+%', result)
-
-    @pytest.mark.positive
-    @pytest.mark.usefixtures("tool_close_face_score_detection")
-    def test_face_property(self, login_web):
-        """ 测试人脸属性输出的属性字段 """
-        MenubarPage(login_web).click_nav_item("工具", "人脸属性检测")
-        ToolPage(login_web).check_face_property(f'{CommonPath.DATA_FOLDER}/face_property/seleniumbase.jpg')
-        face_sex = ToolPage(login_web).get_face_result_sex()
-        face_age = ToolPage(login_web).get_face_result_age()
-        face_phiz = ToolPage(login_web).get_face_result_phiz()
-        face_mustache = ToolPage(login_web).get_face_result_mustache()
-        face_glasse = ToolPage(login_web).get_face_result_glasse()
-        face_mask = ToolPage(login_web).get_face_result_mask()
-        face_helmet = ToolPage(login_web).get_face_result_helmet()
-        face_hat = ToolPage(login_web).get_face_result_hat()
-
-        assert ("性别" in face_sex) and ("年龄" in face_age) and ("表情" in face_phiz) and ("胡子" in face_mustache) and ("眼镜" in face_glasse) and ("口罩" in face_mask) and ("安全帽" in face_helmet) and ("帽子" in face_hat)
-
-    @pytest.mark.negative
-    @pytest.mark.usefixtures("tool_close_face_score_detection")
-    @pytest.mark.parametrize("data", FPD.face_data_negative)
-    def test_negative_face_property(self, login_web, data):
-        """ 测试上传不同属性的人脸照片检测出对应的人脸属性 """
-        MenubarPage(login_web).click_nav_item("工具", "人脸属性检测")
-        ToolPage(login_web).check_face_property(f'{CommonPath.DATA_FOLDER}/face_property/{data["img_path"]}')
-        face_sex = ToolPage(login_web).get_face_result_sex()
-        face_age = ToolPage(login_web).get_face_result_age()
-        face_phiz = ToolPage(login_web).get_face_result_phiz()
-        face_mustache = ToolPage(login_web).get_face_result_mustache()
-        face_glasse = ToolPage(login_web).get_face_result_glasse()
-        face_mask = ToolPage(login_web).get_face_result_mask()
-        face_helmet = ToolPage(login_web).get_face_result_helmet()
-        face_hat = ToolPage(login_web).get_face_result_hat()
-
-        assert (data["sex"] in face_sex) and (data["age"] in face_age) and (data["phiz"] in face_phiz) and (data["mustache"] in face_mustache) and (data["glasse"] in face_glasse) and (data["mask"] in face_mask) and (data["helmet"] in face_helmet) and (data["hat"] in face_hat)
+    # @pytest.mark.positive
+    # @pytest.mark.usefixtures("tool_close_one_img_quality")
+    # def test_score_detection(self, login_web):
+    #     """ 测试人脸质量分数检测功能 """
+    #     MenubarPage(login_web).click_nav_item("工具", "质量分数检测")
+    #     ToolPage(login_web).check_one_img_quality(f"{CommonPath.DATA_FOLDER}/face_property/have_glasse.jpg")
+    #
+    #     result = ToolPage(login_web).get_face_score_detection_result()
+    #     assert re.match(r'\d+ .\d+%', result)
+    #
+    # @pytest.mark.positive
+    # @pytest.mark.usefixtures("tool_close_face_score_detection")
+    # def test_face_property(self, login_web):
+    #     """ 测试人脸属性输出的属性字段 """
+    #     MenubarPage(login_web).click_nav_item("工具", "人脸属性检测")
+    #     ToolPage(login_web).check_face_property(f'{CommonPath.DATA_FOLDER}/face_property/seleniumbase.jpg')
+    #     face_sex = ToolPage(login_web).get_face_result_sex()
+    #     face_age = ToolPage(login_web).get_face_result_age()
+    #     face_phiz = ToolPage(login_web).get_face_result_phiz()
+    #     face_mustache = ToolPage(login_web).get_face_result_mustache()
+    #     face_glasse = ToolPage(login_web).get_face_result_glasse()
+    #     face_mask = ToolPage(login_web).get_face_result_mask()
+    #     face_helmet = ToolPage(login_web).get_face_result_helmet()
+    #     face_hat = ToolPage(login_web).get_face_result_hat()
+    #
+    #     assert ("性别" in face_sex) and ("年龄" in face_age) and ("表情" in face_phiz) and ("胡子" in face_mustache) and ("眼镜" in face_glasse) and ("口罩" in face_mask) and ("安全帽" in face_helmet) and ("帽子" in face_hat)
+    #
+    # @pytest.mark.negative
+    # @pytest.mark.usefixtures("tool_close_face_score_detection")
+    # @pytest.mark.parametrize("data", FPD.face_data_negative)
+    # def test_negative_face_property(self, login_web, data):
+    #     """ 测试上传不同属性的人脸照片检测出对应的人脸属性 """
+    #     MenubarPage(login_web).click_nav_item("工具", "人脸属性检测")
+    #     ToolPage(login_web).check_face_property(f'{CommonPath.DATA_FOLDER}/face_property/{data["img_path"]}')
+    #     face_sex = ToolPage(login_web).get_face_result_sex()
+    #     face_age = ToolPage(login_web).get_face_result_age()
+    #     face_phiz = ToolPage(login_web).get_face_result_phiz()
+    #     face_mustache = ToolPage(login_web).get_face_result_mustache()
+    #     face_glasse = ToolPage(login_web).get_face_result_glasse()
+    #     face_mask = ToolPage(login_web).get_face_result_mask()
+    #     face_helmet = ToolPage(login_web).get_face_result_helmet()
+    #     face_hat = ToolPage(login_web).get_face_result_hat()
+    #
+    #     assert (data["sex"] in face_sex) and (data["age"] in face_age) and (data["phiz"] in face_phiz) and (data["mustache"] in face_mustache) and (data["glasse"] in face_glasse) and (data["mask"] in face_mask) and (data["helmet"] in face_helmet) and (data["hat"] in face_hat)
 
 
 if __name__ == '__main__':
