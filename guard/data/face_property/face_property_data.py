@@ -14,5 +14,5 @@ class FacePropertyData:
         {"img_path": "have_helmet.jpg", "sex": "女", "age": "成人", "phiz": "平静",
             "mustache": "无", "glasse": "无", "mask": "无", "helmet": "有", "hat": "有"},
         {"img_path": "have_mask.jpg", "sex": "女", "age": "成人", "phiz": "平静",
-            "mustache": "无", "glasse": "无", "mask": "有", "helmet": "无", "hat": "无"},
+            "mustache": "无", "glasse": "无", "mask": "有", "helmet": "无", "hat": "无"}
     ]
