@@ -3,3 +3,9 @@
 # @Author: wenqin_zhu
 # @File: main.py.py
 # @Software: PyCharm
+
+
+import pytest
+
+if __name__ == '__main__':
+    pytest.main()
