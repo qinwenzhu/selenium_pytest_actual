@@ -5,6 +5,7 @@
 # @Software: PyCharm
 
 import pytest
+import re
 
 from guard.pages.components.group_tree import GroupTree
 from guard.pages.user import UserPage
@@ -51,6 +52,7 @@ class TestUser:
 
         # 断言搜索到的内容<前端缩略显示的>在dep_name字符串内
         result = GroupTree(dep_name[0]).judge_search_success(dep_name[1])
+        # result = re.match('^[.]', result)
         assert result in dep_name[1]
 
     @pytest.mark.usefixtures("close_alert")
