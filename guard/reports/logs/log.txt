@@ -1,0 +1,93 @@
+[2020-04-07 10:15:42,290] - INFO - 文本框输入文本：登录页面的input[name="username"]元素
+[2020-04-07 10:15:42,290] - INFO - 文本框输入文本：登录页面的input[name="username"]元素
+[2020-04-07 10:15:42,290] - INFO - 等待元素可见：登录页面的-input[name="username"]元素
+[2020-04-07 10:15:42,290] - INFO - 等待元素可见：登录页面的-input[name="username"]元素
+[2020-04-07 10:15:42,434] - INFO - 获取元素定位：登录页面的input[name="username"]元素
+[2020-04-07 10:15:42,434] - INFO - 获取元素定位：登录页面的input[name="username"]元素
+[2020-04-07 10:15:43,102] - INFO - 文本框输入文本：登录页面的input[name="password"]元素
+[2020-04-07 10:15:43,102] - INFO - 文本框输入文本：登录页面的input[name="password"]元素
+[2020-04-07 10:15:43,102] - INFO - 文本框输入文本：登录页面的input[name="password"]元素
+[2020-04-07 10:15:43,104] - INFO - 等待元素可见：登录页面的-input[name="password"]元素
+[2020-04-07 10:15:43,104] - INFO - 等待元素可见：登录页面的-input[name="password"]元素
+[2020-04-07 10:15:43,104] - INFO - 等待元素可见：登录页面的-input[name="password"]元素
+[2020-04-07 10:15:43,202] - INFO - 获取元素定位：登录页面的input[name="password"]元素
+[2020-04-07 10:15:43,202] - INFO - 获取元素定位：登录页面的input[name="password"]元素
+[2020-04-07 10:15:43,202] - INFO - 获取元素定位：登录页面的input[name="password"]元素
+[2020-04-07 10:15:43,734] - INFO - 点击元素：登录页面的-div.verify-code > div.refresh > i元素
+[2020-04-07 10:15:43,734] - INFO - 点击元素：登录页面的-div.verify-code > div.refresh > i元素
+[2020-04-07 10:15:43,734] - INFO - 点击元素：登录页面的-div.verify-code > div.refresh > i元素
+[2020-04-07 10:15:43,734] - INFO - 点击元素：登录页面的-div.verify-code > div.refresh > i元素
+[2020-04-07 10:15:43,735] - INFO - 等待元素可见：登录页面的-div.verify-code > div.refresh > i元素
+[2020-04-07 10:15:43,735] - INFO - 等待元素可见：登录页面的-div.verify-code > div.refresh > i元素
+[2020-04-07 10:15:43,735] - INFO - 等待元素可见：登录页面的-div.verify-code > div.refresh > i元素
+[2020-04-07 10:15:43,735] - INFO - 等待元素可见：登录页面的-div.verify-code > div.refresh > i元素
+[2020-04-07 10:15:43,834] - INFO - 获取元素定位：登录页面的div.verify-code > div.refresh > i元素
+[2020-04-07 10:15:43,834] - INFO - 获取元素定位：登录页面的div.verify-code > div.refresh > i元素
+[2020-04-07 10:15:43,834] - INFO - 获取元素定位：登录页面的div.verify-code > div.refresh > i元素
+[2020-04-07 10:15:43,834] - INFO - 获取元素定位：登录页面的div.verify-code > div.refresh > i元素
+[2020-04-07 10:15:44,301] - INFO - Connected (version 2.0, client OpenSSH_7.4)
+[2020-04-07 10:15:44,301] - INFO - Connected (version 2.0, client OpenSSH_7.4)
+[2020-04-07 10:15:44,301] - INFO - Connected (version 2.0, client OpenSSH_7.4)
+[2020-04-07 10:15:44,301] - INFO - Connected (version 2.0, client OpenSSH_7.4)
+[2020-04-07 10:15:44,411] - INFO - Authentication (password) successful!
+[2020-04-07 10:15:44,411] - INFO - Authentication (password) successful!
+[2020-04-07 10:15:44,411] - INFO - Authentication (password) successful!
+[2020-04-07 10:15:44,411] - INFO - Authentication (password) successful!
+[2020-04-07 10:15:45,477] - INFO - Connected (version 2.0, client OpenSSH_7.4)
+[2020-04-07 10:15:45,477] - INFO - Connected (version 2.0, client OpenSSH_7.4)
+[2020-04-07 10:15:45,477] - INFO - Connected (version 2.0, client OpenSSH_7.4)
+[2020-04-07 10:15:45,477] - INFO - Connected (version 2.0, client OpenSSH_7.4)
+[2020-04-07 10:15:45,628] - INFO - Authentication (password) successful!
+[2020-04-07 10:15:45,628] - INFO - Authentication (password) successful!
+[2020-04-07 10:15:45,628] - INFO - Authentication (password) successful!
+[2020-04-07 10:15:45,628] - INFO - Authentication (password) successful!
+[2020-04-07 10:15:46,719] - INFO - 文本框输入文本：登录页面的input[name="verifyCode"]元素
+[2020-04-07 10:15:46,719] - INFO - 文本框输入文本：登录页面的input[name="verifyCode"]元素
+[2020-04-07 10:15:46,719] - INFO - 文本框输入文本：登录页面的input[name="verifyCode"]元素
+[2020-04-07 10:15:46,719] - INFO - 文本框输入文本：登录页面的input[name="verifyCode"]元素
+[2020-04-07 10:15:46,719] - INFO - 文本框输入文本：登录页面的input[name="verifyCode"]元素
+[2020-04-07 10:15:46,719] - INFO - 等待元素可见：登录页面的-input[name="verifyCode"]元素
+[2020-04-07 10:15:46,719] - INFO - 等待元素可见：登录页面的-input[name="verifyCode"]元素
+[2020-04-07 10:15:46,719] - INFO - 等待元素可见：登录页面的-input[name="verifyCode"]元素
+[2020-04-07 10:15:46,719] - INFO - 等待元素可见：登录页面的-input[name="verifyCode"]元素
+[2020-04-07 10:15:46,719] - INFO - 等待元素可见：登录页面的-input[name="verifyCode"]元素
+[2020-04-07 10:15:46,751] - INFO - 获取元素定位：登录页面的input[name="verifyCode"]元素
+[2020-04-07 10:15:46,751] - INFO - 获取元素定位：登录页面的input[name="verifyCode"]元素
+[2020-04-07 10:15:46,751] - INFO - 获取元素定位：登录页面的input[name="verifyCode"]元素
+[2020-04-07 10:15:46,751] - INFO - 获取元素定位：登录页面的input[name="verifyCode"]元素
+[2020-04-07 10:15:46,751] - INFO - 获取元素定位：登录页面的input[name="verifyCode"]元素
+[2020-04-07 10:15:46,891] - INFO - 点击元素：登录页面的-//button//span[contains(text(), "登录")]元素
+[2020-04-07 10:15:46,891] - INFO - 点击元素：登录页面的-//button//span[contains(text(), "登录")]元素
+[2020-04-07 10:15:46,891] - INFO - 点击元素：登录页面的-//button//span[contains(text(), "登录")]元素
+[2020-04-07 10:15:46,891] - INFO - 点击元素：登录页面的-//button//span[contains(text(), "登录")]元素
+[2020-04-07 10:15:46,891] - INFO - 点击元素：登录页面的-//button//span[contains(text(), "登录")]元素
+[2020-04-07 10:15:46,891] - INFO - 点击元素：登录页面的-//button//span[contains(text(), "登录")]元素
+[2020-04-07 10:15:46,891] - INFO - 等待元素可见：登录页面的-//button//span[contains(text(), "登录")]元素
+[2020-04-07 10:15:46,891] - INFO - 等待元素可见：登录页面的-//button//span[contains(text(), "登录")]元素
+[2020-04-07 10:15:46,891] - INFO - 等待元素可见：登录页面的-//button//span[contains(text(), "登录")]元素
+[2020-04-07 10:15:46,891] - INFO - 等待元素可见：登录页面的-//button//span[contains(text(), "登录")]元素
+[2020-04-07 10:15:46,891] - INFO - 等待元素可见：登录页面的-//button//span[contains(text(), "登录")]元素
+[2020-04-07 10:15:46,891] - INFO - 等待元素可见：登录页面的-//button//span[contains(text(), "登录")]元素
+[2020-04-07 10:15:46,920] - INFO - 获取元素定位：登录页面的//button//span[contains(text(), "登录")]元素
+[2020-04-07 10:15:46,920] - INFO - 获取元素定位：登录页面的//button//span[contains(text(), "登录")]元素
+[2020-04-07 10:15:46,920] - INFO - 获取元素定位：登录页面的//button//span[contains(text(), "登录")]元素
+[2020-04-07 10:15:46,920] - INFO - 获取元素定位：登录页面的//button//span[contains(text(), "登录")]元素
+[2020-04-07 10:15:46,920] - INFO - 获取元素定位：登录页面的//button//span[contains(text(), "登录")]元素
+[2020-04-07 10:15:46,920] - INFO - 获取元素定位：登录页面的//button//span[contains(text(), "登录")]元素
+[2020-04-07 10:15:47,008] - INFO - 等待元素存在：current页面的-span[class="avatar-name"]元素
+[2020-04-07 10:15:47,008] - INFO - 等待元素存在：current页面的-span[class="avatar-name"]元素
+[2020-04-07 10:15:47,008] - INFO - 等待元素存在：current页面的-span[class="avatar-name"]元素
+[2020-04-07 10:15:47,008] - INFO - 等待元素存在：current页面的-span[class="avatar-name"]元素
+[2020-04-07 10:15:47,008] - INFO - 等待元素存在：current页面的-span[class="avatar-name"]元素
+[2020-04-07 10:15:47,008] - INFO - 等待元素存在：current页面的-span[class="avatar-name"]元素
+[2020-04-07 10:15:47,008] - INFO - 等待元素存在：current页面的-span[class="avatar-name"]元素
+[2020-04-07 10:15:47,008] - INFO - 等待元素存在：current页面的-span[class="avatar-name"]元素
+[2020-04-07 10:15:48,593] - INFO - 获取元素定位：current页面的span[class="avatar-name"]元素
+[2020-04-07 10:15:48,593] - INFO - 获取元素定位：current页面的span[class="avatar-name"]元素
+[2020-04-07 10:15:48,593] - INFO - 获取元素定位：current页面的span[class="avatar-name"]元素
+[2020-04-07 10:15:48,593] - INFO - 获取元素定位：current页面的span[class="avatar-name"]元素
+[2020-04-07 10:15:48,593] - INFO - 获取元素定位：current页面的span[class="avatar-name"]元素
+[2020-04-07 10:15:48,593] - INFO - 获取元素定位：current页面的span[class="avatar-name"]元素
+[2020-04-07 10:15:48,593] - INFO - 获取元素定位：current页面的span[class="avatar-name"]元素
+[2020-04-07 10:15:48,593] - INFO - 获取元素定位：current页面的span[class="avatar-name"]元素
+[2020-04-07 10:15:48,593] - INFO - 获取元素定位：current页面的span[class="avatar-name"]元素
