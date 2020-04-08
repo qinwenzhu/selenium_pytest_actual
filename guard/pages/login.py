@@ -55,8 +55,17 @@ class LoginPage(BasePage):
             CAPTCHA_REFRESH_BUTTON = (By.CSS_SELECTOR, 'div.verify-code > div.refresh > i')
             BasePage(self.driver).click_ele(CAPTCHA_REFRESH_BUTTON, "登录")
             time.sleep(0.2)
+
             # 2、通过调用封装的方法从日志里获取当前登录页面的验证码
             code = self.get_captcha_from_k8s_log()
+
+            # if code is None:
+            #     # 获取到错误信息的元素定位
+            #     CAPTCHA_ERROR_TEXT = (By.XPATH, '//div[@class="el-form-item__error"]')
+            #     error_text = BasePage(self.driver).get_text(CAPTCHA_ERROR_TEXT, "登录")
+            #     while error_text in "验证码不正确":
+            #         code = self.get_captcha_from_k8s_log()
+
             BasePage(self.driver).update_input_text(CODE_INPUT, code, "登录")
         elif flag == 'ceshi':
             # 手动输入验证码
