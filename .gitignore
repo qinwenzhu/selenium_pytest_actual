@@ -8,3 +8,5 @@
 /guard/data/face_property/__pycache__
 /.pytest_cache
 /__pycache__
+/guard/reports/logs/log.txt
+/guard/reports/web_screenshot
