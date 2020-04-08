@@ -31,7 +31,7 @@ class HandleLog:
 
         # 定义日志输出到文件 并设置输出日志的等级
         log_file = logging.FileHandler(path_to_log, encoding='utf-8')
-        log_file.setLevel(logging.INFO)
+        log_file.setLevel(logging.DEBUG)
 
         # 设置日志输出格式
         formatter = logging.Formatter('[%(asctime)s] - %(levelname)s - %(message)s')
