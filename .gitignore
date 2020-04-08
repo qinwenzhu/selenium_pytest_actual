@@ -9,4 +9,4 @@
 /.pytest_cache/
 /__pycache__/
 /guard/reports/logs/log.txt/
-/guard/reports/web_screenshot/
+/guard/reports/web_screenshot/*.jpg/
