@@ -1,0 +1,192 @@
+[2020-04-08 13:17:29,129] - INFO - 等待元素可见：登录页面的-input[name="username"]元素
+[2020-04-08 13:17:29,193] - INFO - 获取元素定位：登录页面的input[name="username"]元素
+[2020-04-08 13:17:29,198] - INFO - 文本框输入文本：登录页面的input[name="username"]元素
+[2020-04-08 13:17:29,382] - INFO - 等待元素可见：登录页面的-input[name="password"]元素
+[2020-04-08 13:17:29,418] - INFO - 获取元素定位：登录页面的input[name="password"]元素
+[2020-04-08 13:17:29,429] - INFO - 文本框输入文本：登录页面的input[name="password"]元素
+[2020-04-08 13:17:29,558] - INFO - 等待元素可见：current页面的-div.verify-code > div.refresh > i元素
+[2020-04-08 13:17:29,586] - INFO - 获取元素定位：current页面的div.verify-code > div.refresh > i元素
+[2020-04-08 13:17:29,598] - INFO - 点击元素：登录页面的-div.verify-code > div.refresh > i元素
+[2020-04-08 13:17:29,862] - DEBUG - starting thread (client mode): 0x5ed537b8
+[2020-04-08 13:17:29,862] - DEBUG - Local version/idstring: SSH-2.0-paramiko_2.7.1
+[2020-04-08 13:17:29,886] - DEBUG - Remote version/idstring: SSH-2.0-OpenSSH_7.4
+[2020-04-08 13:17:29,887] - INFO - Connected (version 2.0, client OpenSSH_7.4)
+[2020-04-08 13:17:29,893] - DEBUG - kex algos:['curve25519-sha256', 'curve25519-sha256@libssh.org', 'ecdh-sha2-nistp256', 'ecdh-sha2-nistp384', 'ecdh-sha2-nistp521', 'diffie-hellman-group-exchange-sha256', 'diffie-hellman-group16-sha512', 'diffie-hellman-group18-sha512', 'diffie-hellman-group-exchange-sha1', 'diffie-hellman-group14-sha256', 'diffie-hellman-group14-sha1', 'diffie-hellman-group1-sha1'] server key:['ssh-rsa', 'rsa-sha2-512', 'rsa-sha2-256', 'ecdsa-sha2-nistp256', 'ssh-ed25519'] client encrypt:['chacha20-poly1305@openssh.com', 'aes128-ctr', 'aes192-ctr', 'aes256-ctr', 'aes128-gcm@openssh.com', 'aes256-gcm@openssh.com', 'aes128-cbc', 'aes192-cbc', 'aes256-cbc', 'blowfish-cbc', 'cast128-cbc', '3des-cbc'] server encrypt:['chacha20-poly1305@openssh.com', 'aes128-ctr', 'aes192-ctr', 'aes256-ctr', 'aes128-gcm@openssh.com', 'aes256-gcm@openssh.com', 'aes128-cbc', 'aes192-cbc', 'aes256-cbc', 'blowfish-cbc', 'cast128-cbc', '3des-cbc'] client mac:['umac-64-etm@openssh.com', 'umac-128-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512-etm@openssh.com', 'hmac-sha1-etm@openssh.com', 'umac-64@openssh.com', 'umac-128@openssh.com', 'hmac-sha2-256', 'hmac-sha2-512', 'hmac-sha1'] server mac:['umac-64-etm@openssh.com', 'umac-128-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512-etm@openssh.com', 'hmac-sha1-etm@openssh.com', 'umac-64@openssh.com', 'umac-128@openssh.com', 'hmac-sha2-256', 'hmac-sha2-512', 'hmac-sha1'] client compress:['none', 'zlib@openssh.com'] server compress:['none', 'zlib@openssh.com'] client lang:[''] server lang:[''] kex follows?False
+[2020-04-08 13:17:29,893] - DEBUG - Kex agreed: curve25519-sha256@libssh.org
+[2020-04-08 13:17:29,893] - DEBUG - HostKey agreed: ssh-ed25519
+[2020-04-08 13:17:29,894] - DEBUG - Cipher agreed: aes128-ctr
+[2020-04-08 13:17:29,894] - DEBUG - MAC agreed: hmac-sha2-256
+[2020-04-08 13:17:29,894] - DEBUG - Compression agreed: none
+[2020-04-08 13:17:29,916] - DEBUG - kex engine KexCurve25519 specified hash_algo <built-in function openssl_sha256>
+[2020-04-08 13:17:29,916] - DEBUG - Switch to new keys ...
+[2020-04-08 13:17:29,917] - DEBUG - Adding ssh-ed25519 host key for 10.151.3.96: b'764681cc50a95a9c327acd165587194e'
+[2020-04-08 13:17:29,961] - DEBUG - userauth is OK
+[2020-04-08 13:17:30,020] - INFO - Authentication (password) successful!
+[2020-04-08 13:17:30,021] - DEBUG - [chan 0] Max packet in: 32768 bytes
+[2020-04-08 13:17:30,059] - DEBUG - Received global request "hostkeys-00@openssh.com"
+[2020-04-08 13:17:30,059] - DEBUG - Rejecting "hostkeys-00@openssh.com" global request from server.
+[2020-04-08 13:17:30,104] - DEBUG - [chan 0] Max packet out: 32768 bytes
+[2020-04-08 13:17:30,104] - DEBUG - Secsh channel 0 opened.
+[2020-04-08 13:17:30,113] - DEBUG - [chan 0] Sesch channel 0 request ok
+[2020-04-08 13:17:30,114] - DEBUG - [chan 0] EOF sent (0)
+[2020-04-08 13:17:31,076] - DEBUG - [chan 0] EOF received (0)
+[2020-04-08 13:17:31,077] - DEBUG - EOF in transport thread
+[2020-04-08 13:17:31,091] - DEBUG - starting thread (client mode): 0x5ed53dd8
+[2020-04-08 13:17:31,091] - DEBUG - Local version/idstring: SSH-2.0-paramiko_2.7.1
+[2020-04-08 13:17:31,103] - DEBUG - Remote version/idstring: SSH-2.0-OpenSSH_7.4
+[2020-04-08 13:17:31,103] - INFO - Connected (version 2.0, client OpenSSH_7.4)
+[2020-04-08 13:17:31,108] - DEBUG - kex algos:['curve25519-sha256', 'curve25519-sha256@libssh.org', 'ecdh-sha2-nistp256', 'ecdh-sha2-nistp384', 'ecdh-sha2-nistp521', 'diffie-hellman-group-exchange-sha256', 'diffie-hellman-group16-sha512', 'diffie-hellman-group18-sha512', 'diffie-hellman-group-exchange-sha1', 'diffie-hellman-group14-sha256', 'diffie-hellman-group14-sha1', 'diffie-hellman-group1-sha1'] server key:['ssh-rsa', 'rsa-sha2-512', 'rsa-sha2-256', 'ecdsa-sha2-nistp256', 'ssh-ed25519'] client encrypt:['chacha20-poly1305@openssh.com', 'aes128-ctr', 'aes192-ctr', 'aes256-ctr', 'aes128-gcm@openssh.com', 'aes256-gcm@openssh.com', 'aes128-cbc', 'aes192-cbc', 'aes256-cbc', 'blowfish-cbc', 'cast128-cbc', '3des-cbc'] server encrypt:['chacha20-poly1305@openssh.com', 'aes128-ctr', 'aes192-ctr', 'aes256-ctr', 'aes128-gcm@openssh.com', 'aes256-gcm@openssh.com', 'aes128-cbc', 'aes192-cbc', 'aes256-cbc', 'blowfish-cbc', 'cast128-cbc', '3des-cbc'] client mac:['umac-64-etm@openssh.com', 'umac-128-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512-etm@openssh.com', 'hmac-sha1-etm@openssh.com', 'umac-64@openssh.com', 'umac-128@openssh.com', 'hmac-sha2-256', 'hmac-sha2-512', 'hmac-sha1'] server mac:['umac-64-etm@openssh.com', 'umac-128-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512-etm@openssh.com', 'hmac-sha1-etm@openssh.com', 'umac-64@openssh.com', 'umac-128@openssh.com', 'hmac-sha2-256', 'hmac-sha2-512', 'hmac-sha1'] client compress:['none', 'zlib@openssh.com'] server compress:['none', 'zlib@openssh.com'] client lang:[''] server lang:[''] kex follows?False
+[2020-04-08 13:17:31,108] - DEBUG - Kex agreed: curve25519-sha256@libssh.org
+[2020-04-08 13:17:31,108] - DEBUG - HostKey agreed: ssh-ed25519
+[2020-04-08 13:17:31,108] - DEBUG - Cipher agreed: aes128-ctr
+[2020-04-08 13:17:31,108] - DEBUG - MAC agreed: hmac-sha2-256
+[2020-04-08 13:17:31,108] - DEBUG - Compression agreed: none
+[2020-04-08 13:17:31,132] - DEBUG - kex engine KexCurve25519 specified hash_algo <built-in function openssl_sha256>
+[2020-04-08 13:17:31,132] - DEBUG - Switch to new keys ...
+[2020-04-08 13:17:31,133] - DEBUG - Adding ssh-ed25519 host key for 10.151.3.96: b'764681cc50a95a9c327acd165587194e'
+[2020-04-08 13:17:31,181] - DEBUG - userauth is OK
+[2020-04-08 13:17:31,241] - INFO - Authentication (password) successful!
+[2020-04-08 13:17:31,242] - DEBUG - [chan 0] Max packet in: 32768 bytes
+[2020-04-08 13:17:31,286] - DEBUG - Received global request "hostkeys-00@openssh.com"
+[2020-04-08 13:17:31,286] - DEBUG - Rejecting "hostkeys-00@openssh.com" global request from server.
+[2020-04-08 13:17:31,331] - DEBUG - [chan 0] Max packet out: 32768 bytes
+[2020-04-08 13:17:31,331] - DEBUG - Secsh channel 0 opened.
+[2020-04-08 13:17:31,338] - DEBUG - [chan 0] Sesch channel 0 request ok
+[2020-04-08 13:17:31,338] - DEBUG - [chan 0] EOF sent (0)
+[2020-04-08 13:17:32,270] - DEBUG - [chan 0] EOF received (0)
+[2020-04-08 13:17:32,270] - DEBUG - EOF in transport thread
+[2020-04-08 13:17:32,271] - INFO - 等待元素可见：登录页面的-input[name="verifyCode"]元素
+[2020-04-08 13:17:32,297] - INFO - 获取元素定位：登录页面的input[name="verifyCode"]元素
+[2020-04-08 13:17:32,310] - INFO - 文本框输入文本：登录页面的input[name="verifyCode"]元素
+[2020-04-08 13:17:32,478] - INFO - 等待元素可见：current页面的-//button//span[contains(text(), "登录")]元素
+[2020-04-08 13:17:32,512] - INFO - 获取元素定位：current页面的//button//span[contains(text(), "登录")]元素
+[2020-04-08 13:17:32,523] - INFO - 点击元素：登录页面的-//button//span[contains(text(), "登录")]元素
+[2020-04-08 13:17:32,604] - INFO - 等待元素存在：current页面的-span[class="avatar-name"]元素
+[2020-04-08 13:17:33,458] - INFO - 获取元素定位：current页面的span[class="avatar-name"]元素
+[2020-04-08 13:17:41,938] - DEBUG - starting thread (client mode): 0x5ed53ba8
+[2020-04-08 13:17:41,938] - DEBUG - Local version/idstring: SSH-2.0-paramiko_2.7.1
+[2020-04-08 13:17:41,961] - DEBUG - Remote version/idstring: SSH-2.0-OpenSSH_7.4
+[2020-04-08 13:17:41,961] - INFO - Connected (version 2.0, client OpenSSH_7.4)
+[2020-04-08 13:17:41,970] - DEBUG - kex algos:['curve25519-sha256', 'curve25519-sha256@libssh.org', 'ecdh-sha2-nistp256', 'ecdh-sha2-nistp384', 'ecdh-sha2-nistp521', 'diffie-hellman-group-exchange-sha256', 'diffie-hellman-group16-sha512', 'diffie-hellman-group18-sha512', 'diffie-hellman-group-exchange-sha1', 'diffie-hellman-group14-sha256', 'diffie-hellman-group14-sha1', 'diffie-hellman-group1-sha1'] server key:['ssh-rsa', 'rsa-sha2-512', 'rsa-sha2-256', 'ecdsa-sha2-nistp256', 'ssh-ed25519'] client encrypt:['chacha20-poly1305@openssh.com', 'aes128-ctr', 'aes192-ctr', 'aes256-ctr', 'aes128-gcm@openssh.com', 'aes256-gcm@openssh.com', 'aes128-cbc', 'aes192-cbc', 'aes256-cbc', 'blowfish-cbc', 'cast128-cbc', '3des-cbc'] server encrypt:['chacha20-poly1305@openssh.com', 'aes128-ctr', 'aes192-ctr', 'aes256-ctr', 'aes128-gcm@openssh.com', 'aes256-gcm@openssh.com', 'aes128-cbc', 'aes192-cbc', 'aes256-cbc', 'blowfish-cbc', 'cast128-cbc', '3des-cbc'] client mac:['umac-64-etm@openssh.com', 'umac-128-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512-etm@openssh.com', 'hmac-sha1-etm@openssh.com', 'umac-64@openssh.com', 'umac-128@openssh.com', 'hmac-sha2-256', 'hmac-sha2-512', 'hmac-sha1'] server mac:['umac-64-etm@openssh.com', 'umac-128-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512-etm@openssh.com', 'hmac-sha1-etm@openssh.com', 'umac-64@openssh.com', 'umac-128@openssh.com', 'hmac-sha2-256', 'hmac-sha2-512', 'hmac-sha1'] client compress:['none', 'zlib@openssh.com'] server compress:['none', 'zlib@openssh.com'] client lang:[''] server lang:[''] kex follows?False
+[2020-04-08 13:17:41,971] - DEBUG - Kex agreed: curve25519-sha256@libssh.org
+[2020-04-08 13:17:41,971] - DEBUG - HostKey agreed: ssh-ed25519
+[2020-04-08 13:17:41,971] - DEBUG - Cipher agreed: aes128-ctr
+[2020-04-08 13:17:41,971] - DEBUG - MAC agreed: hmac-sha2-256
+[2020-04-08 13:17:41,971] - DEBUG - Compression agreed: none
+[2020-04-08 13:17:42,011] - DEBUG - kex engine KexCurve25519 specified hash_algo <built-in function openssl_sha256>
+[2020-04-08 13:17:42,012] - DEBUG - Switch to new keys ...
+[2020-04-08 13:17:42,012] - DEBUG - Adding ssh-ed25519 host key for 10.151.3.96: b'764681cc50a95a9c327acd165587194e'
+[2020-04-08 13:17:42,055] - DEBUG - userauth is OK
+[2020-04-08 13:17:42,100] - INFO - Authentication (password) successful!
+[2020-04-08 13:17:42,100] - DEBUG - [chan 0] Max packet in: 32768 bytes
+[2020-04-08 13:17:42,139] - DEBUG - Received global request "hostkeys-00@openssh.com"
+[2020-04-08 13:17:42,139] - DEBUG - Rejecting "hostkeys-00@openssh.com" global request from server.
+[2020-04-08 13:17:42,184] - DEBUG - [chan 0] Max packet out: 32768 bytes
+[2020-04-08 13:17:42,184] - DEBUG - Secsh channel 0 opened.
+[2020-04-08 13:17:42,189] - DEBUG - [chan 0] Sesch channel 0 request ok
+[2020-04-08 13:17:42,189] - DEBUG - [chan 0] EOF sent (0)
+[2020-04-08 13:17:43,049] - DEBUG - [chan 0] EOF received (0)
+[2020-04-08 13:17:43,054] - DEBUG - starting thread (client mode): 0x5ed15dd8
+[2020-04-08 13:17:43,054] - DEBUG - Local version/idstring: SSH-2.0-paramiko_2.7.1
+[2020-04-08 13:17:43,077] - DEBUG - Remote version/idstring: SSH-2.0-OpenSSH_7.4
+[2020-04-08 13:17:43,077] - INFO - Connected (version 2.0, client OpenSSH_7.4)
+[2020-04-08 13:17:43,082] - DEBUG - kex algos:['curve25519-sha256', 'curve25519-sha256@libssh.org', 'ecdh-sha2-nistp256', 'ecdh-sha2-nistp384', 'ecdh-sha2-nistp521', 'diffie-hellman-group-exchange-sha256', 'diffie-hellman-group16-sha512', 'diffie-hellman-group18-sha512', 'diffie-hellman-group-exchange-sha1', 'diffie-hellman-group14-sha256', 'diffie-hellman-group14-sha1', 'diffie-hellman-group1-sha1'] server key:['ssh-rsa', 'rsa-sha2-512', 'rsa-sha2-256', 'ecdsa-sha2-nistp256', 'ssh-ed25519'] client encrypt:['chacha20-poly1305@openssh.com', 'aes128-ctr', 'aes192-ctr', 'aes256-ctr', 'aes128-gcm@openssh.com', 'aes256-gcm@openssh.com', 'aes128-cbc', 'aes192-cbc', 'aes256-cbc', 'blowfish-cbc', 'cast128-cbc', '3des-cbc'] server encrypt:['chacha20-poly1305@openssh.com', 'aes128-ctr', 'aes192-ctr', 'aes256-ctr', 'aes128-gcm@openssh.com', 'aes256-gcm@openssh.com', 'aes128-cbc', 'aes192-cbc', 'aes256-cbc', 'blowfish-cbc', 'cast128-cbc', '3des-cbc'] client mac:['umac-64-etm@openssh.com', 'umac-128-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512-etm@openssh.com', 'hmac-sha1-etm@openssh.com', 'umac-64@openssh.com', 'umac-128@openssh.com', 'hmac-sha2-256', 'hmac-sha2-512', 'hmac-sha1'] server mac:['umac-64-etm@openssh.com', 'umac-128-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512-etm@openssh.com', 'hmac-sha1-etm@openssh.com', 'umac-64@openssh.com', 'umac-128@openssh.com', 'hmac-sha2-256', 'hmac-sha2-512', 'hmac-sha1'] client compress:['none', 'zlib@openssh.com'] server compress:['none', 'zlib@openssh.com'] client lang:[''] server lang:[''] kex follows?False
+[2020-04-08 13:17:43,083] - DEBUG - Kex agreed: curve25519-sha256@libssh.org
+[2020-04-08 13:17:43,083] - DEBUG - HostKey agreed: ssh-ed25519
+[2020-04-08 13:17:43,083] - DEBUG - Cipher agreed: aes128-ctr
+[2020-04-08 13:17:43,083] - DEBUG - MAC agreed: hmac-sha2-256
+[2020-04-08 13:17:43,083] - DEBUG - Compression agreed: none
+[2020-04-08 13:17:43,103] - DEBUG - kex engine KexCurve25519 specified hash_algo <built-in function openssl_sha256>
+[2020-04-08 13:17:43,103] - DEBUG - Switch to new keys ...
+[2020-04-08 13:17:43,104] - DEBUG - Adding ssh-ed25519 host key for 10.151.3.96: b'764681cc50a95a9c327acd165587194e'
+[2020-04-08 13:17:43,148] - DEBUG - userauth is OK
+[2020-04-08 13:17:43,210] - INFO - Authentication (password) successful!
+[2020-04-08 13:17:43,210] - DEBUG - [chan 0] Max packet in: 32768 bytes
+[2020-04-08 13:17:43,248] - DEBUG - Received global request "hostkeys-00@openssh.com"
+[2020-04-08 13:17:43,248] - DEBUG - Rejecting "hostkeys-00@openssh.com" global request from server.
+[2020-04-08 13:17:43,293] - DEBUG - [chan 0] Max packet out: 32768 bytes
+[2020-04-08 13:17:43,293] - DEBUG - Secsh channel 0 opened.
+[2020-04-08 13:17:43,298] - DEBUG - [chan 0] Sesch channel 0 request ok
+[2020-04-08 13:17:43,298] - DEBUG - [chan 0] EOF sent (0)
+[2020-04-08 13:17:44,165] - DEBUG - [chan 0] EOF received (0)
+[2020-04-08 13:17:44,166] - DEBUG - EOF in transport thread
+[2020-04-08 13:17:44,441] - INFO - 等待元素可见：顶部导航组件-nav页面的-//div[text()="工具"]元素
+[2020-04-08 13:17:45,324] - INFO - 获取元素定位：顶部导航组件-nav页面的//div[text()="工具"]元素
+[2020-04-08 13:17:45,332] - INFO - 鼠标移动到指定元素：顶部导航组件-nav页面的-//div[text()="工具"]元素
+[2020-04-08 13:17:45,721] - INFO - 等待元素可见：顶部导航组件-nav页面的-//div[text()="工具"]元素
+[2020-04-08 13:17:45,744] - INFO - 获取元素定位：顶部导航组件-nav页面的//div[text()="工具"]元素
+[2020-04-08 13:17:45,752] - INFO - 等待元素可见：顶部导航组件-nav页面的-//li[text()="1:1人脸验证"]元素
+[2020-04-08 13:17:46,317] - INFO - 获取元素定位：顶部导航组件-nav页面的//li[text()="1:1人脸验证"]元素
+[2020-04-08 13:17:46,325] - INFO - 顶部导航组件-nav页面：鼠标移动到父级元素//div[text()="工具"],操作子元素//li[text()="1:1人脸验证"]元素
+[2020-04-08 13:17:48,895] - INFO - 获取元素定位：小工具页面的.app-tools-content-pics .imageselsect-container:first-child > input[type="file"]元素
+[2020-04-08 13:17:48,917] - INFO - 文件上传：小工具页面的-.app-tools-content-pics .imageselsect-container:first-child > input[type="file"]元素
+[2020-04-08 13:17:48,942] - INFO - 获取元素定位：小工具页面的.app-tools-content-pics .imageselsect-container:last-child > input[type="file"]元素
+[2020-04-08 13:17:48,955] - INFO - 文件上传：小工具页面的-.app-tools-content-pics .imageselsect-container:last-child > input[type="file"]元素
+[2020-04-08 13:17:48,979] - INFO - 等待元素可见：current页面的-app-tools-content-pics-vsbtn元素
+[2020-04-08 13:17:49,024] - INFO - 获取元素定位：current页面的app-tools-content-pics-vsbtn元素
+[2020-04-08 13:17:49,031] - INFO - 点击元素：小工具页面的-app-tools-content-pics-vsbtn元素
+[2020-04-08 13:17:49,097] - INFO - 等待元素存在：小工具页面的-.app-tools-content-pics-vsbtn-popover > strong元素
+[2020-04-08 13:17:49,631] - INFO - 获取元素文本：小工具页面的.app-tools-content-pics-vsbtn-popover > strong元素
+[2020-04-08 13:17:49,631] - INFO - 获取元素定位：小工具页面的.app-tools-content-pics-vsbtn-popover > strong元素
+[2020-04-08 13:17:49,654] - INFO - 等待元素可见：current页面的-//div[contains(@class, "tools-face-verification")]//i[contains(@class, "app-tools-header-close")]元素
+[2020-04-08 13:17:49,675] - INFO - 获取元素定位：current页面的//div[contains(@class, "tools-face-verification")]//i[contains(@class, "app-tools-header-close")]元素
+[2020-04-08 13:17:49,683] - INFO - 点击元素：小工具页面的-//div[contains(@class, "tools-face-verification")]//i[contains(@class, "app-tools-header-close")]元素
+[2020-04-08 13:17:49,739] - INFO - 等待元素可见：顶部导航组件-nav页面的-//div[text()="工具"]元素
+[2020-04-08 13:17:49,758] - INFO - 获取元素定位：顶部导航组件-nav页面的//div[text()="工具"]元素
+[2020-04-08 13:17:49,766] - INFO - 鼠标移动到指定元素：顶部导航组件-nav页面的-//div[text()="工具"]元素
+[2020-04-08 13:17:50,039] - INFO - 等待元素可见：顶部导航组件-nav页面的-//div[text()="工具"]元素
+[2020-04-08 13:17:50,058] - INFO - 获取元素定位：顶部导航组件-nav页面的//div[text()="工具"]元素
+[2020-04-08 13:17:50,066] - INFO - 等待元素可见：顶部导航组件-nav页面的-//li[text()="质量分数检测"]元素
+[2020-04-08 13:17:50,614] - INFO - 获取元素定位：顶部导航组件-nav页面的//li[text()="质量分数检测"]元素
+[2020-04-08 13:17:50,624] - INFO - 顶部导航组件-nav页面：鼠标移动到父级元素//div[text()="工具"],操作子元素//li[text()="质量分数检测"]元素
+[2020-04-08 13:17:53,175] - INFO - 获取元素定位：小工具页面的input[type="file"]元素
+[2020-04-08 13:17:53,190] - INFO - 文件上传：小工具页面的-input[type="file"]元素
+[2020-04-08 13:17:53,212] - INFO - 等待元素可见：current页面的-.app-tools-content-detection-detectbtn元素
+[2020-04-08 13:17:53,244] - INFO - 获取元素定位：current页面的.app-tools-content-detection-detectbtn元素
+[2020-04-08 13:17:53,256] - INFO - 点击元素：小工具页面的-.app-tools-content-detection-detectbtn元素
+[2020-04-08 13:17:53,327] - INFO - 等待元素存在：小工具页面的-//div[@class="app-tools-content-center"]//span元素
+[2020-04-08 13:17:54,880] - INFO - 获取元素文本：小工具页面的//div[@class="app-tools-content-center"]//span元素
+[2020-04-08 13:17:54,880] - INFO - 获取元素定位：小工具页面的//div[@class="app-tools-content-center"]//span元素
+[2020-04-08 13:17:54,908] - INFO - 等待元素可见：current页面的-//div[contains(@class, "tools-score-detection")]//i[contains(@class, "app-tools-header-close")]元素
+[2020-04-08 13:17:54,936] - INFO - 获取元素定位：current页面的//div[contains(@class, "tools-score-detection")]//i[contains(@class, "app-tools-header-close")]元素
+[2020-04-08 13:17:54,944] - INFO - 点击元素：小工具页面的-//div[contains(@class, "tools-score-detection")]//i[contains(@class, "app-tools-header-close")]元素
+[2020-04-08 13:17:55,015] - INFO - 等待元素可见：顶部导航组件-nav页面的-//div[text()="工具"]元素
+[2020-04-08 13:17:55,038] - INFO - 获取元素定位：顶部导航组件-nav页面的//div[text()="工具"]元素
+[2020-04-08 13:17:55,048] - INFO - 鼠标移动到指定元素：顶部导航组件-nav页面的-//div[text()="工具"]元素
+[2020-04-08 13:17:55,318] - INFO - 等待元素可见：顶部导航组件-nav页面的-//div[text()="工具"]元素
+[2020-04-08 13:17:55,336] - INFO - 获取元素定位：顶部导航组件-nav页面的//div[text()="工具"]元素
+[2020-04-08 13:17:55,344] - INFO - 等待元素可见：顶部导航组件-nav页面的-//li[text()="人脸属性检测"]元素
+[2020-04-08 13:17:55,910] - INFO - 获取元素定位：顶部导航组件-nav页面的//li[text()="人脸属性检测"]元素
+[2020-04-08 13:17:55,921] - INFO - 顶部导航组件-nav页面：鼠标移动到父级元素//div[text()="工具"],操作子元素//li[text()="人脸属性检测"]元素
+[2020-04-08 13:17:58,491] - INFO - 获取元素定位：小工具页面的input[type="file"]元素
+[2020-04-08 13:17:58,502] - INFO - 文件上传：小工具页面的-input[type="file"]元素
+[2020-04-08 13:17:58,521] - INFO - 等待元素可见：current页面的-.app-tools-content-face-detectbtn元素
+[2020-04-08 13:17:58,558] - INFO - 获取元素定位：current页面的.app-tools-content-face-detectbtn元素
+[2020-04-08 13:17:58,569] - INFO - 点击元素：小工具页面的-.app-tools-content-face-detectbtn元素
+[2020-04-08 13:17:58,625] - INFO - 等待元素存在：小工具页面的-//div[@class="app-tools-content-detection-right"]//li[1]元素
+[2020-04-08 13:17:59,667] - INFO - 获取元素文本：小工具页面的//div[@class="app-tools-content-detection-right"]//li[1]元素
+[2020-04-08 13:17:59,667] - INFO - 获取元素定位：小工具页面的//div[@class="app-tools-content-detection-right"]//li[1]元素
+[2020-04-08 13:17:59,690] - INFO - 等待元素存在：小工具页面的-//div[@class="app-tools-content-detection-right"]//li[2]元素
+[2020-04-08 13:17:59,703] - INFO - 获取元素文本：小工具页面的//div[@class="app-tools-content-detection-right"]//li[2]元素
+[2020-04-08 13:17:59,703] - INFO - 获取元素定位：小工具页面的//div[@class="app-tools-content-detection-right"]//li[2]元素
+[2020-04-08 13:17:59,730] - INFO - 等待元素存在：小工具页面的-//div[@class="app-tools-content-detection-right"]//li[3]元素
+[2020-04-08 13:17:59,741] - INFO - 获取元素文本：小工具页面的//div[@class="app-tools-content-detection-right"]//li[3]元素
+[2020-04-08 13:17:59,742] - INFO - 获取元素定位：小工具页面的//div[@class="app-tools-content-detection-right"]//li[3]元素
+[2020-04-08 13:17:59,769] - INFO - 等待元素存在：小工具页面的-//div[@class="app-tools-content-detection-right"]//li[4]元素
+[2020-04-08 13:17:59,783] - INFO - 获取元素文本：小工具页面的//div[@class="app-tools-content-detection-right"]//li[4]元素
+[2020-04-08 13:17:59,783] - INFO - 获取元素定位：小工具页面的//div[@class="app-tools-content-detection-right"]//li[4]元素
+[2020-04-08 13:17:59,807] - INFO - 等待元素存在：小工具页面的-//div[@class="app-tools-content-detection-right"]//li[5]元素
+[2020-04-08 13:17:59,822] - INFO - 获取元素文本：小工具页面的//div[@class="app-tools-content-detection-right"]//li[5]元素
+[2020-04-08 13:17:59,822] - INFO - 获取元素定位：小工具页面的//div[@class="app-tools-content-detection-right"]//li[5]元素
+[2020-04-08 13:17:59,849] - INFO - 等待元素存在：小工具页面的-//div[@class="app-tools-content-detection-right"]//li[6]元素
+[2020-04-08 13:17:59,863] - INFO - 获取元素文本：小工具页面的//div[@class="app-tools-content-detection-right"]//li[6]元素
+[2020-04-08 13:17:59,863] - INFO - 获取元素定位：小工具页面的//div[@class="app-tools-content-detection-right"]//li[6]元素
+[2020-04-08 13:17:59,887] - INFO - 等待元素存在：小工具页面的-//div[@class="app-tools-content-detection-right"]//li[7]元素
+[2020-04-08 13:17:59,917] - INFO - 获取元素文本：小工具页面的//div[@class="app-tools-content-detection-right"]//li[7]元素
+[2020-04-08 13:17:59,917] - INFO - 获取元素定位：小工具页面的//div[@class="app-tools-content-detection-right"]//li[7]元素
+[2020-04-08 13:17:59,948] - INFO - 等待元素存在：小工具页面的-//div[@class="app-tools-content-detection-right"]//li[8]元素
+[2020-04-08 13:17:59,959] - INFO - 获取元素文本：小工具页面的//div[@class="app-tools-content-detection-right"]//li[8]元素
+[2020-04-08 13:17:59,959] - INFO - 获取元素定位：小工具页面的//div[@class="app-tools-content-detection-right"]//li[8]元素
+[2020-04-08 13:17:59,987] - INFO - 等待元素可见：current页面的-//div[contains(@class, "tools-test-detection")]//i[contains(@class, "app-tools-header-close")]元素
+[2020-04-08 13:18:00,016] - INFO - 获取元素定位：current页面的//div[contains(@class, "tools-test-detection")]//i[contains(@class, "app-tools-header-close")]元素
+[2020-04-08 13:18:00,023] - INFO - 点击元素：小工具页面的-//div[contains(@class, "tools-test-detection")]//i[contains(@class, "app-tools-header-close")]元素

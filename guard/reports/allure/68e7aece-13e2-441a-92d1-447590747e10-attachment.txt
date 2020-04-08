@@ -1,0 +1,68 @@
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 starting thread (client mode): 0x5ed53ba8
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Local version/idstring: SSH-2.0-paramiko_2.7.1
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Remote version/idstring: SSH-2.0-OpenSSH_7.4
+[32mINFO    [0m paramiko.transport:transport.py:1819 Connected (version 2.0, client OpenSSH_7.4)
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 kex algos:['curve25519-sha256', 'curve25519-sha256@libssh.org', 'ecdh-sha2-nistp256', 'ecdh-sha2-nistp384', 'ecdh-sha2-nistp521', 'diffie-hellman-group-exchange-sha256', 'diffie-hellman-group16-sha512', 'diffie-hellman-group18-sha512', 'diffie-hellman-group-exchange-sha1', 'diffie-hellman-group14-sha256', 'diffie-hellman-group14-sha1', 'diffie-hellman-group1-sha1'] server key:['ssh-rsa', 'rsa-sha2-512', 'rsa-sha2-256', 'ecdsa-sha2-nistp256', 'ssh-ed25519'] client encrypt:['chacha20-poly1305@openssh.com', 'aes128-ctr', 'aes192-ctr', 'aes256-ctr', 'aes128-gcm@openssh.com', 'aes256-gcm@openssh.com', 'aes128-cbc', 'aes192-cbc', 'aes256-cbc', 'blowfish-cbc', 'cast128-cbc', '3des-cbc'] server encrypt:['chacha20-poly1305@openssh.com', 'aes128-ctr', 'aes192-ctr', 'aes256-ctr', 'aes128-gcm@openssh.com', 'aes256-gcm@openssh.com', 'aes128-cbc', 'aes192-cbc', 'aes256-cbc', 'blowfish-cbc', 'cast128-cbc', '3des-cbc'] client mac:['umac-64-etm@openssh.com', 'umac-128-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512-etm@openssh.com', 'hmac-sha1-etm@openssh.com', 'umac-64@openssh.com', 'umac-128@openssh.com', 'hmac-sha2-256', 'hmac-sha2-512', 'hmac-sha1'] server mac:['umac-64-etm@openssh.com', 'umac-128-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512-etm@openssh.com', 'hmac-sha1-etm@openssh.com', 'umac-64@openssh.com', 'umac-128@openssh.com', 'hmac-sha2-256', 'hmac-sha2-512', 'hmac-sha1'] client compress:['none', 'zlib@openssh.com'] server compress:['none', 'zlib@openssh.com'] client lang:[''] server lang:[''] kex follows?False
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Kex agreed: curve25519-sha256@libssh.org
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 HostKey agreed: ssh-ed25519
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Cipher agreed: aes128-ctr
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 MAC agreed: hmac-sha2-256
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Compression agreed: none
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 kex engine KexCurve25519 specified hash_algo <built-in function openssl_sha256>
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Switch to new keys ...
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Adding ssh-ed25519 host key for 10.151.3.96: b'764681cc50a95a9c327acd165587194e'
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 userauth is OK
+[32mINFO    [0m paramiko.transport:transport.py:1819 Authentication (password) successful!
+[35mDEBUG   [0m paramiko.transport:channel.py:1212 [chan 0] Max packet in: 32768 bytes
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Received global request "hostkeys-00@openssh.com"
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Rejecting "hostkeys-00@openssh.com" global request from server.
+[35mDEBUG   [0m paramiko.transport:channel.py:1212 [chan 0] Max packet out: 32768 bytes
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Secsh channel 0 opened.
+[35mDEBUG   [0m paramiko.transport:channel.py:1212 [chan 0] Sesch channel 0 request ok
+[35mDEBUG   [0m paramiko.transport:channel.py:1212 [chan 0] EOF sent (0)
+[35mDEBUG   [0m paramiko.transport:channel.py:1212 [chan 0] EOF received (0)
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 starting thread (client mode): 0x5ed15dd8
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Local version/idstring: SSH-2.0-paramiko_2.7.1
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Remote version/idstring: SSH-2.0-OpenSSH_7.4
+[32mINFO    [0m paramiko.transport:transport.py:1819 Connected (version 2.0, client OpenSSH_7.4)
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 kex algos:['curve25519-sha256', 'curve25519-sha256@libssh.org', 'ecdh-sha2-nistp256', 'ecdh-sha2-nistp384', 'ecdh-sha2-nistp521', 'diffie-hellman-group-exchange-sha256', 'diffie-hellman-group16-sha512', 'diffie-hellman-group18-sha512', 'diffie-hellman-group-exchange-sha1', 'diffie-hellman-group14-sha256', 'diffie-hellman-group14-sha1', 'diffie-hellman-group1-sha1'] server key:['ssh-rsa', 'rsa-sha2-512', 'rsa-sha2-256', 'ecdsa-sha2-nistp256', 'ssh-ed25519'] client encrypt:['chacha20-poly1305@openssh.com', 'aes128-ctr', 'aes192-ctr', 'aes256-ctr', 'aes128-gcm@openssh.com', 'aes256-gcm@openssh.com', 'aes128-cbc', 'aes192-cbc', 'aes256-cbc', 'blowfish-cbc', 'cast128-cbc', '3des-cbc'] server encrypt:['chacha20-poly1305@openssh.com', 'aes128-ctr', 'aes192-ctr', 'aes256-ctr', 'aes128-gcm@openssh.com', 'aes256-gcm@openssh.com', 'aes128-cbc', 'aes192-cbc', 'aes256-cbc', 'blowfish-cbc', 'cast128-cbc', '3des-cbc'] client mac:['umac-64-etm@openssh.com', 'umac-128-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512-etm@openssh.com', 'hmac-sha1-etm@openssh.com', 'umac-64@openssh.com', 'umac-128@openssh.com', 'hmac-sha2-256', 'hmac-sha2-512', 'hmac-sha1'] server mac:['umac-64-etm@openssh.com', 'umac-128-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512-etm@openssh.com', 'hmac-sha1-etm@openssh.com', 'umac-64@openssh.com', 'umac-128@openssh.com', 'hmac-sha2-256', 'hmac-sha2-512', 'hmac-sha1'] client compress:['none', 'zlib@openssh.com'] server compress:['none', 'zlib@openssh.com'] client lang:[''] server lang:[''] kex follows?False
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Kex agreed: curve25519-sha256@libssh.org
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 HostKey agreed: ssh-ed25519
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Cipher agreed: aes128-ctr
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 MAC agreed: hmac-sha2-256
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Compression agreed: none
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 kex engine KexCurve25519 specified hash_algo <built-in function openssl_sha256>
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Switch to new keys ...
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Adding ssh-ed25519 host key for 10.151.3.96: b'764681cc50a95a9c327acd165587194e'
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 userauth is OK
+[32mINFO    [0m paramiko.transport:transport.py:1819 Authentication (password) successful!
+[35mDEBUG   [0m paramiko.transport:channel.py:1212 [chan 0] Max packet in: 32768 bytes
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Received global request "hostkeys-00@openssh.com"
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Rejecting "hostkeys-00@openssh.com" global request from server.
+[35mDEBUG   [0m paramiko.transport:channel.py:1212 [chan 0] Max packet out: 32768 bytes
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 Secsh channel 0 opened.
+[35mDEBUG   [0m paramiko.transport:channel.py:1212 [chan 0] Sesch channel 0 request ok
+[35mDEBUG   [0m paramiko.transport:channel.py:1212 [chan 0] EOF sent (0)
+[35mDEBUG   [0m paramiko.transport:channel.py:1212 [chan 0] EOF received (0)
+[35mDEBUG   [0m paramiko.transport:transport.py:1819 EOF in transport thread
+[32mINFO    [0m root:basepage.py:42 等待元素可见：顶部导航组件-nav页面的-//div[text()="工具"]元素
+[32mINFO    [0m root:basepage.py:76 获取元素定位：顶部导航组件-nav页面的//div[text()="工具"]元素
+[32mINFO    [0m root:basepage.py:178 鼠标移动到指定元素：顶部导航组件-nav页面的-//div[text()="工具"]元素
+[32mINFO    [0m root:basepage.py:42 等待元素可见：顶部导航组件-nav页面的-//div[text()="工具"]元素
+[32mINFO    [0m root:basepage.py:76 获取元素定位：顶部导航组件-nav页面的//div[text()="工具"]元素
+[32mINFO    [0m root:basepage.py:42 等待元素可见：顶部导航组件-nav页面的-//li[text()="1:1人脸验证"]元素
+[32mINFO    [0m root:basepage.py:76 获取元素定位：顶部导航组件-nav页面的//li[text()="1:1人脸验证"]元素
+[32mINFO    [0m root:basepage.py:195 顶部导航组件-nav页面：鼠标移动到父级元素//div[text()="工具"],操作子元素//li[text()="1:1人脸验证"]元素
+[32mINFO    [0m root:basepage.py:76 获取元素定位：小工具页面的.app-tools-content-pics .imageselsect-container:first-child > input[type="file"]元素
+[32mINFO    [0m root:basepage.py:140 文件上传：小工具页面的-.app-tools-content-pics .imageselsect-container:first-child > input[type="file"]元素
+[32mINFO    [0m root:basepage.py:76 获取元素定位：小工具页面的.app-tools-content-pics .imageselsect-container:last-child > input[type="file"]元素
+[32mINFO    [0m root:basepage.py:140 文件上传：小工具页面的-.app-tools-content-pics .imageselsect-container:last-child > input[type="file"]元素
+[32mINFO    [0m root:basepage.py:42 等待元素可见：current页面的-app-tools-content-pics-vsbtn元素
+[32mINFO    [0m root:basepage.py:76 获取元素定位：current页面的app-tools-content-pics-vsbtn元素
+[32mINFO    [0m root:basepage.py:165 点击元素：小工具页面的-app-tools-content-pics-vsbtn元素
+[32mINFO    [0m root:basepage.py:54 等待元素存在：小工具页面的-.app-tools-content-pics-vsbtn-popover > strong元素
+[32mINFO    [0m root:basepage.py:90 获取元素文本：小工具页面的.app-tools-content-pics-vsbtn-popover > strong元素
+[32mINFO    [0m root:basepage.py:76 获取元素定位：小工具页面的.app-tools-content-pics-vsbtn-popover > strong元素
+[32mINFO    [0m root:basepage.py:42 等待元素可见：current页面的-//div[contains(@class, "tools-face-verification")]//i[contains(@class, "app-tools-header-close")]元素
+[32mINFO    [0m root:basepage.py:76 获取元素定位：current页面的//div[contains(@class, "tools-face-verification")]//i[contains(@class, "app-tools-header-close")]元素
+[32mINFO    [0m root:basepage.py:165 点击元素：小工具页面的-//div[contains(@class, "tools-face-verification")]//i[contains(@class, "app-tools-header-close")]元素

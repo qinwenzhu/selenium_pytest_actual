@@ -1,0 +1,19 @@
+[32mINFO    [0m root:basepage.py:42 等待元素可见：顶部导航组件-nav页面的-//div[text()="工具"]元素
+[32mINFO    [0m root:basepage.py:76 获取元素定位：顶部导航组件-nav页面的//div[text()="工具"]元素
+[32mINFO    [0m root:basepage.py:178 鼠标移动到指定元素：顶部导航组件-nav页面的-//div[text()="工具"]元素
+[32mINFO    [0m root:basepage.py:42 等待元素可见：顶部导航组件-nav页面的-//div[text()="工具"]元素
+[32mINFO    [0m root:basepage.py:76 获取元素定位：顶部导航组件-nav页面的//div[text()="工具"]元素
+[32mINFO    [0m root:basepage.py:42 等待元素可见：顶部导航组件-nav页面的-//li[text()="质量分数检测"]元素
+[32mINFO    [0m root:basepage.py:76 获取元素定位：顶部导航组件-nav页面的//li[text()="质量分数检测"]元素
+[32mINFO    [0m root:basepage.py:195 顶部导航组件-nav页面：鼠标移动到父级元素//div[text()="工具"],操作子元素//li[text()="质量分数检测"]元素
+[32mINFO    [0m root:basepage.py:76 获取元素定位：小工具页面的input[type="file"]元素
+[32mINFO    [0m root:basepage.py:140 文件上传：小工具页面的-input[type="file"]元素
+[32mINFO    [0m root:basepage.py:42 等待元素可见：current页面的-.app-tools-content-detection-detectbtn元素
+[32mINFO    [0m root:basepage.py:76 获取元素定位：current页面的.app-tools-content-detection-detectbtn元素
+[32mINFO    [0m root:basepage.py:165 点击元素：小工具页面的-.app-tools-content-detection-detectbtn元素
+[32mINFO    [0m root:basepage.py:54 等待元素存在：小工具页面的-//div[@class="app-tools-content-center"]//span元素
+[32mINFO    [0m root:basepage.py:90 获取元素文本：小工具页面的//div[@class="app-tools-content-center"]//span元素
+[32mINFO    [0m root:basepage.py:76 获取元素定位：小工具页面的//div[@class="app-tools-content-center"]//span元素
+[32mINFO    [0m root:basepage.py:42 等待元素可见：current页面的-//div[contains(@class, "tools-score-detection")]//i[contains(@class, "app-tools-header-close")]元素
+[32mINFO    [0m root:basepage.py:76 获取元素定位：current页面的//div[contains(@class, "tools-score-detection")]//i[contains(@class, "app-tools-header-close")]元素
+[32mINFO    [0m root:basepage.py:165 点击元素：小工具页面的-//div[contains(@class, "tools-score-detection")]//i[contains(@class, "app-tools-header-close")]元素
