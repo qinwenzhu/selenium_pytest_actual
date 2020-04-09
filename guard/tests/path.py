@@ -21,7 +21,7 @@ class CommonPath:
     DATA_FOLDER = f"{PRO_PATH}/guard/data"
 
     # 定位到 logs 目录
-    LOG_FOLDER = f"{PRO_PATH}/guard/reports/logs"
+    LOG_FOLDER = f"{PRO_PATH}/reports/logs"
 
     # 定位到屏幕截图 <web_screenshot> 目录
-    SCREENSHOT_FOLDER = f"{PRO_PATH}/guard/reports/web_screenshot"
+    SCREENSHOT_FOLDER = f"{PRO_PATH}/reports/web_screenshot"
