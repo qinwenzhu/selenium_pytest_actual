@@ -8,8 +8,8 @@
 /guard/data/face_property/__pycache__/
 /.pytest_cache/
 /__pycache__/
-/guard/reports/logs/
-/guard/reports/web_screenshot/*.jpg/
-/guard/reports/allure/
-/guard/reports/html/
-/guard/reports/web_screenshot/
+/reports/logs/
+/reports/web_screenshot/*.jpg/
+/reports/allure/
+/reports/html/
+/reports/web_screenshot/
