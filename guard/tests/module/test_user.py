@@ -49,7 +49,7 @@ class TestUser:
         result = UserPage(dep_name[0]).judge_alert_info()
         assert "创建下一级分组成功" == result
 
-    @pytest.mark.positive
+    @pytest.mark.error
     def test_search_dep_by_name(self, dep_name):
         # 测试group_tree的搜索功能
         GroupTree(dep_name[0]).search_dep_by_name(dep_name[1])
