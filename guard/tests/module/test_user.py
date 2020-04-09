@@ -13,8 +13,8 @@ from guard.pages.user import UserPage
 @pytest.mark.usefixtures("user_web")
 class TestUser:
 
-    @pytest.mark.usefixtures("close_alert")
     @pytest.mark.positive
+    @pytest.mark.usefixtures("close_alert")
     def test_create_peer_dep_from_Default(self, dep_name):
         # 测试从Default根分组创建同级分组
         UserPage(dep_name[0]).create_department_from_Default(dep_name[1])
