@@ -8,4 +8,5 @@
 import pytest
 
 if __name__ == '__main__':
-    pytest.main()
+    # pytest.main()
+    pytest.main(["-s", "-v", "--html=reports/html/web_report.html", "--alluredir=reports/allure/allure_report"])
