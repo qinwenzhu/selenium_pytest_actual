@@ -19,10 +19,6 @@ class TimezonePage(BasePage):
         :param confirm: dialog按钮选项。默认确定
         """
 
-        # 通过
-        # DIALOG_TITLE = f'//div[@class="timezone-rename-dialog-header"]//span[contains(text(), "{til_name}")]'
-        # self.find_element(DIALOG_TITLE, By.XPATH)
-
         INPUT_TEXT = (By.XPATH, f'//div[@class="timezone-rename-dialog-header"]//span[contains(text(), "{til_name}")]/ancestor::div[@class="el-dialog__header"]/following-sibling::div[@class="el-dialog__body"]//input')
         BasePage(self.driver).update_input_text(INPUT_TEXT, val, img_describe="时间条件")
 
@@ -36,19 +32,15 @@ class TimezonePage(BasePage):
             BasePage(self.driver).click_ele(CANCEL_BUTTON)
 
     def check_time(self):
+        """ 封装时间控件 """
 
-        # 定位到当前可见的时间选择框
-        # //div[contains(@class, "el-date-range-picker") and contains(@style, "position")]
-        # WRAP_CON = '//div[contains(@class, "el-date-range-picker") and contains(@style, "position")]'
-
-        # 定位到时间控件
+        # 定位到时间控件并通过鼠标操作
         TIME_CONTROL = (By.XPATH, '//div[contains(@class, "el-date-range-picker") and contains(@style, "position")]//td[contains(@class, "today")]')
         BasePage(self.driver).mouse_move_ele(TIME_CONTROL)
 
-
+        # 滑动时间控件点击对应的日期
         TIME_TODAY = (By.XPATH, '//div[contains(@class, "el-date-range-picker") and contains(@style, "position")]//div[contains(@class,"is-left")]//td[contains(@class, "today")]')
         BasePage(self.driver).mouse_move_ele_and_click(TIME_CONTROL, TIME_TODAY)
-        # BasePage(self.driver).click_ele(TIME_TODAY)
 
         TODAY_TEXT = (By.XPATH, '//div[contains(@class, "el-date-range-picker") and contains(@style, "position")]//div[contains(@class,"is-left")]//td[contains(@class, "today")]//span')
         today_text = BasePage(self.driver).get_text(TODAY_TEXT)
@@ -61,32 +53,37 @@ class TimezonePage(BasePage):
             today_text = str(int(today_text)+2)
             # 默认选择结束时间为 day+2
             TIME_END = (By.XPATH, f'//div[contains(@class, "el-date-range-picker") and contains(@style, "position")]//div[contains(@class,"is-left")]//td//span[contains(text(),{today_text})]')
-        # BasePage(self.driver).click_ele(TIME_END)
         BasePage(self.driver).mouse_move_ele_and_click(TIME_CONTROL, TIME_END)
 
     def add_timezone_name(self, val):
-        """ 添加时间条件 """
+        """
+        添加时间条件
+        :param val: 时间条件的名称
+        """
+        # 定位到添加时间条件的按钮
         ICON = (By.XPATH, '//span[contains(text(), "时间条件名称")]/i')
         BasePage(self.driver).click_ele(ICON)
 
-        # 添加时间条件
+        # 调用封装方法 - 添加时间条件名称
         self.dialog_info_com("添加时间条件", val)
 
     def create_holidays(self, tile_name, val):
-        """ 创建假期 """
+        """
+        添加假期
+        :param tile_name: 动态传入定位表达式的标题名称
+        :param val: 假期名称
+        """
 
-        # 点击 - 未定义假期
+        # 点击 - 未定义假期 - 按钮
         SET_HOLIDAY = (By.XPATH, '//span[contains(text(), "未定义假期")]')
         BasePage(self.driver).click_ele(SET_HOLIDAY)
-
-        # 创建假期文本框
+        # 调用封装方法 - 添加假期
         self.dialog_info_com(tile_name, val)
 
-        # 点击 - 设定日期
+        # 点击 - 设定日期 - 按钮
         SET_TIME = (By.XPATH, '//span[contains(text(), "设定日期")]')
         BasePage(self.driver).click_ele(SET_TIME)
-
-        # 选择假期的日期
+        # 调用封装方法 - 选择假期的时间区间
         self.check_time()
 
 
@@ -103,4 +100,4 @@ if __name__ == '__main__':
 
     # TimezonePage(driver).add_timezone_name("input输入框内容")
 
-    TimezonePage(driver).create_holidays("添加假期", "假期名称")
+    # TimezonePage(driver).create_holidays("添加假期", "假期名称")
