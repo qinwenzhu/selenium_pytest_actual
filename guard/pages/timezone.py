@@ -41,25 +41,28 @@ class TimezonePage(BasePage):
         # //div[contains(@class, "el-date-range-picker") and contains(@style, "position")]
         # WRAP_CON = '//div[contains(@class, "el-date-range-picker") and contains(@style, "position")]'
 
-        # 默认选择开始时间为今天 - today
-        # //div[contains(@class, "el-date-range-picker") and contains(@style, "position")]//td[contains(@class, "today")]
+        # 定位到时间控件
+        TIME_CONTROL = (By.XPATH, '//div[contains(@class, "el-date-range-picker") and contains(@style, "position")]//td[contains(@class, "today")]')
+        BasePage(self.driver).mouse_move_ele(TIME_CONTROL)
+
 
         TIME_TODAY = (By.XPATH, '//div[contains(@class, "el-date-range-picker") and contains(@style, "position")]//div[contains(@class,"is-left")]//td[contains(@class, "today")]')
-        BasePage(self.driver).click_ele(TIME_TODAY)
+        BasePage(self.driver).mouse_move_ele_and_click(TIME_CONTROL, TIME_TODAY)
+        # BasePage(self.driver).click_ele(TIME_TODAY)
 
         TODAY_TEXT = (By.XPATH, '//div[contains(@class, "el-date-range-picker") and contains(@style, "position")]//div[contains(@class,"is-left")]//td[contains(@class, "today")]//span')
         today_text = BasePage(self.driver).get_text(TODAY_TEXT)
-
-        if today_text >= 28:
+        if int(today_text) >= 28:
             # 结束时间为下月1号
-            today_text = 1
+            today_text = "1"
             TIME_END = (By.XPATH, f'//div[contains(@class, "el-date-range-picker") and contains(@style, "position")]//div[contains(@class,"is-right")]//td//span[contains(text(),{today_text})]')
         else:
             # 结束时间为今天的后两天
-            today_text += 2
+            today_text = str(int(today_text)+2)
             # 默认选择结束时间为 day+2
             TIME_END = (By.XPATH, f'//div[contains(@class, "el-date-range-picker") and contains(@style, "position")]//div[contains(@class,"is-left")]//td//span[contains(text(),{today_text})]')
-        BasePage(self.driver).click_ele(TIME_END)
+        # BasePage(self.driver).click_ele(TIME_END)
+        BasePage(self.driver).mouse_move_ele_and_click(TIME_CONTROL, TIME_END)
 
     def add_timezone_name(self, val):
         """ 添加时间条件 """
@@ -80,7 +83,7 @@ class TimezonePage(BasePage):
         self.dialog_info_com(tile_name, val)
 
         # 点击 - 设定日期
-        SET_TIME = (By.XPATH, '//span[contains(text(), "未定义假期")]/ancestor::td/following-sibling::td//span[contains(text(), "设定日期")]')
+        SET_TIME = (By.XPATH, '//span[contains(text(), "设定日期")]')
         BasePage(self.driver).click_ele(SET_TIME)
 
         # 选择假期的日期
