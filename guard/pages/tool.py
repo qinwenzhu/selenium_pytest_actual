@@ -71,42 +71,51 @@ class ToolPage(BasePage):
         CHECK_CONTENT_FACE_BUTTON = (By.CSS_SELECTOR, '.app-tools-content-face-detectbtn')
         BasePage(self.driver).click_ele(CHECK_CONTENT_FACE_BUTTON, "小工具")
 
-    def get_face_result_sex(self):
-        # 获取人脸属性 - 性别
-        CHECK_CONTENT_FACE_SEX = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[1]')
-        return BasePage(self.driver).get_text(CHECK_CONTENT_FACE_SEX, "小工具")
+    def get_facial_attribute_by_name(self, name):
+        """
+        获取人脸属性
+        :param name: 人脸属性名称，可选性别、年龄、表情、胡子、眼睛、口罩、安全帽、帽子
+        """
+        CHECK_CONTENT = (By.XPATH, f'//div[@class="app-tools-content-detection-right"]//li//span[contains(text(), "{name}")]/parent::li')
+        return BasePage(self.driver).get_text(CHECK_CONTENT, "小工具")
 
-    def get_face_result_age(self):
-        # 获取人脸属性 - 年龄
-        CHECK_CONTENT_AGE = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[2]')
-        return BasePage(self.driver).get_text(CHECK_CONTENT_AGE, "小工具")
-
-    def get_face_result_phiz(self):
-        # 获取人脸属性 - 表情
-        CHECK_CONTENT_PHIZ = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[3]')
-        return BasePage(self.driver).get_text(CHECK_CONTENT_PHIZ, "小工具")
-
-    def get_face_result_mustache(self):
-        # 获取人脸属性 - 胡子
-        CHECK_CONTENT_MUSTACHE = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[4]')
-        return BasePage(self.driver).get_text(CHECK_CONTENT_MUSTACHE, "小工具")
-
-    def get_face_result_glasse(self):
-        # 获取人脸属性 - 眼镜
-        CHECK_CONTENT_GLASSE = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[5]')
-        return BasePage(self.driver).get_text(CHECK_CONTENT_GLASSE, "小工具")
-
-    def get_face_result_mask(self):
-        # 获取人脸属性 - 口罩
-        CHECK_CONTENT_MASK = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[6]')
-        return BasePage(self.driver).get_text(CHECK_CONTENT_MASK, "小工具")
-
-    def get_face_result_helmet(self):
-        # 获取人脸属性 - 安全帽
-        CHECK_CONTENT_HELMET = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[7]')
-        return BasePage(self.driver).get_text(CHECK_CONTENT_HELMET, "小工具")
-
-    def get_face_result_hat(self):
-        # 获取人脸属性 - 帽子
-        CHECK_CONTENT_HAT = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[8]')
-        return BasePage(self.driver).get_text(CHECK_CONTENT_HAT, "小工具")
+    """ 将重复性高的代码进行重构，简化代码 """
+    # def get_face_result_sex(self):
+    #     # 获取人脸属性 - 性别
+    #     CHECK_CONTENT_FACE_SEX = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[1]')
+    #     return BasePage(self.driver).get_text(CHECK_CONTENT_FACE_SEX, "小工具")
+    #
+    # def get_face_result_age(self):
+    #     # 获取人脸属性 - 年龄
+    #     CHECK_CONTENT_AGE = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[2]')
+    #     return BasePage(self.driver).get_text(CHECK_CONTENT_AGE, "小工具")
+    #
+    # def get_face_result_phiz(self):
+    #     # 获取人脸属性 - 表情
+    #     CHECK_CONTENT_PHIZ = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[3]')
+    #     return BasePage(self.driver).get_text(CHECK_CONTENT_PHIZ, "小工具")
+    #
+    # def get_face_result_mustache(self):
+    #     # 获取人脸属性 - 胡子
+    #     CHECK_CONTENT_MUSTACHE = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[4]')
+    #     return BasePage(self.driver).get_text(CHECK_CONTENT_MUSTACHE, "小工具")
+    #
+    # def get_face_result_glasse(self):
+    #     # 获取人脸属性 - 眼镜
+    #     CHECK_CONTENT_GLASSE = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[5]')
+    #     return BasePage(self.driver).get_text(CHECK_CONTENT_GLASSE, "小工具")
+    #
+    # def get_face_result_mask(self):
+    #     # 获取人脸属性 - 口罩
+    #     CHECK_CONTENT_MASK = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[6]')
+    #     return BasePage(self.driver).get_text(CHECK_CONTENT_MASK, "小工具")
+    #
+    # def get_face_result_helmet(self):
+    #     # 获取人脸属性 - 安全帽
+    #     CHECK_CONTENT_HELMET = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[7]')
+    #     return BasePage(self.driver).get_text(CHECK_CONTENT_HELMET, "小工具")
+    #
+    # def get_face_result_hat(self):
+    #     # 获取人脸属性 - 帽子
+    #     CHECK_CONTENT_HAT = (By.XPATH, '//div[@class="app-tools-content-detection-right"]//li[8]')
+    #     return BasePage(self.driver).get_text(CHECK_CONTENT_HAT, "小工具")

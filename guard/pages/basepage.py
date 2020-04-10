@@ -87,15 +87,14 @@ class BasePage:
         """ 获取元素的文本内容  前提：元素存在 """
 
         self.wait_for_ele_to_be_presence(loc, img_describe)
+        ele = self.get_ele_locator(loc, img_describe)
         self.log.info(f"获取元素文本：{img_describe}页面的{loc[-1]}元素")
         try:
-            ele = self.get_ele_locator(loc, img_describe)
+            return ele.text
         except Exception as e:
             self.save_web_screenshots(img_describe)
             self.log.error(f"获取元素文本失败！")
             raise e
-        else:
-            return ele.text
 
     def get_ele_attribute(self, loc, attr, img_describe="current"):
         """ 获取元素的属性  前提：元素存在 """
