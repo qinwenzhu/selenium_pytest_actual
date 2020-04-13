@@ -1,14 +1,14 @@
 # -*- coding:utf-8 -*-
 # @Time: 2020/4/13 19:48
 # @Author: wenqin_zhu
-# @File: com_dialog.py
+# @File: global_dialog.py
 # @Software: PyCharm
 
 from selenium.webdriver.common.by import By
 from guard.pages.basepage import BasePage
 
 
-class CommDialog(BasePage):
+class GlobalDialog(BasePage):
     """ 通用：系统弹框 """
 
     def judge_alert_info(self):

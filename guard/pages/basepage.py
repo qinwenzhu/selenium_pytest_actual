@@ -18,13 +18,13 @@ from utils.win_upload import upload
 # 自定义 - 导入日志
 from utils.handle_log import HandleLog
 # 自定义 - 导入公共路径
-from guard.tests.path import CommonPath
+from guard.tools.share_path import SharePath
 
 
 class BasePage:
     """  Basepage - 针对selenium框架中常用的元素操作进行二次封装 """
 
-    log = HandleLog(r"{}/log.txt".format(CommonPath.LOG_FOLDER)).get_log()
+    log = HandleLog(r"{}/log.txt".format(SharePath.LOG_FOLDER)).get_log()
 
     def __init__(self, driver: WebDriver):
         # 传入 driver - 指定类型为：WebDriver
@@ -33,7 +33,7 @@ class BasePage:
     def save_web_screenshots(self, img_describe):
         current_time_to_str = datetime.strftime(datetime.now(), '%Y%m%d%H%M%S')
         file_name = f"{img_describe}_{current_time_to_str}.jpg"
-        self.driver.save_screenshot(f"{CommonPath.SCREENSHOT_FOLDER}/{file_name}")
+        self.driver.save_screenshot(f"{SharePath.SCREENSHOT_FOLDER}/{file_name}")
         self.log.info(f"页面截图保存位置：{file_name}")
 
     def wait_for_ele_to_be_visible(self, loc, img_describe="current", timeout=10, poll_frequency=0.5):

@@ -9,9 +9,10 @@ import pytest
 import time
 from selenium import webdriver
 
-from utils.uuid_generate_unique_data import uuid_data
+from guard.tools.get_uuid_data import uuid1_data, uuid4_data
+from guard.tools.get_current_time import get_current_time
 
-from guard.pages.login_backup import LoginPage
+from guard.pages.login import LoginPage
 from guard.pages.tool import ToolPage
 from guard.pages.components.menubar import MenubarPage
 from guard.pages.user import UserPage
@@ -45,8 +46,15 @@ def timezone_web(login_web):
 @pytest.fixture
 def sole_time_name():
     # 前置 - 分组名 - 只针对测试用例<保证数据唯一性>
-    sole_time_name = f"TIME-{uuid_data()}"
+    sole_time_name = f"TIME-{uuid1_data()}"
     yield sole_time_name
+
+
+@pytest.fixture
+def sole_short_time_name():
+    # 前置 - 分组名 - 只针对测试用例<保证数据唯一性>
+    sole_short_time_name = f"TIME-{get_current_time()}"
+    yield sole_short_time_name
 
 
 """ ---------------------------- 用户管理 user ---------------------------- """
@@ -60,7 +68,7 @@ def user_web(login_web):
 @pytest.fixture(scope="class")
 def dep_name(user_web):
     # 前置 - 准备分组名称
-    group_name = f"UDN-{uuid_data()}"
+    group_name = f"UDN-{uuid4_data()}"
     yield user_web, group_name
     # 删除通过Default用户组创建的同级分组
     # UserPage(user_web).delete_department_by_name(parent_name=group_name)
@@ -76,7 +84,7 @@ def close_alert(user_web):
 @pytest.fixture
 def sole_group_name():
     # 前置 - 分组名 - 只针对测试用例<保证数据唯一性>
-    sole_group_name = f"UDN-{uuid_data()}"
+    sole_group_name = f"UDN-{uuid4_data()}"
     yield sole_group_name
 
 

@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 # @Time: 2020/3/17 10:17
 # @Author: wenqin_zhu
-# @File: login_backup.py
+# @File: login.py
 # @Software: PyCharm
 
 
@@ -19,7 +19,7 @@ from utils.ssh import SSH
 from utils.handle_config import HandleConfig
 
 # 导入共用路径
-from guard.tests.path import CommonPath
+from guard.tools.share_path import SharePath
 
 # 导入二次封装selenium框架的 BasePage类
 from guard.pages.basepage import BasePage
@@ -81,22 +81,28 @@ class LoginPage(BasePage):
         LOGIN_BUTTON = (By.XPATH, '//button//span[contains(text(), "登录")]')
         BasePage(self.driver).click_ele(LOGIN_BUTTON, "登录")
 
-    # def login_success_info(self):
-    #     # 定位到首页
-    #     LOGIN_SUCCESS_USERNAME = (By.CSS_SELECTOR, 'span[class="avatar-name"]')
-    #     # BasePage(self.driver).wait_for_ele_to_be_visible(LOGIN_SUCCESS_USERNAME)
-    #     text = BasePage(self.driver).get_text(LOGIN_SUCCESS_USERNAME)
-    #     print(f"当前登录用户的别名为：{text}")             # "/monitor"
-    #     return text
-
-    def is_login_success(self):
-        # 判断登录操作是否成功并跳转到首页
+    def login_success_info(self):
+        # 登录成功，页面中的个人信息和当前登陆用户一致
         LOGIN_SUCCESS_USERNAME = (By.CSS_SELECTOR, 'span[class="avatar-name"]')
-        BasePage(self.driver).wait_for_ele_to_be_presence(LOGIN_SUCCESS_USERNAME)
-        if BasePage(self.driver).get_ele_locator(LOGIN_SUCCESS_USERNAME):
-            return True
-        else:
-            return False
+        result_text = BasePage(self.driver).get_text(LOGIN_SUCCESS_USERNAME)
+        print(f"当前登录用户的别名为：{result_text}")             # "/monitor"
+        return result_text
+
+    # def is_login_success(self):
+    #     # 判断登录是否成功
+    #
+    #     LOGIN_SUCCESS_USERNAME = (By.CSS_SELECTOR, 'span[class="avatar-name"]')
+    #     text_result = BasePage(self.driver).get_text(LOGIN_SUCCESS_USERNAME)
+    #     if text_result is None:
+    #         return True
+    #     else:
+    #         return False
+
+        # BasePage(self.driver).wait_for_ele_to_be_presence(LOGIN_SUCCESS_USERNAME)
+        # if BasePage(self.driver).get_ele_locator(LOGIN_SUCCESS_USERNAME):
+        #     return True
+        # else:
+        #     return False
 
     # def get_error_username(self):
     #     # 用户名错误信息
@@ -114,17 +120,17 @@ class LoginPage(BasePage):
         BasePage(self.driver).wait_for_ele_to_be_visible(CODE_IMG, "登录")
         code_img_src = BasePage(self.driver).get_ele_locator(CODE_IMG).get_attribute("src")
         # 将获取到的图片地址保存到本地目录
-        urllib.request.urlretrieve(code_img_src, r'{}\cjy_read_code\save_cur_code.jpg'.format(CommonPath.DATA_FOLDER))
+        urllib.request.urlretrieve(code_img_src, r'{}\cjy_read_code\save_cur_code.jpg'.format(SharePath.DATA_FOLDER))
 
         # 调第三方接口_识别验证码
         cjy = Chaojiying_Client('18500379756', '123456', '9bf661c27903e244883b5af71ed0c5da')  # 用户中心>>软件ID 生成一个
-        img = open(r'{}\cjy_read_code\save_cur_code.jpg'.format(CommonPath.DATA_FOLDER), 'rb').read()  # 本地图片文件路径,有时WIN系统须要//
+        img = open(r'{}\cjy_read_code\save_cur_code.jpg'.format(SharePath.DATA_FOLDER), 'rb').read()  # 本地图片文件路径,有时WIN系统须要//
         result = cjy.PostPic(img, 1902)  # 1902 验证码类型
         print(f"-------第三方接口识别当前的验证码为：{result['pic_str']}-----------")
         return result['pic_str']
 
     def get_captcha_from_k8s_log(self):
-        SSH_CONFIG = HandleConfig(r'{}\ssh_config.yml'.format(CommonPath.CONFIG_FOLDER)).config
+        SSH_CONFIG = HandleConfig(r'{}\ssh_config.yml'.format(SharePath.CONFIG_FOLDER)).config
         ssh_config = SSH_CONFIG.get("ssh")
         ssh_config['hostname'] = "10.151.3.96"
         ssh = SSH(**ssh_config)

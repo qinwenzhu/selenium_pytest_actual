@@ -3,7 +3,7 @@
 # @Author: wenqin_zhu
 # @File: timezone.py
 # @Software: PyCharm
-
+import time
 
 from selenium.webdriver.common.by import By
 
@@ -61,6 +61,8 @@ class TimezonePage(BasePage):
         添加时间条件
         :param val: 时间条件的名称
         """
+        # icon的识别率不高，强制等待2s
+        time.sleep(2)
         # 定位到添加时间条件的按钮
         ICON = (By.XPATH, '//span[contains(text(), "时间条件名称")]/i')
         BasePage(self.driver).click_ele(ICON)
@@ -68,8 +70,12 @@ class TimezonePage(BasePage):
         # 调用封装方法 - 添加时间条件名称
         self.dialog_info_com("添加时间条件", val)
 
-    def add_timezone_section(self):
+    def add_timezone_section_by_timezone_name(self, timezone_name):
         """ 添加时间区间 """
+
+        # 定位时间条件名称定位表达式
+        SELECT_TIMEZONE = (By.XPATH, f'//div[@role="tablist"]//button/span[contains(text(), "{timezone_name}")]')
+        BasePage(self.driver).click_ele(SELECT_TIMEZONE)
 
         # 选择指定的时间条件添加对应的时间段
         ICON = (By.XPATH, '//span[contains(text(), "时间段")]/i')

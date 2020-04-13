@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # @time: 2020/3/15 13:48 
 # @Author: wenqinzhu
-# @Email: zhuwenqin_vendor@sensetime.com
 # @file: chaojiying.py
 # @software: PyCharm
 

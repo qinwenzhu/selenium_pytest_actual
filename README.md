@@ -24,18 +24,16 @@ pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
 ├─guard: Guard项目
 │  ├─config: 测试服务器相关配置文件
 │  ├─data: 测试数据
-│  ├─pages: POM页面
-│  │  ├─classes: 封装类
-│  │  └─components: POM组件
-|  ├─reports: 测试报告
-|  |-log: 日志
-|  |─screenshot: 屏幕截图
-│  ├─tests: 测试用例 
-│  │  ├─module: 模块测试
-│  │  └─scenario: 场景测试
-│  └─tools: 常用工具
+│  ├─pages: web功能模块页面
+│  │  └─components: 封装的重用性高的模块组件
+│  ├─tests: 测试用例
+│  └─tools: 封装的常用工具方法
+├─outputs: 测试报告
+|  ├─allure: allure格式的测试报告
+|  ├─html: html格式的测试报告
+|  ├─logs: 脚本输出日志
+|  ├─web_screenshot: 错误界面截图
 └─utils: 基础工具类
-
 ```
 
 ## 执行用例
