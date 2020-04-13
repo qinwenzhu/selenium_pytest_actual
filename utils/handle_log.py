@@ -16,7 +16,7 @@ import logging
 """
 
 
-class HandleLog:
+class HandleLog(object):
     """ 封装日志操作 """
 
     def __init__(self, path_to_log=None):

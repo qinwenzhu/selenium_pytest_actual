@@ -34,6 +34,21 @@ def login_web(start_driver_and_quit):
     yield start_driver_and_quit
 
 
+""" ---------------------------- 时间条件 timezone ---------------------------- """
+@pytest.fixture(scope="module")
+def timezone_web(login_web):
+    # 进入时间条件模块
+    MenubarPage(login_web).click_nav_item("配置", "时间条件")
+    yield login_web
+
+
+@pytest.fixture
+def sole_time_name():
+    # 前置 - 分组名 - 只针对测试用例<保证数据唯一性>
+    sole_time_name = f"TIME-{uuid_data()}"
+    yield sole_time_name
+
+
 """ ---------------------------- 用户管理 user ---------------------------- """
 @pytest.fixture(scope="module")
 def user_web(login_web):
@@ -47,7 +62,7 @@ def dep_name(user_web):
     # 前置 - 准备分组名称
     group_name = f"UDN-{uuid_data()}"
     yield user_web, group_name
-    # # 删除通过Default用户组创建的同级分组
+    # 删除通过Default用户组创建的同级分组
     # UserPage(user_web).delete_department_by_name(parent_name=group_name)
 
 
@@ -59,7 +74,7 @@ def close_alert(user_web):
 
 
 @pytest.fixture
-def sole_group_name(dep_name):
+def sole_group_name():
     # 前置 - 分组名 - 只针对测试用例<保证数据唯一性>
     sole_group_name = f"UDN-{uuid_data()}"
     yield sole_group_name

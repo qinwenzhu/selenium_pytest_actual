@@ -157,8 +157,6 @@ class BasePage:
     def click_ele(self, loc, img_describe="current"):
         """ 点击元素，等待元素可见进行点击"""
 
-        # ele = self.wait_for_ele_to_click(loc)
-        # ele = self.get_ele_locator(loc, img_describe)
         self.wait_for_ele_to_be_visible(loc)
         ele = self.get_ele_locator(loc)
         self.log.info(f"点击元素：{img_describe}页面的-{loc[-1]}元素")

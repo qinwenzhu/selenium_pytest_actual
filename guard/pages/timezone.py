@@ -6,6 +6,7 @@
 
 
 from selenium.webdriver.common.by import By
+
 from guard.pages.basepage import BasePage
 
 
@@ -67,6 +68,13 @@ class TimezonePage(BasePage):
         # 调用封装方法 - 添加时间条件名称
         self.dialog_info_com("添加时间条件", val)
 
+    def add_timezone_section(self):
+        """ 添加时间区间 """
+
+        # 选择指定的时间条件添加对应的时间段
+        ICON = (By.XPATH, '//span[contains(text(), "时间段")]/i')
+        BasePage(self.driver).click_ele(ICON)
+
     def create_holidays(self, tile_name, val):
         """
         添加假期
@@ -77,13 +85,32 @@ class TimezonePage(BasePage):
         # 点击 - 未定义假期 - 按钮
         SET_HOLIDAY = (By.XPATH, '//span[contains(text(), "未定义假期")]')
         BasePage(self.driver).click_ele(SET_HOLIDAY)
+
         # 调用封装方法 - 添加假期
         self.dialog_info_com(tile_name, val)
-
         # 点击 - 设定日期 - 按钮
-        SET_TIME = (By.XPATH, '//span[contains(text(), "设定日期")]')
+        SET_TIME = (By.XPATH, '//header[contains(text(), "假期定义")]/following-sibling::div//span[contains(text(), "设定日期")]')
         BasePage(self.driver).click_ele(SET_TIME)
         # 调用封装方法 - 选择假期的时间区间
+        self.check_time()
+
+    def create_workday(self, tile_name, val):
+        """
+        添加特殊工作日
+        :param tile_name: 动态传入定位表达式的标题名称
+        :param val: 特殊工作日名称
+        """
+
+        # 点击 - 未定义工作日 - 按钮
+        SET_HOLIDAY = (By.XPATH, '//span[contains(text(), "未定义工作日")]')
+        BasePage(self.driver).click_ele(SET_HOLIDAY)
+
+        # 调用封装方法 - 添加特殊工作日
+        self.dialog_info_com(tile_name, val)
+        # 点击 - 设定日期 - 按钮
+        SET_TIME = (By.XPATH, '//header[contains(text(), "特殊工作日定义")]/following-sibling::div//span[contains(text(), "设定日期")]')
+        BasePage(self.driver).click_ele(SET_TIME)
+        # 调用封装方法 - 选择特殊工作日的时间区间
         self.check_time()
 
 
@@ -100,4 +127,8 @@ if __name__ == '__main__':
 
     # TimezonePage(driver).add_timezone_name("input输入框内容")
 
-    # TimezonePage(driver).create_holidays("添加假期", "假期名称")
+    TimezonePage(driver).create_holidays("添加假期", "假期名称1")
+    TimezonePage(driver).create_workday("添加特殊工作日", "工作日名称1")
+    TimezonePage(driver).add_timezone_name("timezone1")
+
+
