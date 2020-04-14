@@ -56,9 +56,31 @@ class TimezonePage(BasePage):
             TIME_END = (By.XPATH, f'//div[contains(@class, "el-date-range-picker") and contains(@style, "position")]//div[contains(@class,"is-left")]//td//span[contains(text(),{today_text})]')
         BasePage(self.driver).mouse_move_ele_and_click(TIME_CONTROL, TIME_END)
 
-    # def choice_operation_by_text_name(self, text_name):
-    #     # //div[@role="tooltip"  and contains(@style, "position")]//span[contains(text(), "删除")]
-    #     ELE_LOC = (By.XPATH, f'//div[@role="tooltip"  and contains(@style, "position")]//span[contains(text(), "{text_name}")]')
+    def operation_timezone_by_name(self, name, flag):
+        """
+        通过时间条件名称 重命名/删除 该条记录
+        :param name: 当前选择的名称，包括：时间条件名称、假期、特殊工作日
+        :param flag: 判断是 重命名还是删除
+        """
+        # 定位时间条件名称定位表达式
+        SELECT_TIMEZONE = (By.XPATH, f'//div[@role="tablist"]//button/span[contains(text(), "{name}")]')
+        BasePage(self.driver).mouse_move_ele(SELECT_TIMEZONE)
+
+        if flag == "重命名":
+            ELE_LOC = (By.XPATH,
+                       '//div[@role="tooltip"  and contains(@style, "position")]//span[contains(text(), "重命名")]')
+            BasePage(self.driver).mouse_move_ele(SELECT_TIMEZONE, ELE_LOC)
+
+            # 执行重命名操作
+            self.dialog_info_com("重命名时间条件", "UPDATE" + name)
+
+        elif flag == "删除":
+            ELE_LOC = (By.XPATH,
+                       '//div[@role="tooltip"  and contains(@style, "position")]//span[contains(text(), "删除")]')
+            BasePage(self.driver).mouse_move_ele(SELECT_TIMEZONE, ELE_LOC)
+
+            # TODO 执行删除操作
+            # 删除
 
     def add_timezone_name(self, val):
         """
@@ -128,27 +150,6 @@ class TimezonePage(BasePage):
         BasePage(self.driver).click_ele(SET_TIME)
         # 调用封装方法 - 选择特殊工作日的时间区间
         self.check_time()
-
-    def operation_timezone_by_name(self, timezone_name, flag):
-        """
-        通过时间条件名称 重命名/删除 该条记录
-        :param timezone_name: 当前创建的时间条件名称
-        :param flag: 判断是 重命名还是删除
-        """
-        # 定位时间条件名称定位表达式
-        SELECT_TIMEZONE = (By.XPATH, f'//div[@role="tablist"]//button/span[contains(text(), "{timezone_name}")]')
-        BasePage(self.driver).mouse_move_ele(SELECT_TIMEZONE)
-
-        if flag == "重命名":
-            ELE_LOC = (By.XPATH,
-                       '//div[@role="tooltip"  and contains(@style, "position")]//span[contains(text(), "重命名")]')
-            BasePage(self.driver).mouse_move_ele(SELECT_TIMEZONE, ELE_LOC)
-            self.dialog_info_com("重命名时间条件", "UPDATE"+timezone_name)
-
-        elif flag == "删除":
-            ELE_LOC = (By.XPATH,
-                       '//div[@role="tooltip"  and contains(@style, "position")]//span[contains(text(), "删除")]')
-            BasePage(self.driver).mouse_move_ele(SELECT_TIMEZONE, ELE_LOC)
 
     def assert_timezone_section(self):
         # 判断给当前时间条件下的时间段是否成功添加
