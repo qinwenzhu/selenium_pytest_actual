@@ -8,7 +8,6 @@
 import pytest
 from guard.pages.login import LoginPage
 from guard.data.login_data import LoginData
-from guard.tools.call_database import query_result_by_database
 
 
 @pytest.mark.positive

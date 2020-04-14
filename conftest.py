@@ -16,6 +16,27 @@ from guard.pages.login import LoginPage
 from guard.pages.tool import ToolPage
 from guard.pages.components.menubar import MenubarPage
 from guard.pages.user import UserPage
+from guard.tools.share_path import SharePath
+from utils.handle_config import HandleConfig
+from utils.handle_database import HandleDB
+
+
+@pytest.fixture(scope="session")
+def connect_mysql_and_close():
+    # 前置 - 连接数据库 后置 - 关闭连接
+    # 调用数据库查询结果
+    DB_CONFIG = HandleConfig(r'{}\db_config.yml'.format(SharePath.CONFIG_FOLDER)).config
+    db_config = DB_CONFIG.get("database")
+    db_config['host'] = "10.151.3.96"
+    # db_config['host'] = "10.151.3.111"
+
+    # 连接数据库
+    database = HandleDB(host=db_config['host'], username=db_config['user'],
+                  password=db_config['password'], port=db_config['port'], database="senseguard")
+    print("数据库连接成功！")
+    yield database
+    # 关闭游标、关闭数据库
+    database.close()
 
 
 @pytest.fixture(scope="module")
@@ -31,7 +52,9 @@ def start_driver_and_quit():
 def login_web(start_driver_and_quit):
     # 登录web网站
     start_driver_and_quit.get("http://10.151.3.96/login")
+    # start_driver_and_quit.get("http://10.151.3.111/login")
     LoginPage(start_driver_and_quit).login("zhuwenqin", "888888")
+    # LoginPage(start_driver_and_quit).login("zhuwenqin", "888888", flag="cjy")
     yield start_driver_and_quit
 
 
@@ -43,9 +66,16 @@ def timezone_web(login_web):
     yield login_web
 
 
+@pytest.fixture(scope="class")
+def sole_time_name_to_class():
+    # 创建类时间条件名称，通过该时间条件添加时间段
+    sole_time_name = f"TIME-{get_current_time()}"
+    yield sole_time_name
+
+
 @pytest.fixture
 def sole_time_name():
-    # 前置 - 分组名 - 只针对测试用例<保证数据唯一性>
+    # 创建类时间条件名称，通过该时间条件添加时间段
     sole_time_name = f"TIME-{uuid1_data()}"
     yield sole_time_name
 
@@ -112,9 +142,6 @@ def del_sub_dep_name_to_user(dep_name, sole_group_name):
     time.sleep(2)
 
 
-
-
-
 # @pytest.fixture
 # def add_dep_sole_name_and_del(dep_name):
 #     # 前置 - 准备分组名称 - 只针对测试用例<保证数据唯一性>
@@ -144,14 +171,11 @@ def del_sub_dep_name_to_user(dep_name, sole_group_name):
 #     UserPage(user_web).delete_department_by_name()
 
 
-
-
-
-
 """ ---------------------------- 登录 login ---------------------------- """
 @pytest.fixture(scope="class")
 def login(start_driver_and_quit):
-    start_driver_and_quit.get("http://10.151.3.96/login")
+    # start_driver_and_quit.get("http://10.151.3.96/login")
+    start_driver_and_quit.get("http://10.151.3.111/login")
     yield start_driver_and_quit
 
 

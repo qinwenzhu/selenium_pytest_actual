@@ -72,7 +72,7 @@ class LoginPage(BasePage):
             print("请手动输入登录页面的验证码：")
             code = input()
             BasePage(self.driver).update_input_text(CODE_INPUT, code, "登录")
-        else:
+        elif flag == "cjy":
             # 2、通过调用第三方接口<cjy>识别当前验证码
             code = self.get_code_cjy()
             BasePage(self.driver).update_input_text(CODE_INPUT, code, "登录")
