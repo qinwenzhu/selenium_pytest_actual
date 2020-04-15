@@ -1,6 +1,6 @@
 # database configurations
 database:
-  host: ""
+  hostname: ""
   port: 30446
   user: "root"
   password: "UVlY88m9suHLsthK"

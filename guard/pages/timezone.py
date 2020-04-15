@@ -32,7 +32,7 @@ class TimezonePage(BasePage):
                              f'//div[@class="timezone-rename-dialog-header"]//span[contains(text(), "{til_name}")]/ancestor::div[@class="el-dialog__header"]/following-sibling::div[@class="el-dialog__footer"]//span[contains(text(), "取消")]')
             BasePage(self.driver).click_ele(CANCEL_BUTTON)
 
-    def check_time(self):
+    def check_time(self, num=1):
         """ 封装时间控件 """
 
         # 定位到时间控件并通过鼠标操作
@@ -51,36 +51,55 @@ class TimezonePage(BasePage):
             TIME_END = (By.XPATH, f'//div[contains(@class, "el-date-range-picker") and contains(@style, "position")]//div[contains(@class,"is-right")]//td//span[contains(text(),{today_text})]')
         else:
             # 结束时间为今天的后两天
-            today_text = str(int(today_text)+2)
-            # 默认选择结束时间为 day+2
+            today_text = str(int(today_text)+num)
+            # 默认选择时间段为全天24小时
             TIME_END = (By.XPATH, f'//div[contains(@class, "el-date-range-picker") and contains(@style, "position")]//div[contains(@class,"is-left")]//td//span[contains(text(),{today_text})]')
         BasePage(self.driver).mouse_move_ele_and_click(TIME_CONTROL, TIME_END)
 
-    def operation_timezone_by_name(self, name, flag):
-        """
-        通过时间条件名称 重命名/删除 该条记录
-        :param name: 当前选择的名称，包括：时间条件名称、假期、特殊工作日
-        :param flag: 判断是 重命名还是删除
-        """
-        # 定位时间条件名称定位表达式
-        SELECT_TIMEZONE = (By.XPATH, f'//div[@role="tablist"]//button/span[contains(text(), "{name}")]')
-        BasePage(self.driver).mouse_move_ele(SELECT_TIMEZONE)
+    # def operation_hover(self, text_name):
+    #     """
+    #     封装：重命名/删除 该条记录
+    #     :param text_name: 判断是 重命名还是删除
+    #     """
+    #     # 定位时间条件名称定位表达式
+    #     SELECT_TIMEZONE = (By.XPATH, f'//div[@role="tablist"]//button/span[contains(text(), "{name}")]')
+    #     BasePage(self.driver).mouse_move_ele(SELECT_TIMEZONE)
+    #
+        # if text_name == "重命名":
+        #     ELE_LOC = (By.XPATH,
+        #                '//div[@role="tooltip"  and contains(@style, "position")]//span[contains(text(), "重命名")]')
+        #     BasePage(self.driver).mouse_move_ele(SELECT_TIMEZONE, ELE_LOC)
+        #
+        #     # 执行重命名操作
+        #     # self.dialog_info_com("重命名时间条件", "UPDATE" + name)
+    #
+        # elif flag == "删除":
+        #     ELE_LOC = (By.XPATH,
+        #                '//div[@role="tooltip"  and contains(@style, "position")]//span[contains(text(), "删除")]')
+        #     BasePage(self.driver).mouse_move_ele(SELECT_TIMEZONE, ELE_LOC)
+        #
+        #     # TODO 执行删除操作
+        #     # 删除
 
+    def delete_or_rename_timezone_name(self, timezone_name, flag):
+
+        # 定位到当前时间条件名称
+        SELECT_TIMEZONE = (By.XPATH, f'//div[@role="tablist"]//button/span[contains(text(), "{timezone_name}")]')
+        BasePage(self.driver).mouse_move_ele(SELECT_TIMEZONE)
         if flag == "重命名":
+            # 定位到 "重命名" 元素
             ELE_LOC = (By.XPATH,
                        '//div[@role="tooltip"  and contains(@style, "position")]//span[contains(text(), "重命名")]')
-            BasePage(self.driver).mouse_move_ele(SELECT_TIMEZONE, ELE_LOC)
-
+            BasePage(self.driver).mouse_move_ele_and_click(SELECT_TIMEZONE, ELE_LOC)
             # 执行重命名操作
-            self.dialog_info_com("重命名时间条件", "UPDATE" + name)
+            self.dialog_info_com("重命名时间条件", "UPDATE" + timezone_name)
 
         elif flag == "删除":
+            # 定位到 "删除" 元素
             ELE_LOC = (By.XPATH,
                        '//div[@role="tooltip"  and contains(@style, "position")]//span[contains(text(), "删除")]')
-            BasePage(self.driver).mouse_move_ele(SELECT_TIMEZONE, ELE_LOC)
-
+            BasePage(self.driver).mouse_move_ele_and_click(SELECT_TIMEZONE, ELE_LOC)
             # TODO 执行删除操作
-            # 删除
 
     def add_timezone_name(self, val):
         """
@@ -101,23 +120,32 @@ class TimezonePage(BasePage):
 
         # 定位时间条件名称定位表达式
         SELECT_TIMEZONE = (By.XPATH, f'//div[@role="tablist"]//button/span[contains(text(), "{timezone_name}")]')
+        # 选择指定的时间条件添加对应的时间段
+        ICON = (By.XPATH, '//span[contains(text(), "时间段")]/i')
 
-        # 元素滚动到页面可见区域
-        BasePage(self.driver).scroll_visibility_region(SELECT_TIMEZONE)
-        time.sleep(5)
+        if BasePage(self.driver).wait_for_ele_to_be_visible(SELECT_TIMEZONE):
+            pass
+        else:
+            time.sleep(0.5)
+            # 元素滚动到页面可见区域
+            BasePage(self.driver).scroll_visibility_region(SELECT_TIMEZONE)
+            BasePage(self.driver).click_ele(SELECT_TIMEZONE)
+
         # ele = BasePage(self.driver).get_ele_locator(SELECT_TIMEZONE)
         # self.driver.execute_script("arguments[0].scrollIntoView();", ele)
         # BasePage(self.driver).click_ele(SELECT_TIMEZONE)
 
-        # 选择指定的时间条件添加对应的时间段
-        ICON = (By.XPATH, '//span[contains(text(), "时间段")]/i')
+        # # 选择指定的时间条件添加对应的时间段
+        # ICON = (By.XPATH, '//span[contains(text(), "时间段")]/i')
+        time.sleep(0.5)
         BasePage(self.driver).click_ele(ICON)
 
-    def create_holidays(self, tile_name, val):
+    def create_holidays(self, tile_name, val, num=0):
         """
         添加假期
         :param tile_name: 动态传入定位表达式的标题名称
         :param val: 假期名称
+        :param num: 设置动态数值，保证时间选择不同
         """
 
         # 点击 - 未定义假期 - 按钮
@@ -130,13 +158,14 @@ class TimezonePage(BasePage):
         SET_TIME = (By.XPATH, '//header[contains(text(), "假期定义")]/following-sibling::div//span[contains(text(), "设定日期")]')
         BasePage(self.driver).click_ele(SET_TIME)
         # 调用封装方法 - 选择假期的时间区间
-        self.check_time()
+        self.check_time(num)
 
-    def create_workday(self, tile_name, val):
+    def create_workday(self, tile_name, val, num=0):
         """
         添加特殊工作日
         :param tile_name: 动态传入定位表达式的标题名称
         :param val: 特殊工作日名称
+        :param num: 设置动态数值，保证时间选择不同
         """
 
         # 点击 - 未定义工作日 - 按钮
@@ -149,7 +178,7 @@ class TimezonePage(BasePage):
         SET_TIME = (By.XPATH, '//header[contains(text(), "特殊工作日定义")]/following-sibling::div//span[contains(text(), "设定日期")]')
         BasePage(self.driver).click_ele(SET_TIME)
         # 调用封装方法 - 选择特殊工作日的时间区间
-        self.check_time()
+        self.check_time(num)
 
     def assert_timezone_section(self):
         # 判断给当前时间条件下的时间段是否成功添加
@@ -171,8 +200,11 @@ if __name__ == '__main__':
 
     # TimezonePage(driver).add_timezone_name("input输入框内容")
 
-    TimezonePage(driver).create_holidays("添加假期", "假期名称1")
-    TimezonePage(driver).create_workday("添加特殊工作日", "工作日名称1")
-    TimezonePage(driver).add_timezone_name("timezone1")
+    # TimezonePage(driver).create_holidays("添加假期", "假期名称1")
+    # TimezonePage(driver).create_workday("添加特殊工作日", "工作日名称1")
+    # TimezonePage(driver).add_timezone_name("timezone1")
+    TimezonePage(driver).add_timezone_name("timezone2")
+    # TimezonePage(driver).delete_or_rename_timezone_name("timezone1", "重命名")
+    TimezonePage(driver).delete_or_rename_timezone_name("timezone2", "删除")
 
 

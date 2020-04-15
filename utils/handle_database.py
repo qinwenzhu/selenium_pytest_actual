@@ -20,12 +20,22 @@ class HandleDB(object):
         :param database: 连接的数据库名称 如：senseguard
         :param port: 数据库端口，默认为：3306
         """
+        # 默认进行数据库连接，没有设置数据库结果的数据类型
         # self.conn_db = pymysql.connect(host, username, password, database, port, charset='utf8')
+
+        # 推荐：连接数据库的同时并指定数据库结果的返回类型为：字典
         self.conn_db = pymysql.connect(host, username, password, database, port, charset='utf8', cursorclass=pymysql.cursors.DictCursor)
-        # 建立游标,并设置数据库返回数据的数据类型:返回类型为字典类型
+        # 建立游标
         self.cursor = self.conn_db.cursor()
 
     def select_database(self, sql, args=None, is_more=False):
+        """
+        数据库查询
+        :param sql: 查询语句
+        :param args: 查询参数。 参数的传参数据格式为：序列类型
+        :param is_more: 查询结果是否展示多条。 默认显示一条
+        :return: 返回数据库查询结果
+        """
         self.cursor.execute(sql, args=args)
         self.conn_db.commit()
         if is_more:
@@ -41,10 +51,6 @@ class HandleDB(object):
 
 
 if __name__ == '__main__':
-
-    # mobile = '18999990262'
-    # sql_1 = "SELECT * FROM member WHERE MobilePhone=%s"
-    # sql_2 = "SELECT * FROM member LIMIT 0, 10;"
 
     do_mysql = HandleDB(host="10.151.3.96", username="root", password="UVlY88m9suHLsthK", database="senseguard", port=30446)
 

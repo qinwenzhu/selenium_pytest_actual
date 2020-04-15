@@ -20,6 +20,15 @@ from guard.tools.share_path import SharePath
 from utils.handle_config import HandleConfig
 from utils.handle_database import HandleDB
 
+# 读取当前的测试环境
+IP_CONFIG = HandleConfig(r'{}\operation _config.yml'.format(SharePath.CONFIG_FOLDER)).config
+operation = IP_CONFIG.get("operation")
+print(operation)
+"""
+测试环境/登录用户动态更换
+{'host': '10.151.3.96', 'username': 'zhuwenqin', 'password': '888888'}
+"""
+
 
 @pytest.fixture(scope="session")
 def connect_mysql_and_close():
@@ -27,11 +36,11 @@ def connect_mysql_and_close():
     # 调用数据库查询结果
     DB_CONFIG = HandleConfig(r'{}\db_config.yml'.format(SharePath.CONFIG_FOLDER)).config
     db_config = DB_CONFIG.get("database")
-    db_config['host'] = "10.151.3.96"
-    # db_config['host'] = "10.151.3.111"
+    # db_config['host'] = "10.151.3.96"
+    db_config['hostname'] = operation["host"]
 
     # 连接数据库
-    database = HandleDB(host=db_config['host'], username=db_config['user'],
+    database = HandleDB(host=db_config['hostname'], username=db_config['user'],
                   password=db_config['password'], port=db_config['port'], database="senseguard")
     print("数据库连接成功！")
     yield database
@@ -51,10 +60,12 @@ def start_driver_and_quit():
 @pytest.fixture(scope="module")
 def login_web(start_driver_and_quit):
     # 登录web网站
-    start_driver_and_quit.get("http://10.151.3.96/login")
-    # start_driver_and_quit.get("http://10.151.3.111/login")
-    LoginPage(start_driver_and_quit).login("zhuwenqin", "888888")
-    # LoginPage(start_driver_and_quit).login("zhuwenqin", "888888", flag="cjy")
+    # start_driver_and_quit.get("http://10.151.3.96/login")
+    start_driver_and_quit.get(f'http://{operation["host"]}/login')
+    # LoginPage(start_driver_and_quit).login("zhuwenqin", "888888")
+    LoginPage(start_driver_and_quit).login(f'{operation["username"]}', f'{operation["password"]}')
+    # 通过超级鹰第三方识别验证码
+    # LoginPage(start_driver_and_quit).login(f'{operation["username"]}', f'{operation["password"]}', flag="cjy")
     yield start_driver_and_quit
 
 
@@ -175,7 +186,7 @@ def del_sub_dep_name_to_user(dep_name, sole_group_name):
 @pytest.fixture(scope="class")
 def login(start_driver_and_quit):
     # start_driver_and_quit.get("http://10.151.3.96/login")
-    start_driver_and_quit.get("http://10.151.3.111/login")
+    start_driver_and_quit.get(f'http://{operation["host"]}/login')
     yield start_driver_and_quit
 
 

@@ -9,7 +9,7 @@ from guard.pages.basepage import BasePage
 
 
 class GlobalDialog(BasePage):
-    """ 通用：系统弹框 """
+    """ 通用：系统页面消息提示弹框 """
 
     def judge_alert_info(self):
         # 定位alert弹框的文本

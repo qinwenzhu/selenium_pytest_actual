@@ -22,15 +22,23 @@ from guard.tools.share_path import SharePath
 
 
 class BasePage:
-    """  Basepage - 针对selenium框架中常用的元素操作进行二次封装 """
+    """
+        BasePage - 针对selenium框架中常用的元素操作进行二次封装
+    """
 
-    log = HandleLog(r"{}/log.txt".format(SharePath.LOG_FOLDER)).get_log()
+    # 初始化日志对象并返回
+    log = HandleLog(r"{}/log.txt".format(SharePath.LOG_FOLDER)).get_logger()
 
     def __init__(self, driver: WebDriver):
         # 传入 driver - 指定类型为：WebDriver
         self.driver = driver
 
     def save_web_screenshots(self, img_describe):
+        """
+        保存页面截图
+        :param img_describe: 图片描述，如：当前截图是在哪个页面或者哪个模块
+        :return:
+        """
         current_time_to_str = datetime.strftime(datetime.now(), '%Y%m%d%H%M%S')
         file_name = f"{img_describe}_{current_time_to_str}.jpg"
         self.driver.save_screenshot(f"{SharePath.SCREENSHOT_FOLDER}/{file_name}")

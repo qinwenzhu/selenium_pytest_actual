@@ -3,6 +3,7 @@
 # @Author: wenqin_zhu
 # @File: test_timezone.py
 # @Software: PyCharm
+
 import re
 import time
 import pytest
@@ -21,7 +22,7 @@ class TestTimezone:
 
         # 断言
         sql = "SELECT * FROM senseguard.info_time_zone WHERE time_zone_name=%s;"
-        time.sleep(5)
+        time.sleep(2)
         result = connect_mysql_and_close.select_database(sql, args=(sole_time_name_to_class, ))
         print(f"数据库查询结果为：{result}")
         assert sole_time_name_to_class == result["time_zone_name"]
@@ -39,11 +40,11 @@ class TestTimezone:
     @pytest.mark.positive
     def test_create_holidays(self, connect_mysql_and_close, timezone_web, sole_short_time_name):
         # 测试添加假期
-        TimezonePage(timezone_web).create_holidays("添加假期", sole_short_time_name)
+        TimezonePage(timezone_web).create_holidays("添加假期", sole_short_time_name, num=2)
 
         # 断言
         sql = "SELECT * FROM senseguard.info_holiday WHERE holiday_name=%s;"
-        time.sleep(5)
+        time.sleep(2)
         result = connect_mysql_and_close.select_database(sql, args=(sole_short_time_name, ))
         print(f"数据库查询结果为：{result}")
         assert sole_short_time_name == result["holiday_name"]
@@ -51,11 +52,11 @@ class TestTimezone:
     @pytest.mark.positive
     def test_create_workday(self, connect_mysql_and_close, timezone_web, sole_short_time_name):
         # 测试添加特殊工作日
-        TimezonePage(timezone_web).create_workday("添加特殊工作日", sole_short_time_name)
+        TimezonePage(timezone_web).create_workday("添加特殊工作日", sole_short_time_name, num=2)
 
         # 断言
         sql = "SELECT * FROM senseguard.info_holiday WHERE holiday_name=%s;"
-        time.sleep(10)
+        time.sleep(2)
         result = connect_mysql_and_close.select_database(sql, args=(sole_short_time_name, ))
         print(f"数据库查询结果为：{result}")
         assert sole_short_time_name == result["holiday_name"]
@@ -72,7 +73,7 @@ class TestTimezone:
     @pytest.mark.negative
     def test_add_holidays_negative_conflict(self, timezone_web, sole_time_name):
         # 测试添加假期与页面现有的假期时间冲突
-        TimezonePage(timezone_web).create_holidays("添加假期", sole_time_name)
+        TimezonePage(timezone_web).create_holidays("添加假期", sole_time_name, num=1)
 
         # 断言
         result = GlobalDialog(timezone_web).judge_alert_info()
@@ -81,9 +82,8 @@ class TestTimezone:
     @pytest.mark.negative
     def test_add_workday_negative_conflict(self, timezone_web, sole_time_name):
         # 测试添加特殊工作日与页面现有的工作日时间冲突
-        TimezonePage(timezone_web).create_workday("添加特殊工作日", sole_time_name)
+        TimezonePage(timezone_web).create_workday("添加特殊工作日", sole_time_name, num=1)
 
         # 断言
         result = GlobalDialog(timezone_web).judge_alert_info()
         assert "创建的特殊工作日与已有的特殊工作日有冲突，请检查后重新设置" == result
-

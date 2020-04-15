@@ -6,6 +6,8 @@
 
 
 # 导入元素的定位方式
+import re
+
 from selenium.webdriver.common.by import By
 
 import time
@@ -15,6 +17,7 @@ from utils.chaojiying import Chaojiying_Client
 import urllib.request
 
 # 导入封装类
+from utils.redis_database import GetRedisData
 from utils.ssh import SSH
 from utils.handle_config import HandleConfig
 
@@ -26,6 +29,10 @@ from guard.pages.basepage import BasePage
 
 
 class LoginPage(BasePage):
+
+    # 读取当前的测试环境
+    IP_CONFIG = HandleConfig(r'{}\operation _config.yml'.format(SharePath.CONFIG_FOLDER)).config
+    operation = IP_CONFIG.get("operation")
 
     def login(self, username, password, code=None, flag=False):
         """ 登录 """
@@ -75,6 +82,9 @@ class LoginPage(BasePage):
         elif flag == "cjy":
             # 2、通过调用第三方接口<cjy>识别当前验证码
             code = self.get_code_cjy()
+            BasePage(self.driver).update_input_text(CODE_INPUT, code, "登录")
+        elif flag == "redis":
+            code = self.get_captcha_from_redis()
             BasePage(self.driver).update_input_text(CODE_INPUT, code, "登录")
 
         # 定位到登录按钮
@@ -132,13 +142,30 @@ class LoginPage(BasePage):
     def get_captcha_from_k8s_log(self):
         SSH_CONFIG = HandleConfig(r'{}\ssh_config.yml'.format(SharePath.CONFIG_FOLDER)).config
         ssh_config = SSH_CONFIG.get("ssh")
-        ssh_config['hostname'] = "10.151.3.96"
+        # ssh_config['hostname'] = "10.151.3.96"
+        # 读取到当前执行ssh的环境
+        ssh_config['hostname'] = f'{self.operation["host"]}'
         ssh = SSH(**ssh_config)
         oauth2_pod_name = ssh.execute_command(
             "kubectl get pods | grep oauth2 | awk '{print $1}'")
         captcha = ssh.execute_command(
             f"kubectl logs {oauth2_pod_name.rstrip()} --tail 2 | grep 生成验证码存入redis | awk -F ' ' '{{print $5}}'")
         return captcha.rstrip()
+
+    def get_captcha_from_redis(self):
+        """ 通过Redis获取验证码
+
+        返回: 验证码字符串
+
+        """
+        img_url = self.driver.find_element_by_xpath(
+            "//*[@class='code-pic']").get_attribute("innerHTML")
+        pattern = ".*timestamp=(\d+)"
+        timestamp = re.findall(pattern, img_url)
+        redis = GetRedisData(ip="10.151.3.96")
+        captcha_code = redis.get_result_from_redis(
+            "Senseguard:Oauth2:Login:" + timestamp[0])
+        return captcha_code
 
 
 if __name__ == '__main__':
