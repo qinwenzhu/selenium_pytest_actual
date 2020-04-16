@@ -4,6 +4,7 @@
 /utils/__pycache__/
 /guard/tests/__pycache__/
 /guard/datas/__pycache__/
+/guard/datas/tool/__pycache__/
 /guard/datas/face_property/__pycache__/
 /.pytest_cache/
 /__pycache__/

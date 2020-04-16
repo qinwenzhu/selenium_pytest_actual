@@ -70,36 +70,36 @@ def timezone_name(login_web):
     # 创建类时间条件名称，通过该时间条件添加时间段
     sole_time_name = f"TIME-{get_current_time()}"
     yield sole_time_name
-    TimezonePage(login_web).delete_or_rename_timezone_name(sole_time_name, is_delete="删除")
+    TimezonePage(login_web).delete_or_rename_timezone_name(sole_time_name)
 
 
-@pytest.fixture
+@pytest.fixture(scope="class")
 def holiday_name(login_web):
     # 创建假期名称 - 删除假期
     sole_time_name = f"H-{get_current_time()}"
     yield sole_time_name
-    # TimezonePage(login_web).delete_or_rename_timezone_name(sole_time_name, is_delete="删除")
+    TimezonePage(login_web).delete_or_rename_holidays_or_workday(sole_time_name)
 
 
-@pytest.fixture
+@pytest.fixture(scope="class")
 def workday_name(login_web):
     # 创建特殊工作日名称 - 删除特殊工作日
     sole_time_name = f"W-{get_current_time()}"
     yield sole_time_name
-    # TimezonePage(login_web).delete_or_rename_timezone_name(sole_time_name, is_delete="删除")
+    TimezonePage(login_web).delete_or_rename_holidays_or_workday(sole_time_name)
 
 
 @pytest.fixture
 def sole_time_name():
     # 创建类时间条件名称，通过该时间条件添加时间段
-    sole_time_name = f"TIME-{uuid1_data()}"
+    sole_time_name = f"Timezone-{uuid1_data()}"
     yield sole_time_name
 
 
 @pytest.fixture
-def sole_short_time_name():
-    # 前置 - 分组名 - 只针对测试用例<保证数据唯一性>
-    sole_short_time_name = f"TIME-{get_current_time()}"
+def sole_short_time_name(login_web):
+    # 获取当前时间 - 超出字段名称
+    sole_short_time_name = f"HW-{get_current_time()}"
     yield sole_short_time_name
 
 
