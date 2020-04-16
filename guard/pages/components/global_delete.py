@@ -8,7 +8,7 @@ from guard.pages.basepage import BasePage
 from selenium.webdriver.common.by import By
 
 
-class GlobalDialog(BasePage):
+class GlobalDelete(BasePage):
     """ 通用：系统页面删除dialog """
 
     def dialog_delete(self, is_delete=True):

@@ -6,6 +6,7 @@
 import time
 from selenium.webdriver.common.by import By
 from guard.pages.basepage import BasePage
+from guard.pages.components.global_delete import GlobalDelete
 
 
 class TimezonePage(BasePage):
@@ -79,12 +80,13 @@ class TimezonePage(BasePage):
         #     # TODO 执行删除操作
         #     # 删除
 
-    def delete_or_rename_timezone_name(self, timezone_name, flag):
+    def delete_or_rename_timezone_name(self, timezone_name, is_delete="删除"):
+        """ 删除时间条件 """
 
         # 定位到当前时间条件名称
         SELECT_TIMEZONE = (By.XPATH, f'//div[@role="tablist"]//button/span[contains(text(), "{timezone_name}")]')
         BasePage(self.driver).mouse_move_ele(SELECT_TIMEZONE)
-        if flag == "重命名":
+        if is_delete == "重命名":
             # 定位到 "重命名" 元素
             ELE_LOC = (By.XPATH,
                        '//div[@role="tooltip"  and contains(@style, "position")]//span[contains(text(), "重命名")]')
@@ -92,12 +94,13 @@ class TimezonePage(BasePage):
             # 执行重命名操作
             self.dialog_info_com("重命名时间条件", "UPDATE" + timezone_name)
 
-        elif flag == "删除":
+        elif is_delete == "删除":
             # 定位到 "删除" 元素
             ELE_LOC = (By.XPATH,
                        '//div[@role="tooltip"  and contains(@style, "position")]//span[contains(text(), "删除")]')
             BasePage(self.driver).mouse_move_ele_and_click(SELECT_TIMEZONE, ELE_LOC)
             # TODO 执行删除操作
+            GlobalDelete(self.driver).dialog_delete()
 
     def add_timezone_name(self, val):
         """
@@ -125,7 +128,7 @@ class TimezonePage(BasePage):
             # 如果当前操作的目标元素不可见
             time.sleep(0.5)
             # 1、元素滚动到页面可见区域
-            BasePage(self.driver).scroll_visibility_region(SELECT_TIMEZONE)
+            BasePage(self.driver).scroll_visibility_region(loc=SELECT_TIMEZONE)
             # 2、点击元素
             BasePage(self.driver).click_ele(SELECT_TIMEZONE)
         time.sleep(0.5)
@@ -139,9 +142,11 @@ class TimezonePage(BasePage):
         :param val: 假期名称
         :param num: 设置动态数值，保证时间选择不同
         """
-
-        # 点击 - 未定义假期 - 按钮
+        # 定位 - 未定义假期 - 按钮
         SET_HOLIDAY = (By.XPATH, '//span[contains(text(), "未定义假期")]')
+        # 滚动到元素在页面的可见区域
+        BasePage(self.driver).scroll_visibility_region(loc=SET_HOLIDAY)
+        # 点击 - 未定义假期 - 按钮
         BasePage(self.driver).click_ele(SET_HOLIDAY)
         # 调用封装方法 - 添加假期
         self.dialog_info_com(tile_name, val)
@@ -160,8 +165,11 @@ class TimezonePage(BasePage):
         :param num: 设置动态数值，保证时间选择不同
         """
 
-        # 点击 - 未定义工作日 - 按钮
+        # 定位 - 未定义工作日 - 按钮
         SET_HOLIDAY = (By.XPATH, '//span[contains(text(), "未定义工作日")]')
+        # 滚动到元素在页面的可见区域
+        BasePage(self.driver).scroll_visibility_region(loc=SET_HOLIDAY)
+        # 点击 - 未定义工作日 - 按钮
         BasePage(self.driver).click_ele(SET_HOLIDAY)
         # 调用封装方法 - 添加特殊工作日
         self.dialog_info_com(tile_name, val)

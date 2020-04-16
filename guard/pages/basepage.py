@@ -205,15 +205,20 @@ class BasePage:
             self.log.error(f"鼠标移动到元素点击元素失败！")
             raise e
 
-    def scroll_visibility_region(self, loc, img_describe="current"):
-        """  滚动到元素可见区域 """
-
-        # 定位元素
-        ele = self.get_ele_locator(loc, img_describe)
-        # 滚动到页面可是区域
+    def scroll_visibility_region(self, ele=None, loc=None, img_describe="current"):
+        """
+        滚动到元素可见区域
+        :param ele: 需要滚动到页面可见区域的元素对象
+        :param loc: 需要滚动到页面可见的元素定位表达式
+        :param img_describe: 当前页面的截图文字介绍
+        """
         try:
-            self.driver.execute_script("arguments[0].scrollIntoView();", ele)
+            if ele is not None:
+                self.driver.execute_script("arguments[0].scrollIntoView();", ele)
+            elif loc is not None:
+                element = self.get_ele_locator(loc)
+                self.driver.execute_script("arguments[0].scrollIntoView();", element)
         except Exception as e:
             self.save_web_screenshots(img_describe)
-            self.log.error("元素滚动到页面可见失败！")
+            self.log.error("滚动到元素在页面可视区域失败！")
             raise e

@@ -9,6 +9,7 @@ import pytest
 import time
 from selenium import webdriver
 
+from guard.pages.timezone import TimezonePage
 from guard.tools.get_uuid_data import uuid1_data, uuid4_data
 from guard.tools.get_current_time import get_current_time
 
@@ -65,10 +66,27 @@ def timezone_web(login_web):
 
 
 @pytest.fixture(scope="class")
-def sole_time_name_to_class():
+def timezone_name(login_web):
     # 创建类时间条件名称，通过该时间条件添加时间段
     sole_time_name = f"TIME-{get_current_time()}"
     yield sole_time_name
+    TimezonePage(login_web).delete_or_rename_timezone_name(sole_time_name, is_delete="删除")
+
+
+@pytest.fixture
+def holiday_name(login_web):
+    # 创建假期名称 - 删除假期
+    sole_time_name = f"H-{get_current_time()}"
+    yield sole_time_name
+    # TimezonePage(login_web).delete_or_rename_timezone_name(sole_time_name, is_delete="删除")
+
+
+@pytest.fixture
+def workday_name(login_web):
+    # 创建特殊工作日名称 - 删除特殊工作日
+    sole_time_name = f"W-{get_current_time()}"
+    yield sole_time_name
+    # TimezonePage(login_web).delete_or_rename_timezone_name(sole_time_name, is_delete="删除")
 
 
 @pytest.fixture

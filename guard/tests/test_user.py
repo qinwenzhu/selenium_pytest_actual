@@ -4,6 +4,7 @@
 # @File: test_user.py
 # @Software: PyCharm
 
+import re
 import pytest
 from guard.pages.components.group_tree import GroupTree
 from guard.pages.user import UserPage
@@ -57,7 +58,8 @@ class TestUser:
         result = GroupTree(dep_name[0]).judge_search_success(dep_name[1])
         # 正则表达式匹配 - 'UDN-871888...' in 'UDN-871888b9-8004-4b95-954f-562f3e50d421'   字符串在字符内部
         # result = re.match('^[.]', result)
-        # assert result in dep_name[1]
+        # TODO
+        assert True
 
     @pytest.mark.positive
     @pytest.mark.usefixtures("close_alert")

@@ -18,7 +18,6 @@ class UserPage(BasePage):
         :param group_name: 组名称
         :param is_peer: 判断是否创建同级分组  默认为创建同级
         """
-
         if is_peer:
             # 滑动到创建同级分组
             GroupTree(self.driver).click_menu_by_name("Default", "创建同级")
@@ -31,8 +30,6 @@ class UserPage(BasePage):
             GroupTree(self.driver).create_dep_group_com(group_name, "创建下一级")
 
     def create_department_from_user_defined(self, group_name, parent_name="Default", is_peer=True):
-        # 先点击保证元素在页面可视区域
-        GroupTree(self.driver).click_group_by_name(parent_name)
         if is_peer:
             # 滑动到创建同级分组
             GroupTree(self.driver).click_menu_by_name(parent_name, "创建同级")
@@ -52,10 +49,7 @@ class UserPage(BasePage):
         :param is_peer: 判断删除父级/子级分组，默认删除父级
         :param delete: 判断点击删除还是取消按钮，默认删除
         """
-
         if is_peer:
-            # 先点击保证元素在页面可视区域 - 该代码需要重构
-            # BasePage(self.driver).scroll_visibility_region(parent_name)
             GroupTree(self.driver).click_group_by_name(parent_name)
             # 滑动到删除
             GroupTree(self.driver).click_menu_by_name(parent_name, "删除")
