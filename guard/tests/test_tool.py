@@ -6,13 +6,9 @@
 
 
 import pytest
-
-# 导入正则表达式
 import re
-
-from guard.tools.share_path import SharePath
-from guard.data.face_property.face_property_data import FacePropertyData as FPD
-
+from guard.pages.classes.share_path import SharePath
+from guard.datas.face_property.face_property_data import FacePropertyData as FPD
 from guard.pages.components.menubar import MenubarPage
 from guard.pages.tool import ToolPage
 
@@ -74,7 +70,7 @@ class TestTool:
         face_glasse = ToolPage(login_web).get_facial_attribute_by_name("眼镜")
         face_mask = ToolPage(login_web).get_facial_attribute_by_name("口罩")
         face_helmet = ToolPage(login_web).get_facial_attribute_by_name("安全帽")
-        face_hat = ToolPage(login_web).get_facial_attribute_by_name("安全帽")
+        face_hat = ToolPage(login_web).get_facial_attribute_by_name("帽子")
 
         assert (data["sex"] in face_sex) and (data["age"] in face_age) and (data["phiz"] in face_phiz) and (data["mustache"] in face_mustache) and (data["glasse"] in face_glasse) and (data["mask"] in face_mask) and (data["helmet"] in face_helmet) and (data["hat"] in face_hat)
 

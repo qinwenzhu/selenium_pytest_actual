@@ -7,7 +7,6 @@
 import re
 import time
 import pytest
-
 from guard.pages.timezone import TimezonePage
 from guard.pages.components.global_dialog import GlobalDialog
 
@@ -29,7 +28,6 @@ class TestTimezone:
 
     @pytest.mark.positive
     def test_add_timezone_section(self, connect_mysql_and_close, timezone_web, sole_time_name_to_class):
-
         # 通过选择 指定的时间条件名称 创建时间段
         TimezonePage(timezone_web).add_timezone_section_by_timezone_name(sole_time_name_to_class)
 
@@ -66,8 +64,8 @@ class TestTimezone:
         # 测试添加事件条件的超出指定字符长度
         TimezonePage(timezone_web).add_timezone_name(sole_time_name)
 
-        result = GlobalDialog(timezone_web).judge_alert_info()
         # 断言
+        result = GlobalDialog(timezone_web).judge_alert_info()
         assert "请输入最多40个字符的时间条件名称" == result
 
     @pytest.mark.negative

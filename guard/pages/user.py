@@ -6,7 +6,6 @@
 
 import time
 from selenium.webdriver.common.by import By
-
 from guard.pages.basepage import BasePage
 from guard.pages.components.group_tree import GroupTree
 
@@ -55,7 +54,8 @@ class UserPage(BasePage):
         """
 
         if is_peer:
-            # 先点击保证元素在页面可视区域
+            # 先点击保证元素在页面可视区域 - 该代码需要重构
+            # BasePage(self.driver).scroll_visibility_region(parent_name)
             GroupTree(self.driver).click_group_by_name(parent_name)
             # 滑动到删除
             GroupTree(self.driver).click_menu_by_name(parent_name, "删除")
@@ -85,33 +85,17 @@ class UserPage(BasePage):
         CLOSE_BTN = (By.XPATH, '//div[@role="alert"]//i[contains(@class, "el-icon-close")]')
         BasePage(self.driver).click_ele(CLOSE_BTN, "用户管理")
 
-    # def search_dep_by_name(self, group_name):
-    #
-    #     # 定位搜索文本框
-    #     SEARCH_INPUT = (By.XPATH, '//aside[@class="el-aside"]//div[contains(@class,"el-input--suffix")]/input')
-    #     BasePage(self.driver).update_input_text(SEARCH_INPUT, group_name)
-    #
-    #     # 点击搜索
-    #     SEARCH_BTN = (By.XPATH, '//aside[@class="el-aside"]//div[contains(@class,"el-input--suffix")]/span')
-    #     BasePage(self.driver).click_ele(SEARCH_BTN)
-
     def add_user(self):
+        # 添加用户
         pass
 
 
 if __name__ == '__main__':
-
     from selenium import webdriver
     from guard.pages.components.menubar import MenubarPage
     from guard.pages.login import LoginPage
-
     driver = webdriver.Chrome()
     driver.get("http://10.151.3.96/login")
     LoginPage(driver).login("zhuwenqin", "888888")
-
     MenubarPage(driver).click_nav_item("配置", "用户管理")
-    # 创建下一级分组
-    UserPage(driver).create_department_from_Default("nae552", is_peer=False)
-    driver.refresh()
-    # 删除下一级分组
-    UserPage(driver).delete_department_by_name("nae552", is_peer=False)
+    UserPage(driver).create_department_from_Default("用户分组")

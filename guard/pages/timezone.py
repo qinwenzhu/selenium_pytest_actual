@@ -4,9 +4,7 @@
 # @File: timezone.py
 # @Software: PyCharm
 import time
-
 from selenium.webdriver.common.by import By
-
 from guard.pages.basepage import BasePage
 
 
@@ -106,7 +104,7 @@ class TimezonePage(BasePage):
         添加时间条件
         :param val: 时间条件的名称
         """
-        # icon的识别率不高，强制等待2s
+        # icon的识别率不高，强制等待2s，提高用例成功率
         time.sleep(2)
         # 定位到添加时间条件的按钮
         ICON = (By.XPATH, '//span[contains(text(), "时间条件名称")]/i')
@@ -123,21 +121,15 @@ class TimezonePage(BasePage):
         # 选择指定的时间条件添加对应的时间段
         ICON = (By.XPATH, '//span[contains(text(), "时间段")]/i')
 
-        if BasePage(self.driver).wait_for_ele_to_be_visible(SELECT_TIMEZONE):
-            pass
-        else:
+        if not BasePage(self.driver).wait_for_ele_to_be_visible(SELECT_TIMEZONE):
+            # 如果当前操作的目标元素不可见
             time.sleep(0.5)
-            # 元素滚动到页面可见区域
+            # 1、元素滚动到页面可见区域
             BasePage(self.driver).scroll_visibility_region(SELECT_TIMEZONE)
+            # 2、点击元素
             BasePage(self.driver).click_ele(SELECT_TIMEZONE)
-
-        # ele = BasePage(self.driver).get_ele_locator(SELECT_TIMEZONE)
-        # self.driver.execute_script("arguments[0].scrollIntoView();", ele)
-        # BasePage(self.driver).click_ele(SELECT_TIMEZONE)
-
-        # # 选择指定的时间条件添加对应的时间段
-        # ICON = (By.XPATH, '//span[contains(text(), "时间段")]/i')
         time.sleep(0.5)
+        # 点击添加时间段
         BasePage(self.driver).click_ele(ICON)
 
     def create_holidays(self, tile_name, val, num=0):
@@ -151,9 +143,9 @@ class TimezonePage(BasePage):
         # 点击 - 未定义假期 - 按钮
         SET_HOLIDAY = (By.XPATH, '//span[contains(text(), "未定义假期")]')
         BasePage(self.driver).click_ele(SET_HOLIDAY)
-
         # 调用封装方法 - 添加假期
         self.dialog_info_com(tile_name, val)
+
         # 点击 - 设定日期 - 按钮
         SET_TIME = (By.XPATH, '//header[contains(text(), "假期定义")]/following-sibling::div//span[contains(text(), "设定日期")]')
         BasePage(self.driver).click_ele(SET_TIME)
@@ -171,9 +163,9 @@ class TimezonePage(BasePage):
         # 点击 - 未定义工作日 - 按钮
         SET_HOLIDAY = (By.XPATH, '//span[contains(text(), "未定义工作日")]')
         BasePage(self.driver).click_ele(SET_HOLIDAY)
-
         # 调用封装方法 - 添加特殊工作日
         self.dialog_info_com(tile_name, val)
+
         # 点击 - 设定日期 - 按钮
         SET_TIME = (By.XPATH, '//header[contains(text(), "特殊工作日定义")]/following-sibling::div//span[contains(text(), "设定日期")]')
         BasePage(self.driver).click_ele(SET_TIME)
@@ -181,8 +173,7 @@ class TimezonePage(BasePage):
         self.check_time(num)
 
     def assert_timezone_section(self):
-        # 判断给当前时间条件下的时间段是否成功添加
-        # CHECK_CON_RESULT = (By.XPATH, '//div[@class="el-tab-pane" and @style=""]')
+        # 判断选定的时间条件下的时间段是否成功添加
         CHECK_CON_RESULT = (By.XPATH, '//div[@class="el-tab-pane" and @style=""]//div[contains(@class, "el-row")]//span[contains(text(), ":")]')
         return BasePage(self.driver).get_text(CHECK_CON_RESULT)
 
@@ -191,20 +182,16 @@ if __name__ == '__main__':
     from selenium import webdriver
     from guard.pages.components.menubar import MenubarPage
     from guard.pages.login import LoginPage
-
     driver = webdriver.Chrome()
     driver.get("http://10.151.3.96/login")
     LoginPage(driver).login("zhuwenqin", "888888")
-
     MenubarPage(driver).click_nav_item("配置", "时间条件")
-
-    # TimezonePage(driver).add_timezone_name("input输入框内容")
-
+    TimezonePage(driver).add_timezone_name("test_时间条件")
     # TimezonePage(driver).create_holidays("添加假期", "假期名称1")
     # TimezonePage(driver).create_workday("添加特殊工作日", "工作日名称1")
     # TimezonePage(driver).add_timezone_name("timezone1")
-    TimezonePage(driver).add_timezone_name("timezone2")
+    # TimezonePage(driver).add_timezone_name("timezone2")
     # TimezonePage(driver).delete_or_rename_timezone_name("timezone1", "重命名")
-    TimezonePage(driver).delete_or_rename_timezone_name("timezone2", "删除")
+    # TimezonePage(driver).delete_or_rename_timezone_name("timezone2", "删除")
 
 

@@ -14,11 +14,11 @@ from selenium.webdriver.support import expected_conditions as EC
 # 鼠标操作 ActionChains
 from selenium.webdriver.common.action_chains import ActionChains
 # 自定义 - win系统的窗口上传
-from utils.win_upload import upload
+from guard.tools.tool_win_upload_file import upload
 # 自定义 - 导入日志
 from utils.handle_log import HandleLog
 # 自定义 - 导入公共路径
-from guard.tools.share_path import SharePath
+from guard.pages.classes.share_path import SharePath
 
 
 class BasePage:

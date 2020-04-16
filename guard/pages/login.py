@@ -4,16 +4,16 @@
 # @File: login.py
 # @Software: PyCharm
 
-
-# 导入元素的定位方式
+# 导入正则表达式
 import re
-
-from selenium.webdriver.common.by import By
 
 import time
 
+# 导入元素的定位方式
+from selenium.webdriver.common.by import By
+
 # 导入第三方验证码识别接口
-from utils.chaojiying import Chaojiying_Client
+from guard.tools.chaojiying import Chaojiying_Client
 import urllib.request
 
 # 导入封装类
@@ -22,97 +22,69 @@ from utils.ssh import SSH
 from utils.handle_config import HandleConfig
 
 # 导入共用路径
-from guard.tools.share_path import SharePath
+from guard.pages.classes.share_path import SharePath
 
 # 导入二次封装selenium框架的 BasePage类
 from guard.pages.basepage import BasePage
+from guard.pages.classes.run_env import get_run_env
 
 
 class LoginPage(BasePage):
 
-    # 读取当前的测试环境
-    IP_CONFIG = HandleConfig(r'{}\operation _config.yml'.format(SharePath.CONFIG_FOLDER)).config
-    operation = IP_CONFIG.get("operation")
-
-    def login(self, username, password, code=None, flag=False):
+    def login(self, username, password, code=None, login_way="default"):
         """ 登录 """
 
-        # 定位到用户名文本框
+        # 登录用户名文本框
         USERNAME_INPUT = (By.CSS_SELECTOR, 'input[name="username"]')
-        # 输入用户名 - 等待元素可见并输入文本
-        BasePage(self.driver).update_input_text(USERNAME_INPUT, username, "登录")
-
-        # 定位到密码文本框
+        # 登录密码文本框
         PASSWORD_INPUT = (By.CSS_SELECTOR, 'input[name="password"]')
-        # 输入密码
-        BasePage(self.driver).update_input_text(PASSWORD_INPUT, password, "登录")
-
-        # 定位到验证码文本框
+        # 登录验证码文本框
         CODE_INPUT = (By.CSS_SELECTOR, 'input[name="verifyCode"]')
-
-        """ 
-        # TODO 获取验证码的方式
-        1、通过日志获取验证码
-        2、通过第三方识别验证码
-        3、本地测试时通过手动的在控制台输入验证码来进行网页的登录<不推荐>
-        """
-        if flag is False:
-            # 由于多人同时操作自动化环境，会导致获取到的日志里的验证码不是当前用户的登录页面的验证码
-            # 优化方案：先对登录也的验证码进行刷新操作，然后去日志获取验证码
-            CAPTCHA_REFRESH_BUTTON = (By.CSS_SELECTOR, 'div.verify-code > div.refresh > i')
-            BasePage(self.driver).click_ele(CAPTCHA_REFRESH_BUTTON, "登录")
-            time.sleep(0.2)
-
-            # 2、通过调用封装的方法从日志里获取当前登录页面的验证码
-            code = self.get_captcha_from_k8s_log()
-
-            # if code is None:
-            #     # 获取到错误信息的元素定位
-            #     CAPTCHA_ERROR_TEXT = (By.XPATH, '//div[@class="el-form-item__error"]')
-            #     error_text = BasePage(self.driver).get_text(CAPTCHA_ERROR_TEXT, "登录")
-            #     while error_text in "验证码不正确":
-            #         code = self.get_captcha_from_k8s_log()
-
-            BasePage(self.driver).update_input_text(CODE_INPUT, code, "登录")
-        elif flag == 'ceshi':
-            # 手动输入验证码
-            print("请手动输入登录页面的验证码：")
-            code = input()
-            BasePage(self.driver).update_input_text(CODE_INPUT, code, "登录")
-        elif flag == "cjy":
-            # 2、通过调用第三方接口<cjy>识别当前验证码
-            code = self.get_code_cjy()
-            BasePage(self.driver).update_input_text(CODE_INPUT, code, "登录")
-        elif flag == "redis":
-            code = self.get_captcha_from_redis()
-            BasePage(self.driver).update_input_text(CODE_INPUT, code, "登录")
-
         # 定位到登录按钮
         LOGIN_BUTTON = (By.XPATH, '//button//span[contains(text(), "登录")]')
+
+        # 输入用户名 - 等待元素可见并输入文本
+        BasePage(self.driver).update_input_text(USERNAME_INPUT, username)
+        # 输入密码
+        BasePage(self.driver).update_input_text(PASSWORD_INPUT, password)
+
+        """ 获取登录验证码的不同方式 """
+        if login_way == "default":
+            # 定位到刷新验证码按钮，并在读取验证码之前先点击刷新
+            CAPTCHA_REFRESH_BUTTON = (By.CSS_SELECTOR, 'div.verify-code > div.refresh > i')
+            BasePage(self.driver).click_ele(CAPTCHA_REFRESH_BUTTON)
+            time.sleep(0.2)
+
+            # 1、通过ssh连接到服务器，从日志里获取登录验证码
+            code = self.get_captcha_from_k8s_log()
+        elif login_way == "cjy":
+            # 2、通过调用第三方接口<cjy>识别登录验证码
+            code = self.get_code_cjy()
+        elif login_way == "redis":
+            # 3、通过redis的方式获取登录验证码
+            code = self.get_captcha_from_redis()
+        elif login_way == 'ocr':
+            # 4、通过ocr智能识别获取登录验证码
+            # code = get_code_by_ocr()
+            pass
+        elif login_way == 'debug':
+            # 调试的时候，通过手动从控制台输入的方式获取登录验证码
+            print("请手动输入登录页面的验证码：")
+            code = input()
+        # 输入得到的验证码
+        BasePage(self.driver).update_input_text(CODE_INPUT, code)
+
+        # 点击登录网站
         BasePage(self.driver).click_ele(LOGIN_BUTTON, "登录")
 
-    def login_success_info(self):
-        # 登录成功，页面中的个人信息和当前登陆用户一致
+    def is_login_success(self):
+        # 判断是否登录成功：用户名元素在页面中存在，说明页面成功跳转，登录成功
         LOGIN_SUCCESS_USERNAME = (By.CSS_SELECTOR, 'span[class="avatar-name"]')
-        result_text = BasePage(self.driver).get_text(LOGIN_SUCCESS_USERNAME)
-        print(f"当前登录用户的别名为：{result_text}")             # "/monitor"
-        return result_text
-
-    # def is_login_success(self):
-    #     # 判断登录是否成功
-    #
-    #     LOGIN_SUCCESS_USERNAME = (By.CSS_SELECTOR, 'span[class="avatar-name"]')
-    #     text_result = BasePage(self.driver).get_text(LOGIN_SUCCESS_USERNAME)
-    #     if text_result is None:
-    #         return True
-    #     else:
-    #         return False
-
-        # BasePage(self.driver).wait_for_ele_to_be_presence(LOGIN_SUCCESS_USERNAME)
-        # if BasePage(self.driver).get_ele_locator(LOGIN_SUCCESS_USERNAME):
-        #     return True
-        # else:
-        #     return False
+        BasePage(self.driver).wait_for_ele_to_be_presence(LOGIN_SUCCESS_USERNAME)
+        if BasePage(self.driver).get_ele_locator(LOGIN_SUCCESS_USERNAME):
+            return True
+        else:
+            return False
 
     # def get_error_username(self):
     #     # 用户名错误信息
@@ -143,8 +115,8 @@ class LoginPage(BasePage):
         SSH_CONFIG = HandleConfig(r'{}\ssh_config.yml'.format(SharePath.CONFIG_FOLDER)).config
         ssh_config = SSH_CONFIG.get("ssh")
         # ssh_config['hostname'] = "10.151.3.96"
-        # 读取到当前执行ssh的环境
-        ssh_config['hostname'] = f'{self.operation["host"]}'
+        # 动态传入当前运行环境的ip
+        ssh_config['hostname'] = f'{get_run_env()["host"]}'
         ssh = SSH(**ssh_config)
         oauth2_pod_name = ssh.execute_command(
             "kubectl get pods | grep oauth2 | awk '{print $1}'")
@@ -169,17 +141,8 @@ class LoginPage(BasePage):
 
 
 if __name__ == '__main__':
-
     from selenium import webdriver
-
     driver = webdriver.Chrome()
     driver.get("http://10.151.3.96/login")
-
-    # 测试通过手动输入验证码进行登录
-    # LoginPage(driver).login("zhuwenqin", "888888", flag=False)
-
-    # 测试通过调用第三方接口智能识别验证码进行登录
-    # LoginPage(driver).login("zhuwenqin", "888888", flag=True)
-
     # 测试ssh连接服务器进行验证码获取来进行登录
     LoginPage(driver).login("zhuwenqin", "888888")
