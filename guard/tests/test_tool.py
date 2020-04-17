@@ -3,8 +3,8 @@
 # @Author: wenqin_zhu
 # @File: test_tool.py
 # @Software: PyCharm
-import time
 
+import time
 import pytest
 import re
 from guard.pages.classes.share_path import SharePath
@@ -28,11 +28,12 @@ class TestTool:
         assert '评分参考' == result
 
     @pytest.mark.positive
+    @pytest.mark.parametrize("data", FPD.score_detection_data_negative)
     @pytest.mark.usefixtures("tool_close_one_img_quality")
-    def test_score_detection(self, login_web):
+    def test_score_detection(self, login_web, data):
         """ 测试人脸质量分数检测功能 """
         MenubarPage(login_web).click_nav_item("工具", "质量分数检测")
-        ToolPage(login_web).check_one_img_quality(f"{SharePath.DATA_FOLDER}/tool/img_score_detection/size_normal.jpg")
+        ToolPage(login_web).check_one_img_quality(r'{}/tool/img_score_detection/{}'.format(SharePath.DATA_FOLDER, data["img_path"]))
 
         result = ToolPage(login_web).get_face_score_detection_result()
         assert re.match(r'\d+ .\d+%', result)

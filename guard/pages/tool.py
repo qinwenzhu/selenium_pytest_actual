@@ -44,6 +44,11 @@ class ToolPage(BasePage):
         CHECK_RESULT_CONTENT = (By.CSS_SELECTOR, '.app-tools-content-pics-vsbtn-popover > strong')
         return BasePage(self.driver).get_text(CHECK_RESULT_CONTENT)
 
+    # def check_different_content(self):
+    #     """ 检测结果 """
+        # //span[contains(text(), "这两张人像极有可能是同一个人")]
+        # pass
+
     def check_one_img_quality(self, path):
         """ 质量分数检测 """
 
