@@ -85,6 +85,3 @@ class TestTimezone:
         # 断言
         result = GlobalDialog(timezone_web).judge_alert_info()
         assert "创建的特殊工作日与已有的特殊工作日有冲突，请检查后重新设置" == result
-
-
-
