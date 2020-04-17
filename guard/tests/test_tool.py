@@ -19,7 +19,7 @@ class TestTool:
 
     @pytest.mark.positive
     @pytest.mark.usefixtures("tool_close_one_to_one_face_compare")
-    def test_one_to_one_face_compare(self, login_web, data):
+    def test_one_to_one_face_compare(self, login_web):
         """ 测试1:1人脸验证功能 """
         MenubarPage(login_web).click_nav_item("工具", "1:1人脸验证")
         ToolPage(login_web).one_to_one_face_compare(r"{}/tool/img1.jpg".format(SharePath.DATA_FOLDER), r"{}/tool/img2.jpg".format(SharePath.DATA_FOLDER))

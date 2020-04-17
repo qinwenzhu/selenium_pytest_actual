@@ -92,14 +92,14 @@ def workday_name(login_web):
 @pytest.fixture
 def sole_time_name():
     # 创建类时间条件名称，通过该时间条件添加时间段
-    sole_time_name = f"Timezone-{uuid1_data()}"
+    sole_time_name = f"ABD-{uuid1_data()}"
     yield sole_time_name
 
 
 @pytest.fixture
 def sole_short_time_name(login_web):
     # 获取当前时间 - 超出字段名称
-    sole_short_time_name = f"HW-{get_current_time()}"
+    sole_short_time_name = f"ABD-{get_current_time()}"
     yield sole_short_time_name
 
 
