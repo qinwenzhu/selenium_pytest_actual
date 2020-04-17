@@ -22,7 +22,7 @@ class TestTool:
     def test_one_to_one_face_compare(self, login_web):
         """ 测试1:1人脸验证功能 """
         MenubarPage(login_web).click_nav_item("工具", "1:1人脸验证")
-        ToolPage(login_web).one_to_one_face_compare(r"{}/tool/img1.jpg".format(SharePath.DATA_FOLDER), r"{}/tool/img2.jpg".format(SharePath.DATA_FOLDER))
+        ToolPage(login_web).one_to_one_face_compare(r"{}/tool/img_one_to_one/img1.jpg".format(SharePath.DATA_FOLDER), r"{}/tool/img_one_to_one/img2.jpg".format(SharePath.DATA_FOLDER))
 
         result = ToolPage(login_web).get_face_compare_result()
         assert '评分参考' == result
@@ -32,18 +32,18 @@ class TestTool:
     def test_score_detection(self, login_web):
         """ 测试人脸质量分数检测功能 """
         MenubarPage(login_web).click_nav_item("工具", "质量分数检测")
-        ToolPage(login_web).check_one_img_quality(f"{SharePath.DATA_FOLDER}/tool/have_glasse.jpg")
+        ToolPage(login_web).check_one_img_quality(f"{SharePath.DATA_FOLDER}/tool/img_score_detection/size_normal.jpg")
 
         result = ToolPage(login_web).get_face_score_detection_result()
         assert re.match(r'\d+ .\d+%', result)
 
     @pytest.mark.negative
     @pytest.mark.usefixtures("tool_close_one_img_quality")
-    def test_negative_face_property(self, login_web):
+    def test_negative_score_detection(self, login_web):
         """ 测试上传大于16M的图片 - 系统支持上传小于16M的图片 """
         MenubarPage(login_web).click_nav_item("工具", "质量分数检测")
         time.sleep(3)
-        ToolPage(login_web).check_one_img_quality(f"{SharePath.DATA_FOLDER}/tool/size_greater_16M.jpg")
+        ToolPage(login_web).check_one_img_quality(f"{SharePath.DATA_FOLDER}/tool/img_score_detection/size_greater_16M.jpg")
 
         result = GlobalDialog(login_web).judge_alert_info()
         assert "上传图片大小不能超过 16MB!" in result
@@ -53,7 +53,7 @@ class TestTool:
     def test_face_property(self, login_web):
         """ 测试人脸属性输出的属性字段 """
         MenubarPage(login_web).click_nav_item("工具", "人脸属性检测")
-        ToolPage(login_web).check_face_property(f'{SharePath.DATA_FOLDER}/tool/seleniumbase.jpg')
+        ToolPage(login_web).check_face_property(f'{SharePath.DATA_FOLDER}/tool/img_face_property/normal.jpg')
 
         face_sex = ToolPage(login_web).get_facial_attribute_by_name("性别")
         face_age = ToolPage(login_web).get_facial_attribute_by_name("年龄")
@@ -73,7 +73,7 @@ class TestTool:
     def test_negative_face_property(self, login_web, data):
         """ 测试上传不同属性的人脸照片检测出对应的人脸属性 """
         MenubarPage(login_web).click_nav_item("工具", "人脸属性检测")
-        ToolPage(login_web).check_face_property(f'{SharePath.DATA_FOLDER}/tool/{data["img_path"]}')
+        ToolPage(login_web).check_face_property(f'{SharePath.DATA_FOLDER}/tool/img_face_property/{data["img_path"]}')
 
         face_sex = ToolPage(login_web).get_facial_attribute_by_name("性别")
         face_age = ToolPage(login_web).get_facial_attribute_by_name("年龄")
@@ -91,4 +91,3 @@ class TestTool:
 
 if __name__ == '__main__':
     pytest.main()
-
