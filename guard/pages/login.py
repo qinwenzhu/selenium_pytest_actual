@@ -50,19 +50,18 @@ class LoginPage(BasePage):
 
         """ 获取登录验证码的不同方式 """
         if login_way == "default":
+            # 1、通过redis的方式获取登录验证码
+            code = self.get_captcha_from_redis()
+        elif login_way == "cjy":
+            # 2、通过调用第三方接口<cjy>识别登录验证码
+            code = self.get_code_cjy()
+        elif login_way == "ssh":
             # 定位到刷新验证码按钮，并在读取验证码之前先点击刷新
             CAPTCHA_REFRESH_BUTTON = (By.CSS_SELECTOR, 'div.verify-code > div.refresh > i')
             BasePage(self.driver).click_ele(CAPTCHA_REFRESH_BUTTON)
             time.sleep(0.2)
-
-            # 1、通过ssh连接到服务器，从日志里获取登录验证码
+            # 3、通过ssh连接到服务器，从日志里获取登录验证码
             code = self.get_captcha_from_k8s_log()
-        elif login_way == "cjy":
-            # 2、通过调用第三方接口<cjy>识别登录验证码
-            code = self.get_code_cjy()
-        elif login_way == "redis":
-            # 3、通过redis的方式获取登录验证码
-            code = self.get_captcha_from_redis()
         elif login_way == 'ocr':
             # 4、通过ocr智能识别获取登录验证码
             # code = get_code_by_ocr()

@@ -37,8 +37,7 @@ class TimezonePage(BasePage):
         # 定位到 -时间段-
         ICON = (By.XPATH, '//span[contains(text(), "时间段")]/i')
 
-        if not BasePage(self.driver).wait_for_ele_to_be_visible(SELECT_TIMEZONE):
-            # 如果当前操作的目标元素不可见
+        if not self.driver.find_element(*SELECT_TIMEZONE).is_displayed():
             time.sleep(0.5)
             # 元素滚动到页面可见区域
             BasePage(self.driver).scroll_visibility_region(loc=SELECT_TIMEZONE)
@@ -57,7 +56,7 @@ class TimezonePage(BasePage):
         """
         # 定位 - 未定义假期 - 按钮
         SET_HOLIDAY = (By.XPATH, '//span[contains(text(), "未定义假期")]')
-        if not BasePage(self.driver).wait_for_ele_to_be_visible(SET_HOLIDAY):
+        if not self.driver.find_element(*SET_HOLIDAY).is_displayed():
             # 元素滚动到页面可见区域
             BasePage(self.driver).scroll_visibility_region(loc=SET_HOLIDAY)
         # 点击 - 未定义假期 - 按钮
@@ -81,7 +80,9 @@ class TimezonePage(BasePage):
 
         # 定位 - 未定义工作日 - 按钮
         SET_WORKDAY = (By.XPATH, '//span[contains(text(), "未定义工作日")]')
-        if not BasePage(self.driver).wait_for_ele_to_be_visible(SET_WORKDAY):
+        if not self.driver.find_element(*SET_WORKDAY).is_displayed():
+            # TODO 判断元素在页面是否可见 ele.is_displayed()，默认可见
+
             # 元素滚动到页面可见区域
             BasePage(self.driver).scroll_visibility_region(loc=SET_WORKDAY)
         # 点击 - 未定义工作日 - 按钮
